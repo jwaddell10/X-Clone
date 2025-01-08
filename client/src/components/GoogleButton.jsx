@@ -9,7 +9,7 @@ export default function GoogleButton({ text, variant }) {
 				style={{
 					marginRight: "10px",
 					width: "2rem",
-                    height: "2rem"
+					height: "2rem",
 				}}
 			/>
 			{text}

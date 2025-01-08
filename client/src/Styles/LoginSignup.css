@@ -1,0 +1,7 @@
+.signup-login-form {
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	color: red;
+}
