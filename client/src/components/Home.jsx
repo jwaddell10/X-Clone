@@ -2,10 +2,12 @@ import "../Styles/Home.css";
 import Button from "./Button";
 import GoogleButton from "./GoogleButton";
 import { useState } from "react";
-import LoginSignup from "./LoginSignup";
+import Login from "./Login";
+import Signup from "./Signup";
 
 export default function Home() {
 	const [action, setAction] = useState("");
+
 	return (
 		<main>
 			<title>OdinBook Project</title>
@@ -46,10 +48,11 @@ export default function Home() {
 						setAction={setAction}
 					/>
 					<Button text="Sign In as Guest" variant="outlined" />
-                    
-					{/* action determines if login or signup is rendered onClick */}
-					{action && (
-						<LoginSignup action={action} setAction={setAction} />
+					{action === "Login" && (
+						<Login action={action} setAction={setAction} />
+					)}
+					{action === "Signup" && (
+						<Signup action={action} setAction={setAction} />
 					)}
 				</span>
 			</section>
