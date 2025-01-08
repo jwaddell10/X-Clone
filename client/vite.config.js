@@ -1,12 +1,15 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import { configDefaults } from 'vitest/config'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { configDefaults } from "vitest/config";
 /// <reference types="vitest" />
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  test: {
-    exclude: [...configDefaults.exclude],
-  }
-})
+	plugins: [react()],
+	test: {
+		exclude: [...configDefaults.exclude],
+		globals: true,
+		environment: "jsdom",
+		setupFiles: "./tests/setup.js",
+	},
+});
