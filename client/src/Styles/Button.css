@@ -1,0 +1,42 @@
+.auth-form-button {
+	border: 2px solid #24b4fb;
+	background-color: #24b4fb;
+	border-radius: 1em;
+	cursor: pointer;
+	padding: 0.8em 1.2em 0.8em 1em;
+	transition: all ease-in-out 0.2s;
+	font-size: 16px;
+    color: white;
+}
+
+
+#signin-login-button {
+    font-weight: 700;
+    width: 100%;
+    background-color: rgb(29, 155, 240);
+}
+
+#contained {
+    background-color: white;
+}
+
+#google-button {
+    margin-top: 10px;
+    font-weight: 700;
+    width: 100%;
+    display: flex;
+    background-color: black;
+    align-items: center;
+    justify-content: center;
+}
+
+#google-button img {
+    float: left;
+}
+
+#outlined {
+    font-weight: 700;
+    width: 100%;
+    background-color: black;
+    color: rgb(29, 155, 240);
+}

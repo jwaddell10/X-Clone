@@ -1,0 +1,29 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 20rem;
+}
+
+.x-logo {
+    width: 50rem;
+  }
+
+h1 {
+    color: white;
+    font-size: 5rem;
+    font-weight: 700;
+}
+
+h2 {
+    color: white;
+    font-size: 3rem;
+    font-weight: 700;
+}
