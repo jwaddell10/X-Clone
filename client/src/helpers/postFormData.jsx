@@ -1,16 +1,13 @@
 export default async function postFormData(formData, url) {
-	try {
-		const response = await fetch(
-			`${import.meta.env.VITE_API_URL}/auth/${url}`,
-			{
-				method: "POST",
-				body: formData,
-			}
-		);
+	const response = await fetch(
+		`${import.meta.env.VITE_API_URL}/auth/${url}`,
+		{
+			method: "POST",
+			body: JSON.stringify(formData),
+			headers: { "Content-type": "application/json" },
+		}
+	);
 
-		const data = await response.json();
-		console.log(data, "this is data from post requets");
-	} catch (error) {
-		throw new Error(error);
-	}
+	const data = await response.json();
+	return data;
 }

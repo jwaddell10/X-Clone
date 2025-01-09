@@ -1,5 +1,5 @@
 import "../Styles/Home.css";
-import Button from "./Button";
+import HomeAuthButton from "./HomeAuthButton";
 import GoogleButton from "./GoogleButton";
 import { useState } from "react";
 import Login from "./Login";
@@ -35,19 +35,19 @@ export default function Home() {
 					>
 						or
 					</h3>
-					<Button
+					<HomeAuthButton
 						text="Create Account"
 						variant="signin-login-button"
 						action="Signup"
 						setAction={setAction}
 					/>
-					<Button
+					<HomeAuthButton
 						text="Log In"
 						variant="signin-login-button"
 						action="Login"
 						setAction={setAction}
 					/>
-					<Button text="Sign In as Guest" variant="outlined" />
+					<HomeAuthButton text="Sign In as Guest" variant="outlined" />
 					{action === "Login" && (
 						<Login action={action} setAction={setAction} />
 					)}

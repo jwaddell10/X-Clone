@@ -1,17 +1,16 @@
-// import { useState } from "react";
 import { useForm } from "react-hook-form";
 import CloseIcon from "@mui/icons-material/Close";
-import postFormData from "../helpers/postFormData";
 import "../Styles/LoginSignup.css";
+import useSubmit from "../helpers/useSubmit";
 
-export default function Signup({ action, setAction }) {
+export default function Signup({ setAction }) {
 	const {
 		register,
 		formState: { errors },
-		handleSubmit,
 		watch,
 	} = useForm();
 
+	const { error, formHandler } = useSubmit("signup");
 	const usernameRegistered = {
 		...register("username", {
 			required: "Username is required",
@@ -26,9 +25,11 @@ export default function Signup({ action, setAction }) {
 		}),
 	};
 
-	const passwordRegistered = {...register("password", {
-		required: "Please enter password",
-	})}
+	const passwordRegistered = {
+		...register("password", {
+			required: "Please enter password",
+		}),
+	};
 
 	const confirmPasswordRegistered = {
 		...register("confirmPassword", {
@@ -41,12 +42,7 @@ export default function Signup({ action, setAction }) {
 
 	return (
 		<>
-			<form
-				onSubmit={handleSubmit((data) => {
-					postFormData(data, "signup");
-				})}
-				className="signup-login-form"
-			>
+			<form onSubmit={formHandler} className="signup-login-form">
 				<CloseIcon
 					onClick={() => {
 						setAction("");
@@ -76,6 +72,7 @@ export default function Signup({ action, setAction }) {
 				{errors.confirmPassword && (
 					<div>{errors.confirmPassword.message}</div>
 				)}
+				{error && <div>{error}</div>}
 				<button type="submit">Sign up</button>
 			</form>
 		</>

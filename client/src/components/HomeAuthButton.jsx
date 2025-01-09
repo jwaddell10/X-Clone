@@ -1,6 +1,6 @@
 import "../Styles/Button.css";
 
-export default function Button({ text, variant, action, setAction }) {
+export default function HomeAuthButton({ text, variant, action, setAction }) {
 	const handleClick = () => {
 		setAction(action);
 	};

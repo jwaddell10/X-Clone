@@ -1,14 +1,15 @@
 import { useForm } from "react-hook-form";
 import CloseIcon from "@mui/icons-material/Close";
-import postFormData from "../helpers/postFormData";
 import "../Styles/LoginSignup.css";
+import useSubmit from "../helpers/useSubmit";
 
-export default function Login({ action, setAction }) {
+export default function Login({ setAction }) {
 	const {
 		register,
 		formState: { errors },
-		handleSubmit,
 	} = useForm();
+
+	const { error, formHandler } = useSubmit("login");
 
 	const usernameRegistered = {
 		...register("username", {
@@ -31,12 +32,7 @@ export default function Login({ action, setAction }) {
 	};
 
 	return (
-		<form
-			onSubmit={handleSubmit((data) => {
-				postFormData(data, "login");
-			})}
-			className="signup-login-form"
-		>
+		<form onSubmit={formHandler} className="signup-login-form">
 			<CloseIcon
 				onClick={() => {
 					setAction("");
@@ -57,6 +53,7 @@ export default function Login({ action, setAction }) {
 				autoComplete="current-password"
 			/>
 			{errors.password && <div>{errors.password.message}</div>}
+			{error && <div>{error}</div>}
 			<button type="submit">Log in</button>
 		</form>
 	);
