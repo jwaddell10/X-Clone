@@ -9,5 +9,8 @@ export default async function postFormData(formData, url) {
 	);
 
 	const data = await response.json();
-	return data;
+	console.log(data, 'data')
+	if (data.token) {
+		localStorage.setItem("token", data.token);
+	} else return data;
 }

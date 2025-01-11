@@ -1,5 +1,6 @@
-import { ExtractJwt, Strategy } from "passport-jwt";
-import passport from "passport";
+const { ExtractJwt, Strategy } = require("passport-jwt");
+const passport = require("passport");
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const options = {
@@ -7,7 +8,12 @@ const options = {
 	secretKey: process.env.JWT_SECRET,
 };
 
-export function passportJWTStrategy() {
+exports.createJWT = (user) => {
+	console.log(user, "user in createJWT");
+	return jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: "1d" });
+};
+
+exports.passportJWTStrategy = () => {
 	passport.use(
 		new Strategy(options, (payload, done) => {
 			try {
@@ -17,4 +23,4 @@ export function passportJWTStrategy() {
 			}
 		})
 	);
-}
+};

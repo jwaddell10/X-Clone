@@ -47,7 +47,10 @@ export default function Home() {
 						action="Login"
 						setAction={setAction}
 					/>
-					<HomeAuthButton text="Sign In as Guest" variant="outlined" />
+					<HomeAuthButton
+						text="Sign In as Guest"
+						variant="outlined"
+					/>
 					{action === "Login" && (
 						<Login action={action} setAction={setAction} />
 					)}

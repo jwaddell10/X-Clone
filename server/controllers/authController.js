@@ -1,23 +1,28 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 const db = require("../db/queries");
-const checkUser = require("../helpers/checkUser");
+const passportJWTStrategy = require("../passport/passportJWT.js");
 
 exports.signUp = asyncHandler(async (req, res, next) => {
-	const user = await checkUser(req.body.username);
+	console.log(req.body, "req body signup");
+	const user = await db.findUser(req.body.username);
+	console.log(user, "user in signup");
 
-	if (user) {
+	if (user !== null) {
 		throw new Error("User already exists. Please try another username");
-	}
-
-	if (!user) {
+	} else if (!user) {
 		const createdUser = await db.createUserWithHashedPassword(
 			req.body.username,
 			req.body.password
 		);
-		res.json({
-			message: "User created",
-		});
+
+		const token = passportJWTStrategy.createJWT(createdUser);
+		if (token) {
+			res.json({ token: token });
+		} else
+			res.json({
+				message: "An error has occurred. Please try again later",
+			});
 	}
 });
 

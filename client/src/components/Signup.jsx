@@ -3,14 +3,16 @@ import CloseIcon from "@mui/icons-material/Close";
 import "../Styles/LoginSignup.css";
 import useSubmit from "../helpers/useSubmit";
 
-export default function Signup({ setAction }) {
+export default function Signup({ action, setAction }) {
+	// const [error, setError] = useState("");
 	const {
 		register,
 		formState: { errors },
+		handleSubmit,
 		watch,
 	} = useForm();
 
-	const { error, formHandler } = useSubmit("signup");
+	const { error, formHandler } = useSubmit(handleSubmit, "signup");
 	const usernameRegistered = {
 		...register("username", {
 			required: "Username is required",
