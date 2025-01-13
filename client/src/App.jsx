@@ -9,7 +9,6 @@ function App() {
 	useEffect(() => {
 		const JWTToken = localStorage.getItem("token");
 		setUser(tokenActive(JWTToken));
-		console.log(user, 'user useAuth')
 	}, [setUser, user]);
 	return (
 		<>

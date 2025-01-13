@@ -3,7 +3,7 @@ import HomeAuthButton from "./HomeAuthButton";
 import Login from "./Login";
 import Signup from "./Signup";
 
-export default function SignInPage({ action, setAction }) {
+export default function WelcomePage({ action, setAction }) {
 	return (
 		<>
 			<title>OdinBook Project</title>

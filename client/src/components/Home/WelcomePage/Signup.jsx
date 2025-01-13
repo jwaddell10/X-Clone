@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import CloseIcon from "@mui/icons-material/Close";
-import "../Styles/LoginSignup.css";
-import useSubmit from "../helpers/useSubmit";
+import "../../../Styles/LoginSignup.css";
+import useSubmit from "../../../helpers/useSubmit";
 
-export default function Signup({ action, setAction }) {
+export default function Signup({ setAction }) {
 	// const [error, setError] = useState("");
 	const {
 		register,

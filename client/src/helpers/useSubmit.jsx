@@ -3,7 +3,7 @@ import postFormData from "./postFormData";
 import { useAuth } from "./authContext";
 
 export default function useSubmit(handleSubmit, url) {
-	const { setUser } = useAuth()
+	const { login } = useAuth()
 	// const { handleSubmit } = useForm();
 	const [error, setError] = useState("");
 
@@ -12,7 +12,7 @@ export default function useSubmit(handleSubmit, url) {
 			const response = await postFormData(data, url);
 			if (!response.ok) {
 				setError(response.message);
-			} else setUser(true)
+			} else login()
 		} catch (error) {
 			setError(error);
 		}

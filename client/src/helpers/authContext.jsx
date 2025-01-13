@@ -4,12 +4,12 @@ export const AuthContext = createContext({
 	user: false,
 	login: () => {},
 	logout: () => {},
-	setUser: () => {},
+	setUser: () => false,
 });
 
 export const AuthProvider = (props) => {
 	const [refreshTrigger, setRefreshTrigger] = useState(0);
-	const [user, setUser] = useState(false);
+	const [user, setUser] = useState(null);
 
 	const login = () => {
 		setUser(true);
@@ -23,7 +23,7 @@ export const AuthProvider = (props) => {
 
 	return (
 		<AuthContext.Provider value={{ user, setUser, login, logout }}>
-			{props}
+			{props.children}
 		</AuthContext.Provider>
 	);
 };
