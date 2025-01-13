@@ -13,7 +13,6 @@ export default function tokenActive(token) {
 		if (!isTokenValid) {
 			localStorage.removeItem("token");
 		}
-
 		return isTokenValid;
 	} catch (error) {
 		console.error("Error decoding token:", error);

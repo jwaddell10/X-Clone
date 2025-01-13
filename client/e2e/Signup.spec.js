@@ -1,5 +1,9 @@
 import { test, expect } from "@playwright/test";
 
+test.beforeAll(async() => {
+  console.log('before all tests')
+})
+
 test('signup form appears with correct elements when "Create Account" button is clicked', async ({
 	page,
 }) => {
@@ -28,7 +32,7 @@ test('signup form appears with correct elements when "Create Account" button is 
 	await expect(page.locator('svg[data-testid="CloseIcon"]')).toBeVisible();
 });
 
-test("signup form submits correct items", async ({ page, request }) => {
+test("signup form submits correct items", async ({ page }) => {
     await page.goto("http://localhost:5173");
   
     // Click the "Create Account" button
@@ -50,7 +54,6 @@ test("signup form submits correct items", async ({ page, request }) => {
   
     // Wait for the response
     const response = await responsePromise;
-  console.log(response, 'this is response')
     // Check the response status
     expect(response.status()).toBe(200);
   
@@ -60,4 +63,16 @@ test("signup form submits correct items", async ({ page, request }) => {
       success: true,
       message: "User created successfully"
     }));
+    console.log(responseBody, 'responsebody')
+  });
+
+
+  test.afterAll(async () => {
+    console.log('Done with tests');
+    
+    // if (createdUserId) {
+    //   // Delete the created user
+    //   const deleteResponse = await request.delete(`http://localhost:3000/auth/users/${createdUserId}`);
+    //   expect(deleteResponse.status()).toBe(204); // Assuming 204 is the expected status for successful deletion
+    // }
   });

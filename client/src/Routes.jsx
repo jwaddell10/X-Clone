@@ -5,7 +5,7 @@ export default function Router() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route index element={<Home />}></Route>
+				<Route index element={<Home />}/>
 			</Routes>
 		</BrowserRouter>
 	);

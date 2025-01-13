@@ -18,7 +18,7 @@ exports.signUp = asyncHandler(async (req, res, next) => {
 
 		const token = passportJWTStrategy.createJWT(createdUser);
 		if (token) {
-			res.json({ token: token });
+			res.status(200).json({ message: "User created successfully", token: token });
 		} else
 			res.json({
 				message: "An error has occurred. Please try again later",

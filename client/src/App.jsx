@@ -6,10 +6,10 @@ import tokenActive from "./helpers/tokenActive";
 
 function App() {
 	const { user, setUser } = useAuth();
-
 	useEffect(() => {
 		const JWTToken = localStorage.getItem("token");
 		setUser(tokenActive(JWTToken));
+		console.log(user, 'user useAuth')
 	}, [setUser, user]);
 	return (
 		<>
