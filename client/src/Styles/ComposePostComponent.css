@@ -1,0 +1,11 @@
+.post-component-header-container {
+    display: flex;
+}
+
+.post-component-header {
+    color: white;
+}
+
+.post-content {
+    width: 100%;
+}

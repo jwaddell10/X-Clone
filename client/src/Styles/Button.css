@@ -39,3 +39,10 @@
 	background-color: black;
 	color: rgb(29, 155, 240);
 }
+
+.postButton {
+	height: 2rem;
+	width: 4rem;
+	border-radius: 20px;
+	color: black;
+}
