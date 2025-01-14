@@ -6,10 +6,11 @@ import useSubmit from "../../../helpers/useSubmit";
 export default function Login({ setAction }) {
 	const {
 		register,
+		handleSubmit,
 		formState: { errors },
 	} = useForm();
 
-	const { error, formHandler } = useSubmit("login");
+	const { error, formHandler } = useSubmit(handleSubmit, "login");
 
 	const usernameRegistered = {
 		...register("username", {

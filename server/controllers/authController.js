@@ -18,7 +18,10 @@ exports.signUp = asyncHandler(async (req, res, next) => {
 
 		const token = passportJWTStrategy.createJWT(createdUser);
 		if (token) {
-			res.status(200).json({ message: "User created successfully", token: token });
+			res.status(200).json({
+				message: "User created successfully",
+				token: token,
+			});
 		} else
 			res.json({
 				message: "An error has occurred. Please try again later",
@@ -27,5 +30,25 @@ exports.signUp = asyncHandler(async (req, res, next) => {
 });
 
 exports.logIn = asyncHandler(async (req, res, next) => {
-	console.log("login runs");
+	console.log(req.body, "req body login");
+	const user = await db.findUser(req.body.username);
+	console.log(user, "user from findusrebaaA");
+
+	if (user === null) {
+		res.json({
+			message:
+				"Username or password does not match existing user. Please try again",
+		});
+	} else if (user) {
+		const token = passportJWTStrategy.createJWT(user);
+		if (token) {
+			res.status(200).json({
+				message: "User created successfully",
+				token: token,
+			});
+		} else
+			res.json({
+				message: "An error has occurred. Please try again later",
+			});
+	}
 });

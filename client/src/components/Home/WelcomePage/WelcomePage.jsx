@@ -2,6 +2,7 @@ import GoogleButton from "./GoogleButton";
 import HomeAuthButton from "./HomeAuthButton";
 import Login from "./Login";
 import Signup from "./Signup";
+import "../../../Styles/WelcomePage.css"
 
 export default function WelcomePage({ action, setAction }) {
 	return (
