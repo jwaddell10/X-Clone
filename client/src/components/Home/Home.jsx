@@ -2,7 +2,7 @@ import "../../Styles/Home.css";
 import { useState } from "react";
 import WelcomePage from "./WelcomePage/WelcomePage";
 import { useAuth } from "../../helpers/authContext";
-import Main from "./HomePage/HomePage";
+import HomePage from "./HomePage/HomePage";
 
 export default function Home() {
 	const [action, setAction] = useState("");
@@ -10,7 +10,7 @@ export default function Home() {
 
 	return (
 		<main>
-			{user ? <Main /> : <WelcomePage action={action} setAction={setAction}/>}
+			{user ? <HomePage /> : <WelcomePage action={action} setAction={setAction}/>}
 		</main>
 	);
 }
