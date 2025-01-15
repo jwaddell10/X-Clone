@@ -2,6 +2,7 @@ import { useState } from "react";
 import submitPost from "../../../helpers/submitPost";
 import Button from "../../../helpers/Button";
 import "../../../Styles/ComposePostComponent.css";
+import DisplayPost from "./DisplayPost";
 
 export default function ComposePostComponent() {
 	const [text, setText] = useState("");
@@ -24,7 +25,7 @@ export default function ComposePostComponent() {
 					<button>Following</button>
 				</li>
 			</div>
-			<div className="post-container">
+			<div className="post-form-container">
 				<form onSubmit={handleSubmit}>
 					<textarea
 						className="post-content"
@@ -36,6 +37,7 @@ export default function ComposePostComponent() {
 					<Button type="submit" text="Post" variant="postButton" />
 				</form>
 			</div>
+			<DisplayPost />
 		</div>
 	);
 }

@@ -44,13 +44,31 @@ module.exports = {
 			return error;
 		}
 	},
+	findAllPosts: async () => {
+		try {
+			const posts = await prisma.post.findMany({
+				select: {
+					createdAt: true,
+					author: {
+						omit: {
+							password: true,
+						},
+					},
+					text: true,
+				},
+			});
+			console.log(posts, "posts in findall");
+			return posts;
+		} catch (error) {
+			return error;
+		}
+	},
 	createPost: async (user, text) => {
 		try {
-			console.log(user, "user in createpost");
 			const post = await prisma.post.create({
 				data: {
 					author: {
-						connect: {id: user.id}
+						connect: { id: user.id },
 					},
 					text: text,
 				},
