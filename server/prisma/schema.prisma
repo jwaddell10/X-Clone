@@ -43,6 +43,7 @@ model Follows {
 
 model Post {
   id        Int       @unique @default(autoincrement())
+  text      String
   createdAt DateTime  @default(now())
   author    User      @relation(fields: [authorId], references: [id])
   authorId  Int

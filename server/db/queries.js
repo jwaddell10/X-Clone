@@ -4,11 +4,24 @@ const bcryptjs = require("bcryptjs");
 
 module.exports = {
 	findUser: async (username) => {
-        console.log(username, 'username in find')
+		console.log(username, "username in find");
 		try {
 			const user = await prisma.user.findUnique({
 				where: {
 					name: username,
+				},
+			});
+			return user;
+		} catch (error) {
+			return error;
+		}
+	},
+	findUserById: async (id) => {
+		console.log(id, "id in find");
+		try {
+			const user = await prisma.user.findUnique({
+				where: {
+					id: id,
 				},
 			});
 			return user;
@@ -27,6 +40,22 @@ module.exports = {
 				},
 			});
 			return user;
+		} catch (error) {
+			return error;
+		}
+	},
+	createPost: async (user, text) => {
+		try {
+			console.log(user, "user in createpost");
+			const post = await prisma.post.create({
+				data: {
+					author: {
+						connect: {id: user.id}
+					},
+					text: text,
+				},
+			});
+			return post;
 		} catch (error) {
 			return error;
 		}
