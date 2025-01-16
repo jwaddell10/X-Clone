@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import CloseIcon from "@mui/icons-material/Close";
-import "../../../Styles/LoginSignup.css";
-import useSubmit from "../../../helpers/useSubmit";
+import "../../Styles/LoginSignup.css";
+import useSubmit from "../../helpers/useSubmit";
 
 export default function Login({ setAction }) {
 	const {

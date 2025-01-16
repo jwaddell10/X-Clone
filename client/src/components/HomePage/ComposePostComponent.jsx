@@ -1,7 +1,7 @@
 import { useState } from "react";
-import submitPost from "../../../helpers/submitPost";
-import Button from "../../../helpers/Button";
-import "../../../Styles/ComposePostComponent.css";
+import submitPost from "../../helpers/submitPost";
+import Button from "../../helpers/Button";
+import "../../Styles/ComposePostComponent.css";
 import DisplayPost from "./DisplayPost";
 
 export default function ComposePostComponent() {

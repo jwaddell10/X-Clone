@@ -1,5 +1,5 @@
-import useFetchPosts from "../../../helpers/useFetchPosts";
-import "../../../Styles/DisplayPost.css";
+import useFetchPosts from "../../helpers/useFetchPosts";
+import "../../Styles/DisplayPost.css";
 
 export default function DisplayPost() {
 	const { posts } = useFetchPosts();

@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
 
-test.beforeAll(async() => {
-  console.log('before all tests')
-})
+// test.beforeAll(async() => {
+//   console.log('before all tests')
+// })
 
 test('signup form appears with correct elements when "Create Account" button is clicked', async ({
 	page,
@@ -33,46 +33,48 @@ test('signup form appears with correct elements when "Create Account" button is 
 });
 
 test("signup form submits correct items", async ({ page }) => {
-    await page.goto("http://localhost:5173");
-  
-    // Click the "Create Account" button
-    await page.getByRole("button", { name: "Create Account" }).click();
-  
-    // Fill in the form
-    await page.getByPlaceholder("Username").fill("testuser23");
-    await page.getByPlaceholder("Password").nth(0).fill("testpassword");
-    await page.getByPlaceholder("Confirm Password").fill("testpassword");
-  
-    // Intercept the POST request
-    const responsePromise = page.waitForResponse(response => 
-      response.url().includes(`http://localhost:3000/auth/signup`) && 
-      response.request().method() === 'POST'
-    );
-  
-    // Click the submit button
-    await page.getByRole("button", { name: "Sign up" }).click();
-  
-    // Wait for the response
-    const response = await responsePromise;
-    // Check the response status
-    expect(response.status()).toBe(200);
-  
-    // Check the response body
-    const responseBody = await response.json();
-    expect(responseBody).toEqual(expect.objectContaining({
-      success: true,
-      message: "User created successfully"
-    }));
-    console.log(responseBody, 'responsebody')
-  });
+	await page.goto("http://localhost:5173");
 
+	// Click the "Create Account" button
+	await page.getByRole("button", { name: "Create Account" }).click();
 
-  test.afterAll(async () => {
-    console.log('Done with tests');
-    
-    // if (createdUserId) {
-    //   // Delete the created user
-    //   const deleteResponse = await request.delete(`http://localhost:3000/auth/users/${createdUserId}`);
-    //   expect(deleteResponse.status()).toBe(204); // Assuming 204 is the expected status for successful deletion
-    // }
-  });
+	// Fill in the form
+	await page.getByPlaceholder("Username").fill("testuser23");
+	await page.getByPlaceholder("Password").nth(0).fill("testpassword");
+	await page.getByPlaceholder("Confirm Password").fill("testpassword");
+
+	// Intercept the POST request
+	const responsePromise = page.waitForResponse(
+		(response) =>
+			response.url().includes(`http://localhost:3000/auth/signup`) &&
+			response.request().method() === "POST"
+	);
+
+	// Click the submit button
+	await page.getByRole("button", { name: "Sign up" }).click();
+
+	// Wait for the response
+	const response = await responsePromise;
+	// Check the response status
+	expect(response.status()).toBe(200);
+
+	// Check the response body
+	const responseBody = await response.json();
+	expect(responseBody).toEqual(
+		expect.objectContaining({
+			success: true,
+			message: "User created successfully",
+		})
+	);
+	console.log(responseBody, "responsebody");
+});
+
+// test.afterAll(async () => {
+//   console.log('Done with tests');
+
+//   // if (createdUserId) {
+//   //   // Delete the created user
+//   //   const deleteResponse = await request.delete(`http://localhost:3000/auth/users/${createdUserId}`);
+//   //   expect(deleteResponse.status()).toBe(204); // Assuming 204 is the expected status for successful deletion
+//   // }
+// });

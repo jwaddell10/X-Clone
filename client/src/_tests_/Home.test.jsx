@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import Home from "../components/Home";
+import WelcomePage from "../components/WelcomePage/WelcomePage";
 
 describe("home page renders correct elements", () => {
 	it("renders all items on the page", () => {
-		render(<Home />);
+		render(<WelcomePage />);
 
 		//X logo renders
 		expect(screen.getByAltText("X logo"));
