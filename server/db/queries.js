@@ -44,6 +44,19 @@ module.exports = {
 			return error;
 		}
 	},
+	findProfile: async (id) => {
+		try {
+			const profile = await prisma.profile.findUnique({
+				where: {
+					id: id,
+				},
+			});
+			console.log(profile, "profile in findprofile");
+			return profile;
+		} catch (error) {
+			return error;
+		}
+	},
 	findAllPosts: async () => {
 		try {
 			const posts = await prisma.post.findMany({

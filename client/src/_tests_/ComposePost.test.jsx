@@ -4,7 +4,6 @@ import ComposePostComponent from "../components/HomePage/ComposePostComponent.js
 
 describe("ComposePost component", () => {
 	it("renders correct items on the page", () => {
-		// const user = userEvent.setup();
 
 		render(<ComposePostComponent />);
 

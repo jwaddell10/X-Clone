@@ -3,12 +3,7 @@ import "../../Styles/DisplayPost.css";
 
 export default function DisplayPost() {
 	const { posts } = useFetchPosts();
-	if (posts) {
-		console.log(
-			posts.map((item) => item),
-			"this is item"
-		);
-	}
+
 	return (
 		<div>
 			{posts &&

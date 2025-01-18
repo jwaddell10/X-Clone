@@ -1,4 +1,4 @@
-import "../../Styles/Home.css";
+import "../Styles/Home.css";
 import { useState } from "react";
 import WelcomePage from "./WelcomePage/WelcomePage";
 import { useAuth } from "../helpers/authContext";

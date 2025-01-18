@@ -7,7 +7,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+var userRouter = require("./routes/user");
 const authRouter = require("./routes/auth");
 const postRouter = require("./routes/post")
 
@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/user", userRouter);
 app.use("/auth", authRouter);
 app.use("/post", postRouter);
 
