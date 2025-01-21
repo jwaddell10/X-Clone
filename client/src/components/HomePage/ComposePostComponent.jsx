@@ -6,13 +6,20 @@ import DisplayPost from "./DisplayPost";
 
 export default function ComposePostComponent() {
 	const [text, setText] = useState("");
+	const [isDisabled, setIsDisabled] = useState(true);
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
+		if (text.trim() === "") {
+			return;
+		}
 		await submitPost(text, "post");
 	};
 
 	const handleChange = (event) => {
-		setText(event.target.value);
+		const postText = event.target.value;
+		setText(postText);
+		setIsDisabled(postText.trim() === "");
 	};
 
 	return (
@@ -34,7 +41,12 @@ export default function ComposePostComponent() {
 						onChange={handleChange}
 						placeholder="What is happening?!"
 					></textarea>
-					<Button type="submit" text="Post" variant="postButton" />
+					<Button
+						type="submit"
+						text="Post"
+						variant="postButton"
+						disabled={isDisabled}
+					/>
 				</form>
 			</div>
 			<DisplayPost />

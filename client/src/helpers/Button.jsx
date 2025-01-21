@@ -1,5 +1,5 @@
 import "../Styles/Button.css"
 
-export default function Button({ text, variant }) {
-	return <button className={variant}>{text}</button>;
+export default function Button({ text, variant, disabled }) {
+	return <button className={variant} disabled={disabled}>{text}</button>;
 }

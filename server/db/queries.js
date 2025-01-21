@@ -61,6 +61,7 @@ module.exports = {
 		try {
 			const posts = await prisma.post.findMany({
 				select: {
+					id: true,
 					createdAt: true,
 					author: {
 						omit: {

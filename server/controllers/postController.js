@@ -3,7 +3,6 @@ const asyncHandler = require("express-async-handler");
 const db = require("../db/queries");
 
 exports.getAllPosts = asyncHandler(async (req, res, next) => {
-	console.log("getall runs?");
 	const posts = await db.findAllPosts();
 
 	if (posts === null) {
