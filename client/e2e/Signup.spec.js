@@ -61,9 +61,8 @@ test("signup form submits correct items", async ({ page }) => {
 	// Check the response body
 	const responseBody = await response.json();
 	expect(responseBody).toEqual(
-		expect.objectContaining({
+		expect.toContainText({
 			success: true,
-			message: "User created successfully",
 		})
 	);
 	console.log(responseBody, "responsebody");

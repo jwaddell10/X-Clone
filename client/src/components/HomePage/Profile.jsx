@@ -5,7 +5,7 @@ import EditProfile from "./EditProfile";
 
 export default function Profile() {
 	const { profileInfo, error } = useGetProfileInfo();
-	// console.log(profileInfo, 'profile info')
+	console.log(profileInfo, 'profile info')
 
 	if (profileInfo) {
 		console.log("profile exists");

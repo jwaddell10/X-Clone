@@ -14,7 +14,7 @@ export default function useSubmit(handleSubmit, url) {
 			const postData = await postFormData(data, url);
 			if (postData.token) {
 				login();
-			} else setError("Error has occurred");
+			} else setError(postData.message);
 		} catch (error) {
 			setError(error.message || "An unexpected error occurred");
 		} finally {

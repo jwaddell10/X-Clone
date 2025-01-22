@@ -14,28 +14,28 @@ datasource db {
 }
 
 model User {
-  id         Int       @id @default(autoincrement())
-  name       String    @unique
-  password   String
-  followedBy Follows[] @relation("followedBy")
-  following  Follows[] @relation("following")
-  Profile    Profile?
-  Post       Post[]
-  Comment    Comment[]
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  password String
+  Profile  Profile?
+  Post     Post[]
+  Comment  Comment[]
 }
 
 model Profile {
-  id             Int     @unique @default(autoincrement())
+  id             Int       @unique @default(autoincrement())
   bio            String?
   profilePicture String?
-  user           User    @relation(fields: [userId], references: [id])
-  userId         Int     @unique
+  followedBy     Follows[] @relation("followedBy")
+  following      Follows[] @relation("following")
+  user           User      @relation(fields: [userId], references: [id])
+  userId         Int       @unique
 }
 
 model Follows {
-  followedBy   User @relation("followedBy", fields: [followedById], references: [id])
+  followedBy   Profile @relation("followedBy", fields: [followedById], references: [id])
   followedById Int
-  following    User @relation("following", fields: [followingId], references: [id])
+  following    Profile @relation("following", fields: [followingId], references: [id])
   followingId  Int
 
   @@id([followingId, followedById])

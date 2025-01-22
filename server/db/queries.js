@@ -1,23 +1,25 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const bcryptjs = require("bcryptjs");
-
+const { getDefaultImageUrl } = require("../services/cloudinary");
+const defaultImageUrl = getDefaultImageUrl();
 module.exports = {
 	findUser: async (username) => {
-		console.log(username, "username in find");
+		console.log(username, "username in findbyusername");
 		try {
 			const user = await prisma.user.findUnique({
 				where: {
 					name: username,
 				},
 			});
+			console.log(user, "user found in finduser");
 			return user;
 		} catch (error) {
 			return error;
 		}
 	},
 	findUserById: async (id) => {
-		console.log(id, "id in find");
+		console.log(id, "id in finduserbyid");
 		try {
 			const user = await prisma.user.findUnique({
 				where: {
@@ -37,6 +39,16 @@ module.exports = {
 				data: {
 					name: username,
 					password: hashedPassword,
+					Profile: {
+						create: {
+							bio: "",
+							profilePicture: defaultImageUrl,
+						},
+					},
+					// include: {
+					// 	followedBy: true,
+					// 	following: true,
+					// }
 				},
 			});
 			return user;
@@ -45,10 +57,20 @@ module.exports = {
 		}
 	},
 	findProfile: async (id) => {
+		console.log(id, "id in findprofile");
 		try {
 			const profile = await prisma.profile.findUnique({
 				where: {
-					id: id,
+					userId: id,
+				},
+				include: {
+					user: {
+						select: {
+							name: true,
+						},
+					},
+					followedBy: true,
+					following: true,
 				},
 			});
 			console.log(profile, "profile in findprofile");

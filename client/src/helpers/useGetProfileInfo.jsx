@@ -27,5 +27,5 @@ export default function useGetProfileInfo() {
 		fetchProfileInfo();
 	});
 
-	return { profileInfo, error };
+	return { profileInfo, setProfileInfo, error };
 }
