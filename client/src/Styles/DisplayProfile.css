@@ -1,0 +1,25 @@
+.header-container {
+    width: 40%;
+}
+
+.profile-picture {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    background-color: rgb(29, 155, 240);
+
+}
+
+.username-container {
+    margin: 1rem;
+}
+
+.username {
+    color: white;
+}
+
+.follower-container {
+    display: flex;
+    font-size: 0.5rem;
+    gap: 1rem;
+}

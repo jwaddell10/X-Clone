@@ -54,3 +54,14 @@
 	opacity: 0.5;
 	cursor: not-allowed;
 }
+
+.editProfile {
+	border: 1px solid white;
+	background-color: black;
+	border-radius: 1em;
+	cursor: pointer;
+	padding: 0.8em 1.2em 0.8em 1em;
+	transition: all ease-in-out 0.2s;
+	font-size: 16px;
+	color: white;
+}

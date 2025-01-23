@@ -19,13 +19,13 @@ export default function useGetProfileInfo() {
 				if (data.errorMessage) {
 					setError(data.errorMessage);
 				}
-				return data;
+				setProfileInfo(data.profile)
 			} catch (error) {
 				setError(error);
 			}
 		};
 		fetchProfileInfo();
-	});
+	}, [id]);
 
-	return { profileInfo, setProfileInfo, error };
+	return { profileInfo, error };
 }

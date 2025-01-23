@@ -5,11 +5,13 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import MailOutlineSharpIcon from "@mui/icons-material/MailOutlineSharp";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import MoreHorizSharpIcon from "@mui/icons-material/MoreHorizSharp";
+import Button from "../../helpers/Button";
+import styled from "styled-components";
 import "../../Styles/SideNavigation.css";
 import { Link } from "react-router";
 
 export default function SideNavigation() {
-	const id = localStorage.getItem("id")
+	const id = localStorage.getItem("id");
 	return (
 		<section>
 			<span className="icons-container">
@@ -63,7 +65,16 @@ export default function SideNavigation() {
 						<span className="nav-text">Settings</span>
 					</li>
 				</Link>
+				<button className="nav-item">Post</button>
 			</span>
 		</section>
 	);
 }
+
+// const StyledNavItem = styled.link`
+// 	display: flex;
+// 	align-items: center;
+// 	margin-top: 10px;
+// 	margin-left: 6rem;
+// 	gap: 1rem;
+// `;
