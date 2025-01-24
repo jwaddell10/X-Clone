@@ -1,12 +1,11 @@
 import useGetProfileInfo from "../../helpers/useGetProfileInfo";
 import EditProfile from "./EditProfile";
 import "../.././Styles/DisplayProfile.css";
-import Button from "../../helpers/Button";
+// import Button from "../../helpers/Button";
 import { useState } from "react";
 
 export default function DisplayProfile() {
 	const [showEditForm, setShowEditForm] = useState(false);
-	console.log(showEditForm, "showedit ");
 	const { profileInfo, error } = useGetProfileInfo();
 	// if (profileInfo) {
 	// 	console.log(profileInfo.followedBy.length);
@@ -27,19 +26,28 @@ export default function DisplayProfile() {
 							src={profileInfo.profilePicture}
 							alt="profile-picture"
 						/>
-						<Button
-							text="Edit Profile"
-							variant="editProfile"
+						<button
+							className="edit-profile-button"
 							onClick={() => setShowEditForm(true)}
-						/>
+						>
+							Edit Profile
+						</button>
+						{showEditForm && (
+							<EditProfile
+								profilePicture={profileInfo.profilePicture}
+								onClose={() => {
+									setShowEditForm(false);
+								}}
+							/>
+						)}
 					</div>
 					<div className="username-container">
 						<h1 className="username">{profileInfo.user.name}</h1>
 						<div className="follower-container">
-							<h1 style={{ color: "white" }}>
+							<h1>
 								{profileInfo.followedBy.length} Followers
 							</h1>
-							<h1 style={{ color: "white" }}>
+							<h1>
 								{profileInfo.following.length} Following
 							</h1>
 						</div>

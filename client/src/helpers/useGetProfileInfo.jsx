@@ -14,8 +14,7 @@ export default function useGetProfileInfo() {
 				);
 
 				const data = await response.json();
-				console.log(data, "data from fetch profile info");
-
+				
 				if (data.errorMessage) {
 					setError(data.errorMessage);
 				}

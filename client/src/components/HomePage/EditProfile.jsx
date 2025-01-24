@@ -1,19 +1,35 @@
 import Button from "../../helpers/Button";
+import CloseIcon from "@mui/icons-material/Close";
+import "../.././Styles/EditProfile.css";
+import fetchAllImageUrls from "../../helpers/useFetchAllImageUrls.jsx";
+// const images = import.meta.glob('/client/src/assets/*.{jpg}');
+// import animeCat from "../.././assets"
+// console.log(images, 'images')
+// import images from "../.././assets"
 
-export default function EditProfile() {
-	console.log("does edit profile run onclick");
-	//what does profile need?
+//doing glob imports to import images to save time!!!//
+export default function EditProfile({ profilePicture, onClose }) {
+	const { imageUrls, error } = fetchAllImageUrls();
+	console.log(imageUrls, "imageurls");
+	const profileImages = Object.values(
+		import.meta.glob(
+			"/src/assets/profileImages/*.{png,jpg,jpeg,svg,webp,avif}",
+			{ eager: true, as: "url" }
+		)
+	);
+	console.log("profile images", profileImages);
 
-	//profile picture
-	//bio
+	// if (imageUrls) {
+	// 	const result = imageUrls.split(/,(?=https)/);
+	// 	console.log(result, "result");
+	// }
+	//edit profile
+	//change name
+	//change profile picture
 
-	//plan = edit profile, initially just show profile,
-	// have profile picture (a default, regular person one...)
-	// have profile name (username)
-	// have bio
-	// have follower count and following count
-	// have edit profile button, basically recreate twitter,
-	// if edit profile is clicked do a popup form like twitter
+	//onclick of profile, need to fetch images and display//
+
+	//better to display on frontend, send item clicked to backend when user saves//
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -21,9 +37,28 @@ export default function EditProfile() {
 	};
 	return (
 		<>
-			<form onSubmit={handleSubmit}>
-				<Button text="Change Picture" variant="changePicture"></Button>
-				<label htmlFor="name">Change Name</label>
+			<form className="edit-profile-form" onSubmit={handleSubmit}>
+				<CloseIcon onClick={onClose} className="close-icon" />
+				<div className="profile-picture-container">
+					{profileImages.map((url, index) => (
+						<img
+							style={{ width: "5rem" }}
+							key={index}
+							src={url}
+							alt={`Profile ${index + 1}`}
+						/>
+					))}
+					<Button
+						type="button"
+						text="Change Picture"
+						variant="changePicture"
+					/>
+				</div>
+				<div className="edit-name-container">
+					<label htmlFor="name">Change Name</label>
+					<input type="text" />
+				</div>
+				<Button type="submit" text="Save" variant="saveButton" />
 			</form>
 		</>
 	);

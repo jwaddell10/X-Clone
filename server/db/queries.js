@@ -1,8 +1,9 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const bcryptjs = require("bcryptjs");
-const { getDefaultImageUrl } = require("../services/cloudinary");
+const { getDefaultImageUrl, getAllImages } = require("../services/cloudinary");
 const defaultImageUrl = getDefaultImageUrl();
+
 module.exports = {
 	findUser: async (username) => {
 		console.log(username, "username in findbyusername");
