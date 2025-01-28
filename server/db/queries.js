@@ -58,7 +58,6 @@ module.exports = {
 		}
 	},
 	findProfile: async (id) => {
-		console.log(id, "id in findprofile");
 		try {
 			const profile = await prisma.profile.findUnique({
 				where: {

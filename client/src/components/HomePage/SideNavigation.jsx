@@ -5,13 +5,12 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import MailOutlineSharpIcon from "@mui/icons-material/MailOutlineSharp";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import MoreHorizSharpIcon from "@mui/icons-material/MoreHorizSharp";
-import Button from "../../helpers/Button";
-import styled from "styled-components";
 import "../../Styles/SideNavigation.css";
 import { Link } from "react-router";
+import useGetProfileInfo from "../../helpers/useGetProfileInfo";
 
 export default function SideNavigation() {
-	const id = localStorage.getItem("id");
+	const { profileInfo } = useGetProfileInfo();
 	return (
 		<section>
 			<span className="icons-container">
@@ -50,12 +49,19 @@ export default function SideNavigation() {
 						<span className="nav-text">Messages</span>
 					</li>
 				</Link>
-				<Link to={`/profile/${id}`}>
-					<li className="nav-item">
-						<PermIdentityIcon className="icons" fontSize="large" />
-						<span className="nav-text">Profile</span>
-					</li>
-				</Link>
+				{/* add profile id*/}
+				{profileInfo && (
+					<Link to={`/profile/${profileInfo.id}`}>
+						<li className="nav-item">
+							<PermIdentityIcon
+								className="icons"
+								fontSize="large"
+							/>
+							<span className="nav-text">Profile</span>
+						</li>
+					</Link>
+				)}
+
 				<Link>
 					<li className="nav-item">
 						<MoreHorizSharpIcon

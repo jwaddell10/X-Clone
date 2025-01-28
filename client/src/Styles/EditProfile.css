@@ -14,5 +14,14 @@
 }
 
 .image-container:hover {
-	border: 1rem solid white;
+	border: 1rem solid #262626;
 }
+
+.image-container-selected {
+	border: 1rem solid #262626;
+	outline: 1px solid #00ff00;
+}
+
+/* .image-container:active {
+	border-color: green;
+} */

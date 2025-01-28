@@ -15,7 +15,7 @@ exports.getAllImageUrls = asyncHandler(async (req, res, next) => {
 
 exports.editProfile = asyncHandler(async (req, res, next) => {
 	console.log(req.body, "req body edit profile");
-  console.log(req.params, 'req params edit proifle')
-  const user = await db.findUserById(parseInt(req.params.id))
-  console.log(user, 'user')
+	console.log(req.params, "req params edit proifle");
+	const profile = await db.findProfile(parseInt(req.params.id))
+	console.log(profile, 'profile')
 });

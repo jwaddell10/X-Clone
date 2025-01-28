@@ -4,31 +4,26 @@ import CloseIcon from "@mui/icons-material/Close";
 import "../.././Styles/EditProfile.css";
 import fetchAllImageUrls from "../../helpers/useFetchAllImageUrls.jsx";
 import submitEditProfile from "../../helpers/submitEditProfile.jsx";
-// const images = import.meta.glob('/client/src/assets/*.{jpg}');
-// import animeCat from "../.././assets"
-// console.log(images, 'images')
-// import images from "../.././assets"
 
-//doing glob imports to import images to save time!!!//
 export default function EditProfile({ profileInfo, profilePicture, onClose }) {
 	const { imageUrls, error } = fetchAllImageUrls();
+	const [borderToSelectedUrl, setBorderToSelectedUrl] = useState(false);
 	const [formData, setFormData] = useState({
 		imageUrl: "",
 		username: "",
 	});
+
 	const profileImages = Object.values(
 		import.meta.glob(
 			"/src/assets/profileImages/*.{png,jpg,jpeg,svg,webp,avif}",
 			{ eager: true, as: "url" }
 		)
 	);
-	console.log(formData, "formdata");
 	const handleChange = (event) => {
 		setFormData((prevState) => ({
 			...prevState,
 			username: event.target.value,
 		}));
-		console.log(formData, "formdata");
 	};
 	// if (imageUrls) {
 	// 	const result = imageUrls.split(/,(?=https)/);
@@ -44,7 +39,7 @@ export default function EditProfile({ profileInfo, profilePicture, onClose }) {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		await submitEditProfile({formData});
+		await submitEditProfile({ formData }, profileInfo.id);
 	};
 	return (
 		<>
@@ -58,8 +53,11 @@ export default function EditProfile({ profileInfo, profilePicture, onClose }) {
 									...prevState,
 									imageUrl: url,
 								}));
+								setBorderToSelectedUrl(url);
 							}}
-							className="image-container"
+							className={`image-container${
+								borderToSelectedUrl === url ? "-selected" : ""
+							}`}
 							key={index}
 						>
 							<img

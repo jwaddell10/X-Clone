@@ -1,6 +1,6 @@
-export default async function submitEditProfile({ formData }) {
+export default async function submitEditProfile({ formData }, id) {
 	console.log(formData, 'formdata')
-	const id = localStorage.getItem("id");
+	// const id = localStorage.getItem("id");
 	const JWTToken = localStorage.getItem("token");
 	try {
 		const response = await fetch(
