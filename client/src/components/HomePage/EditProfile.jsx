@@ -10,7 +10,7 @@ import submitEditProfile from "../../helpers/submitEditProfile.jsx";
 // import images from "../.././assets"
 
 //doing glob imports to import images to save time!!!//
-export default function EditProfile({ profilePicture, onClose }) {
+export default function EditProfile({ profileInfo, profilePicture, onClose }) {
 	const { imageUrls, error } = fetchAllImageUrls();
 	const [formData, setFormData] = useState({
 		imageUrl: "",
@@ -44,7 +44,7 @@ export default function EditProfile({ profilePicture, onClose }) {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		await submitEditProfile(formData);
+		await submitEditProfile({formData});
 	};
 	return (
 		<>
@@ -82,6 +82,8 @@ export default function EditProfile({ profilePicture, onClose }) {
 						type="text"
 						value={formData.username}
 						onChange={handleChange}
+						placeholder={profileInfo.user.name}
+						minLength="5"
 					/>
 				</div>
 				<Button type="submit" text="Save" variant="saveButton" />

@@ -1,14 +1,13 @@
 export default async function submitEditProfile({ formData }) {
+	console.log(formData, 'formdata')
 	const id = localStorage.getItem("id");
 	const JWTToken = localStorage.getItem("token");
-	console.log(formData, "make sure edit profile formdata works");
-
 	try {
 		const response = await fetch(
 			`${import.meta.env.VITE_API_URL}/profile/edit/${id}`,
 			{
 				method: "POST",
-				body: formData,
+				body: JSON.stringify(formData),
 				headers: {
 					"Content-type": "application/json",
 					Authorization: `Bearer ${JWTToken}`,

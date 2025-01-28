@@ -34,6 +34,7 @@ export default function DisplayProfile() {
 						</button>
 						{showEditForm && (
 							<EditProfile
+								profileInfo={profileInfo}
 								profilePicture={profileInfo.profilePicture}
 								onClose={() => {
 									setShowEditForm(false);
