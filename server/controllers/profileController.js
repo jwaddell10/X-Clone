@@ -14,8 +14,20 @@ exports.getAllImageUrls = asyncHandler(async (req, res, next) => {
 });
 
 exports.editProfile = asyncHandler(async (req, res, next) => {
-	console.log(req.body, "req body edit profile");
-	console.log(req.params, "req params edit proifle");
-	const profile = await db.findProfile(parseInt(req.params.id))
-	console.log(profile, 'profile')
+	const { formData } = req.body;
+
+	const profile = await db.updateProfile(
+		parseInt(req.params.id),
+		formData.imageUrl,
+		formData.username,
+		parseInt(req.body.userId)
+	);
+	if (!profile) {
+		res.json({
+			errorMessage: "Error when creating profile. Try again later",
+		});
+	} else if (profile) {
+		res.json(profile);
+	}
+	//need to update profile
 });

@@ -57,7 +57,7 @@ module.exports = {
 			return error;
 		}
 	},
-	findProfile: async (id) => {
+	findProfileByUserId: async (id) => {
 		try {
 			const profile = await prisma.profile.findUnique({
 				where: {
@@ -75,6 +75,43 @@ module.exports = {
 			});
 			console.log(profile, "profile in findprofile");
 			return profile;
+		} catch (error) {
+			return error;
+		}
+	},
+	findProfileByProfileId: async (id) => {
+		try {
+			const profile = await prisma.profile.findUnique({
+				where: {
+					id: id
+				}
+			})
+			return profile
+		} catch (error) {
+			return error;
+		}
+	},	
+	updateProfile: async (id, profilePicture, name, userId) => {
+		try {
+			const updatedProfile = await prisma.profile.update({
+				where: {
+					id: id,
+				},
+				data: {
+					user: {
+						update: {
+							where: {
+								id: userId
+							},
+							data: {
+								name: name
+							}
+						}
+					},
+					profilePicture: profilePicture
+				}
+			})
+			return updatedProfile
 		} catch (error) {
 			return error;
 		}

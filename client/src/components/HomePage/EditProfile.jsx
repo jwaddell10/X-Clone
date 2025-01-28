@@ -2,14 +2,13 @@ import { useState } from "react";
 import Button from "../../helpers/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import "../.././Styles/EditProfile.css";
-import fetchAllImageUrls from "../../helpers/useFetchAllImageUrls.jsx";
 import submitEditProfile from "../../helpers/submitEditProfile.jsx";
 
 export default function EditProfile({ profileInfo, profilePicture, onClose }) {
-	const { imageUrls, error } = fetchAllImageUrls();
+	const [editProfileError, setEditProfileError] = useState(null);
 	const [borderToSelectedUrl, setBorderToSelectedUrl] = useState(false);
 	const [formData, setFormData] = useState({
-		imageUrl: "",
+		imageUrl: profilePicture,
 		username: "",
 	});
 
@@ -25,22 +24,16 @@ export default function EditProfile({ profileInfo, profilePicture, onClose }) {
 			username: event.target.value,
 		}));
 	};
-	// if (imageUrls) {
-	// 	const result = imageUrls.split(/,(?=https)/);
-	// 	console.log(result, "result");
-	// }
-	//edit profile
-	//change name
-	//change profile picture
-
-	//onclick of profile, need to fetch images and display//
-
-	//better to display on frontend, send item clicked to backend when user saves//
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		await submitEditProfile({ formData }, profileInfo.id);
+		const response = await submitEditProfile({ formData }, profileInfo.id);
+
+		if (!response.ok) {
+			setEditProfileError(response);
+		}
 	};
+
 	return (
 		<>
 			<form className="edit-profile-form" onSubmit={handleSubmit}>
@@ -68,11 +61,6 @@ export default function EditProfile({ profileInfo, profilePicture, onClose }) {
 							/>
 						</div>
 					))}
-					{/* <Button
-						type="button"
-						text="Change Picture"
-						variant="changePicture"
-					/> */}
 				</div>
 				<div className="edit-name-container">
 					<label htmlFor="name">Change Name</label>
@@ -82,9 +70,15 @@ export default function EditProfile({ profileInfo, profilePicture, onClose }) {
 						onChange={handleChange}
 						placeholder={profileInfo.user.name}
 						minLength="5"
+						required
 					/>
 				</div>
 				<Button type="submit" text="Save" variant="saveButton" />
+				{editProfileError && (
+					<div style={{ color: "white" }}>
+						{editProfileError.message}
+					</div>
+				)}
 			</form>
 		</>
 	);

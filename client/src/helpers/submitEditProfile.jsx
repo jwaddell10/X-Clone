@@ -1,13 +1,13 @@
-export default async function submitEditProfile({ formData }, id) {
-	console.log(formData, 'formdata')
-	// const id = localStorage.getItem("id");
+export default async function submitEditProfile({ formData }, profileId) {
+	// console.log(formData, 'formdata')
+	const id = localStorage.getItem("id");
 	const JWTToken = localStorage.getItem("token");
 	try {
 		const response = await fetch(
-			`${import.meta.env.VITE_API_URL}/profile/edit/${id}`,
+			`${import.meta.env.VITE_API_URL}/profile/edit/${profileId}`,
 			{
 				method: "POST",
-				body: JSON.stringify(formData),
+				body: JSON.stringify({formData: formData, userId: id}),
 				headers: {
 					"Content-type": "application/json",
 					Authorization: `Bearer ${JWTToken}`,
@@ -16,8 +16,9 @@ export default async function submitEditProfile({ formData }, id) {
 		);
 
 		const data = await response.json();
-		console.log(data, "data");
+		return data;
 	} catch (error) {
-		throw new Error(error);
+		console.log(error, 'error in catch')
+		return error;
 	}
 }

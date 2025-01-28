@@ -1,6 +1,4 @@
 export default async function submitPost(text, url) {
-	console.log(text, "text");
-	console.log(`${import.meta.env.VITE_API_URL}/${url}`);
 	const JWTToken = localStorage.getItem("token");
 	const id = localStorage.getItem("id");
 
@@ -23,6 +21,6 @@ export default async function submitPost(text, url) {
 		return data;
 	} catch (error) {
 		console.error("There was a problem with the fetch operation:", error);
-		throw error; // Re-throw the error if you want calling code to handle it
+		throw error;
 	}
 }

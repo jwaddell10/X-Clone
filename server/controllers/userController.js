@@ -4,7 +4,7 @@ const db = require("../db/queries");
 const { getAllImages } = require("../services/cloudinary");
 
 exports.getProfile = asyncHandler(async (req, res, next) => {
-	const profile = await db.findProfile(parseInt(req.params.id));
+	const profile = await db.findProfileByUserId(parseInt(req.params.id));
 
 	if (!profile) {
 		res.json({ errorMessage: "Profile not found" });

@@ -11,6 +11,7 @@ import useGetProfileInfo from "../../helpers/useGetProfileInfo";
 
 export default function SideNavigation() {
 	const { profileInfo } = useGetProfileInfo();
+	console.log(profileInfo, 'profileinfo')
 	return (
 		<section>
 			<span className="icons-container">
