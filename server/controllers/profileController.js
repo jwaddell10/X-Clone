@@ -22,6 +22,7 @@ exports.editProfile = asyncHandler(async (req, res, next) => {
 		formData.username,
 		parseInt(req.body.userId)
 	);
+
 	if (!profile) {
 		res.json({
 			errorMessage: "Error when creating profile. Try again later",
@@ -29,5 +30,4 @@ exports.editProfile = asyncHandler(async (req, res, next) => {
 	} else if (profile) {
 		res.json(profile);
 	}
-	//need to update profile
 });
