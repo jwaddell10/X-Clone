@@ -7,7 +7,7 @@ import { test, expect } from "@playwright/test";
 test('signup form appears with correct elements when "Create Account" button is clicked', async ({
 	page,
 }) => {
-	await page.goto("http://localhost:5173");
+	await page.goto("/");
 
 	// Click the "Create Account" button
 	await page.getByRole("button", { name: "Create Account" }).click();
@@ -33,7 +33,7 @@ test('signup form appears with correct elements when "Create Account" button is 
 });
 
 test("signup form submits correct items", async ({ page }) => {
-	await page.goto("http://localhost:5173");
+	await page.goto("/");
 
 	// Click the "Create Account" button
 	await page.getByRole("button", { name: "Create Account" }).click();
@@ -60,11 +60,10 @@ test("signup form submits correct items", async ({ page }) => {
 
 	// Check the response body
 	const responseBody = await response.json();
-	expect(responseBody).toEqual(
-		expect.toContainText({
-			success: true,
-		})
-	);
+	expect(responseBody).toStrictEqual({
+		message: "User created successfully",
+		token: expect.any(String)
+	});
 	console.log(responseBody, "responsebody");
 });
 

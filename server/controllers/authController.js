@@ -39,7 +39,7 @@ exports.logIn = asyncHandler(async (req, res, next) => {
 		console.log(user, "user");
 		if (token) {
 			res.status(200).json({
-				message: "User created successfully",
+				message: "User logged in successfully",
 				token: token,
 				id: user.id,
 			});

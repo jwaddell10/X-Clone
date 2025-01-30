@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import CloseIcon from "@mui/icons-material/Close";
 import "../../Styles/LoginSignup.css";
 import useSubmit from "../../helpers/useSubmit";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Login({ setAction }) {
 	const {
@@ -10,7 +11,7 @@ export default function Login({ setAction }) {
 		formState: { errors },
 	} = useForm();
 
-	const { error, formHandler } = useSubmit(handleSubmit, "login");
+	const { error, isLoading, formHandler } = useSubmit(handleSubmit, "login");
 
 	const usernameRegistered = {
 		...register("username", {
@@ -55,7 +56,11 @@ export default function Login({ setAction }) {
 			/>
 			{errors.password && <div>{errors.password.message}</div>}
 			{error && <div>{error}</div>}
-			<button type="submit">Log in</button>
+			{isLoading ? (
+				<CircularProgress />
+			) : (
+				<button type="submit">Sign in</button>
+			)}
 		</form>
 	);
 }

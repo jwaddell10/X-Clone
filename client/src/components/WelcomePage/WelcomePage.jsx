@@ -45,7 +45,7 @@ export default function WelcomePage({ action, setAction }) {
 						setAction={setAction}
 					/>
 					<HomeAuthButton
-						text="Sign In as Guest"
+						text="Enter as Guest"
 						variant="outlined"
 					/>
 					{action === "Login" && (

@@ -5,7 +5,7 @@ import { useAuth } from "./authContext";
 export default function useSubmit(handleSubmit, url) {
 	const { login } = useAuth();
 	const [error, setError] = useState("");
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState();
 
 	const formHandler = handleSubmit(async (data) => {
 		setIsLoading(true);
