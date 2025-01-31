@@ -1,32 +1,23 @@
-// import { test, expect } from "@playwright/test";
+import { test, expect } from "@playwright/test";
+import Login from "./test-helpers/auth.helpers";
 
-// test('login form works', () => {
-//     async function login(page) {
+test("Correct items display on homepage when user logs in", async ({
+	page,
+}) => {
+	await Login(page, "testing", "testing");
 
-//         await page.goto('http://localhost:5173'); // Navigate to login page [1, 2, 5]
-    
-//         await page.getByRole('button', { name: 'Log In'}).click();
-    
-//         await page.getByRole('form', {name: 'Log In'}).toBeVisible();
-      
-//         // await page.fill('input[name="username"]', 'your_username'); [1, 2, 5]
-      
-//         // await page.fill('input[name="password"]', 'your_password'); [1, 2, 5]
-      
-//         // await page.click('button[type="submit"]'); [1, 2, 5]
-      
-//       }
-//       login()
-// })
+	await page.goto("/");
 
+	const buttons = page.getByRole("button", { name: "Post" });
+	await expect(buttons).toHaveCount(2);
+	await expect(page.getByRole("button", { name: "All" })).toBeVisible();
+	await expect(page.getByRole("button", { name: "Following" })).toBeVisible();
+	await expect(page.getByPlaceholder("What is happening?!")).toBeVisible();
+});
 
+test("Posts display when user is logged in", async ({ page }) => {
+	await Login(page, "testing", "testing");
+    const response = await page.request.get('http://localhost:3000/post');
 
-
-// test("posts display correctly", async ({ page }) => {
-//     await login(page); [1, 2, 5]
-
-//     await page.goto('http://localhost:5173');
-
-//     const allButton = page.locator('button')
-//     await expect(allButton).toBeVisible();
-// })
+	expect(response).toBeOK();
+});
