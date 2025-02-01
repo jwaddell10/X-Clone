@@ -1,4 +1,5 @@
 import "../../Styles/Button.css";
+import PropTypes from "prop-types";
 
 export default function HomeAuthButton({ text, variant, action, setAction }) {
 	const handleClick = () => {
@@ -10,3 +11,10 @@ export default function HomeAuthButton({ text, variant, action, setAction }) {
 		</button>
 	);
 }
+
+HomeAuthButton.propTypes = {
+	text: PropTypes.string,
+	variant: PropTypes.string,
+	action: PropTypes.string,
+	setAction: PropTypes.func,
+};

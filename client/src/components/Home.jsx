@@ -10,7 +10,11 @@ export default function Home() {
 
 	return (
 		<main>
-			{user ? <HomePage /> : <WelcomePage action={action} setAction={setAction}/>}
+			{user ? (
+				<HomePage />
+			) : (
+				<WelcomePage action={action} setAction={setAction} />
+			)}
 		</main>
 	);
 }

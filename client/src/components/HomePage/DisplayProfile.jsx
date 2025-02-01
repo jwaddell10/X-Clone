@@ -1,18 +1,13 @@
 import useGetProfileInfo from "../../helpers/useGetProfileInfo";
 import EditProfile from "./EditProfile";
 import "../.././Styles/DisplayProfile.css";
-// import Button from "../../helpers/Button";
 import { useState } from "react";
 
 export default function DisplayProfile() {
+	const [refreshTrigger, setRefreshTrigger] = useState(0);
 	const [showEditForm, setShowEditForm] = useState(false);
-	const { profileInfo, error } = useGetProfileInfo();
-	// if (profileInfo) {
-	// 	console.log(profileInfo.followedBy.length);
-	// }
+	const { profileInfo, error } = useGetProfileInfo(refreshTrigger);
 
-	//display followers/following
-	//popup form when edit profile button is clicked
 	return (
 		<>
 			{profileInfo && (
@@ -34,8 +29,8 @@ export default function DisplayProfile() {
 						</button>
 						{showEditForm && (
 							<EditProfile
+								setRefreshTrigger={setRefreshTrigger}
 								profileInfo={profileInfo}
-								profilePicture={profileInfo.profilePicture}
 								onClose={() => {
 									setShowEditForm(false);
 								}}
@@ -45,16 +40,13 @@ export default function DisplayProfile() {
 					<div className="username-container">
 						<h1 className="username">{profileInfo.user.name}</h1>
 						<div className="follower-container">
-							<h1>
-								{profileInfo.followedBy.length} Followers
-							</h1>
-							<h1>
-								{profileInfo.following.length} Following
-							</h1>
+							<h1>{profileInfo.followedBy.length} Followers</h1>
+							<h1>{profileInfo.following.length} Following</h1>
 						</div>
 					</div>
 				</div>
 			)}
+			{error && <div style={{ color: "white" }}>{error.message}</div>}
 		</>
 	);
 }

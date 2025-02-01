@@ -2,9 +2,9 @@ import { useForm } from "react-hook-form";
 import CloseIcon from "@mui/icons-material/Close";
 import "../../Styles/LoginSignup.css";
 import useSubmit from "../../helpers/useSubmit";
+import PropTypes from "prop-types";
 
 export default function Signup({ setAction }) {
-	// const [error, setError] = useState("");
 	const {
 		register,
 		formState: { errors },
@@ -80,3 +80,7 @@ export default function Signup({ setAction }) {
 		</>
 	);
 }
+
+Signup.propTypes = {
+	setAction: PropTypes.func,
+};

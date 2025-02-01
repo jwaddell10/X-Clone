@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 
-export default function useGetProfileInfo() {
+export default function useGetProfileInfo(refreshTrigger) {
+	console.log(refreshTrigger, 'refresh trigger in usegetprofile')
 	// const JWTToken = localStorage.getItem("token");
 	const id = localStorage.getItem("id");
 	const [profileInfo, setProfileInfo] = useState(null);
 	const [error, setError] = useState("");
 
 	useEffect(() => {
+		console.log(refreshTrigger, 'refresh trigger in usegetprofile useeffect')
+
 		const fetchProfileInfo = async () => {
 			try {
 				const response = await fetch(
@@ -24,7 +27,7 @@ export default function useGetProfileInfo() {
 			}
 		};
 		fetchProfileInfo();
-	}, [id]);
+	}, [refreshTrigger, id]);
 
 	return { profileInfo, error };
 }

@@ -1,4 +1,5 @@
 import "../../Styles/Button.css";
+import PropTypes from "prop-types";
 
 export default function GoogleButton({ text, variant }) {
 	return (
@@ -16,3 +17,8 @@ export default function GoogleButton({ text, variant }) {
 		</button>
 	);
 }
+
+GoogleButton.propTypes = {
+	text: PropTypes.string,
+	variant: PropTypes.string,
+};

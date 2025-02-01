@@ -2,7 +2,8 @@ import GoogleButton from "./GoogleButton";
 import HomeAuthButton from "./HomeAuthButton";
 import Login from "./Login";
 import Signup from "./Signup";
-import "../../Styles/WelcomePage.css"
+import "../../Styles/WelcomePage.css";
+import PropTypes from "prop-types";
 
 export default function WelcomePage({ action, setAction }) {
 	return (
@@ -44,10 +45,7 @@ export default function WelcomePage({ action, setAction }) {
 						action="Login"
 						setAction={setAction}
 					/>
-					<HomeAuthButton
-						text="Enter as Guest"
-						variant="outlined"
-					/>
+					<HomeAuthButton text="Enter as Guest" variant="outlined" />
 					{action === "Login" && (
 						<Login action={action} setAction={setAction} />
 					)}
@@ -59,3 +57,8 @@ export default function WelcomePage({ action, setAction }) {
 		</>
 	);
 }
+
+WelcomePage.propTypes = {
+	action: PropTypes.string,
+	setAction: PropTypes.func,
+};

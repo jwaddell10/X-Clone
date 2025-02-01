@@ -1,8 +1,9 @@
 import useFetchPosts from "../../helpers/useFetchPosts";
 import "../../Styles/DisplayPost.css";
+import PropTypes from "prop-types";
 
-export default function DisplayPost() {
-	const { posts } = useFetchPosts();
+export default function DisplayPost({ refreshTrigger }) {
+	const { posts } = useFetchPosts(refreshTrigger);
 
 	return (
 		<div>
@@ -17,3 +18,7 @@ export default function DisplayPost() {
 		</div>
 	);
 }
+
+DisplayPost.propTypes = {
+	refreshTrigger: PropTypes.number,
+};

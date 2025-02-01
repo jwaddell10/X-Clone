@@ -3,12 +3,19 @@ import Button from "../../helpers/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import "../.././Styles/EditProfile.css";
 import submitEditProfile from "../../helpers/submitEditProfile.jsx";
+import CircularProgress from "@mui/material/CircularProgress";
+import PropTypes from "prop-types";
 
-export default function EditProfile({ profileInfo, profilePicture, onClose }) {
+export default function EditProfile({
+	setRefreshTrigger,
+	profileInfo,
+	onClose,
+}) {
+	const [isLoading, setIsLoading] = useState(false);
 	const [editProfileError, setEditProfileError] = useState(null);
 	const [borderToSelectedUrl, setBorderToSelectedUrl] = useState(false);
 	const [formData, setFormData] = useState({
-		imageUrl: profilePicture,
+		imageUrl: profileInfo.profilePicture,
 		username: "",
 	});
 
@@ -18,6 +25,7 @@ export default function EditProfile({ profileInfo, profilePicture, onClose }) {
 			{ eager: true, as: "url" }
 		)
 	);
+
 	const handleChange = (event) => {
 		setFormData((prevState) => ({
 			...prevState,
@@ -27,59 +35,69 @@ export default function EditProfile({ profileInfo, profilePicture, onClose }) {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		const response = await submitEditProfile({ formData }, profileInfo.id);
-
-		if (!response.ok) {
-			setEditProfileError(response);
+		setIsLoading(true);
+		try {
+			const data = await submitEditProfile({ formData }, profileInfo.id);
+			if (data) {
+				onClose();
+				setRefreshTrigger((prevState) => prevState + 1);
+			}
+		} catch (error) {
+			setEditProfileError(error);
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
 	return (
-		<>
-			<form className="edit-profile-form" onSubmit={handleSubmit}>
-				<CloseIcon onClick={onClose} className="close-icon" />
-				<div className="profile-picture-container">
-					{profileImages.map((url, index) => (
-						<div
-							onClick={() => {
-								setFormData((prevState) => ({
-									...prevState,
-									imageUrl: url,
-								}));
-								setBorderToSelectedUrl(url);
-							}}
-							className={`image-container${
-								borderToSelectedUrl === url ? "-selected" : ""
-							}`}
+		<form className="edit-profile-form" onSubmit={handleSubmit}>
+			<CloseIcon onClick={onClose} className="close-icon" />
+			<div className="profile-picture-container">
+				{profileImages.map((url, index) => (
+					<div
+						onClick={() => {
+							setFormData((prevState) => ({
+								...prevState,
+								imageUrl: url,
+							}));
+							setBorderToSelectedUrl(url);
+						}}
+						className={`image-container${
+							borderToSelectedUrl === url ? "-selected" : ""
+						}`}
+						key={index}
+					>
+						<img
+							style={{ width: "5rem" }}
 							key={index}
-						>
-							<img
-								style={{ width: "5rem" }}
-								key={index}
-								src={url}
-								alt={`Profile ${index + 1}`}
-							/>
-						</div>
-					))}
-				</div>
-				<div className="edit-name-container">
-					<label htmlFor="name">Change Name</label>
-					<input
-						type="text"
-						value={formData.username}
-						onChange={handleChange}
-						placeholder={profileInfo.user.name}
-						minLength="5"
-						required
-					/>
-				</div>
-				<Button type="submit" text="Save" variant="saveButton" />
-				{editProfileError && (
-					<div style={{ color: "white" }}>
-						{editProfileError.message}
+							src={url}
+							alt={`Profile ${index + 1}`}
+						/>
 					</div>
-				)}
-			</form>
-		</>
+				))}
+			</div>
+			<div className="edit-name-container">
+				<label htmlFor="name">Change Name</label>
+				<input
+					type="text"
+					value={formData.username}
+					onChange={handleChange}
+					placeholder={profileInfo.user.name}
+					minLength="5"
+					required
+				/>
+			</div>
+			<Button type="submit" text="Save" variant="saveButton" />
+			{editProfileError && (
+				<div style={{ color: "white" }}>{editProfileError.message}</div>
+			)}
+			{isLoading && <CircularProgress color="white" />}
+		</form>
 	);
 }
+
+EditProfile.propTypes = {
+	setRefreshTrigger: PropTypes.func,
+	profileInfo: PropTypes.object,
+	onClose: PropTypes.func,
+};

@@ -3,6 +3,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import "../../Styles/LoginSignup.css";
 import useSubmit from "../../helpers/useSubmit";
 import CircularProgress from "@mui/material/CircularProgress";
+import PropTypes from "prop-types";
 
 export default function Login({ setAction }) {
 	const {
@@ -64,3 +65,7 @@ export default function Login({ setAction }) {
 		</form>
 	);
 }
+
+Login.propTypes = {
+	setAction: PropTypes.func,
+};

@@ -8,10 +8,11 @@ import MoreHorizSharpIcon from "@mui/icons-material/MoreHorizSharp";
 import "../../Styles/SideNavigation.css";
 import { Link } from "react-router";
 import useGetProfileInfo from "../../helpers/useGetProfileInfo";
+import PropTypes from "prop-types";
 
-export default function SideNavigation() {
-	const { profileInfo } = useGetProfileInfo();
-	console.log(profileInfo, 'profileinfo')
+export default function SideNavigation({ refreshTrigger }) {
+	const { profileInfo } = useGetProfileInfo(refreshTrigger);
+
 	return (
 		<section>
 			<span className="icons-container">
@@ -50,7 +51,6 @@ export default function SideNavigation() {
 						<span className="nav-text">Messages</span>
 					</li>
 				</Link>
-				{/* add profile id*/}
 				{profileInfo && (
 					<Link to={`/profile/${profileInfo.id}`}>
 						<li className="nav-item">
@@ -78,10 +78,6 @@ export default function SideNavigation() {
 	);
 }
 
-// const StyledNavItem = styled.link`
-// 	display: flex;
-// 	align-items: center;
-// 	margin-top: 10px;
-// 	margin-left: 6rem;
-// 	gap: 1rem;
-// `;
+SideNavigation.propTypes = {
+	refreshTrigger: PropTypes.number,
+};

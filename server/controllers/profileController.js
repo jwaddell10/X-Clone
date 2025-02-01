@@ -24,10 +24,10 @@ exports.editProfile = asyncHandler(async (req, res, next) => {
 	);
 
 	if (!profile) {
-		res.json({
+		res.status(400).json({
 			errorMessage: "Error when creating profile. Try again later",
 		});
 	} else if (profile) {
-		res.json(profile);
+		res.status(200).json(profile);
 	}
 });
