@@ -17,6 +17,25 @@ module.exports = {
 			return error;
 		}
 	},
+	findAllUsersWithProfilePicture: async () => {
+		try {
+			const users = await prisma.user.findMany({
+				omit: {
+					password: true,
+				},
+				include: {
+					Profile: {
+						select: {
+							profilePicture: true,
+						},
+					},
+				},
+			});
+			return users;
+		} catch (error) {
+			return error;
+		}
+	},
 	findUserById: async (id) => {
 		try {
 			const user = await prisma.user.findUnique({
@@ -79,14 +98,14 @@ module.exports = {
 		try {
 			const profile = await prisma.profile.findUnique({
 				where: {
-					id: id
-				}
-			})
-			return profile
+					id: id,
+				},
+			});
+			return profile;
 		} catch (error) {
 			return error;
 		}
-	},	
+	},
 	updateProfile: async (id, profilePicture, name, userId) => {
 		try {
 			const updatedProfile = await prisma.profile.update({
@@ -97,17 +116,17 @@ module.exports = {
 					user: {
 						update: {
 							where: {
-								id: userId
+								id: userId,
 							},
 							data: {
-								name: name
-							}
-						}
+								name: name,
+							},
+						},
 					},
-					profilePicture: profilePicture
-				}
-			})
-			return updatedProfile
+					profilePicture: profilePicture,
+				},
+			});
+			return updatedProfile;
 		} catch (error) {
 			return error;
 		}

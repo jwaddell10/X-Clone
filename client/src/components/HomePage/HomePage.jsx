@@ -1,5 +1,6 @@
 import ComposePostComponent from "./ComposePostComponent";
 import SideNavigation from "./SideNavigation";
+import WhoToFollowSidebar from "./WhoToFollowSidebar";
 
 export default function HomePage() {
 
@@ -7,6 +8,7 @@ export default function HomePage() {
 		<>
 			<SideNavigation />
 			<ComposePostComponent />
+			<WhoToFollowSidebar />
 		</>
 	);
 }

@@ -12,3 +12,13 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
 		res.json({ profile: profile });
 	}
 });
+
+exports.getAllUsers = asyncHandler(async (req, res, next) => {
+	const users = await db.findAllUsersWithProfilePicture();
+	
+	if (!users) {
+		res.json({ errorMessage: "Unable to fetch users." });
+	}
+
+	res.json({ users });
+});
