@@ -12,6 +12,7 @@ const authRouter = require("./routes/auth");
 const postRouter = require("./routes/post")
 const profileRouter = require("./routes/profile")
 
+
 var app = express();
 
 const corsOptions = {

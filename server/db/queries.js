@@ -6,21 +6,18 @@ const defaultImageUrl = getDefaultImageUrl();
 
 module.exports = {
 	findUser: async (username) => {
-		console.log(username, "username in findbyusername");
 		try {
 			const user = await prisma.user.findUnique({
 				where: {
 					name: username,
 				},
 			});
-			console.log(user, "user found in finduser");
 			return user;
 		} catch (error) {
 			return error;
 		}
 	},
 	findUserById: async (id) => {
-		console.log(id, "id in finduserbyid");
 		try {
 			const user = await prisma.user.findUnique({
 				where: {
@@ -73,7 +70,6 @@ module.exports = {
 					following: true,
 				},
 			});
-			console.log(profile, "profile in findprofile");
 			return profile;
 		} catch (error) {
 			return error;
@@ -130,7 +126,6 @@ module.exports = {
 					text: true,
 				},
 			});
-			console.log(posts, "posts in findall");
 			return posts;
 		} catch (error) {
 			return error;
