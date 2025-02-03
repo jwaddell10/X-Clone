@@ -1,4 +1,5 @@
 .user-sidebar {
     display: flex;
-    color: white
+    color: white;
+    width: 30vw;
 }

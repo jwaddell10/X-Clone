@@ -1,11 +1,35 @@
+.post-container {
+	margin-left: 5vw;
+	margin-right: 5vw;
+	width: 50vw;
+	border: 1px solid gray;
+}
+
 .post-component-header-container {
-    display: flex;
+	display: flex;
 }
 
 .post-component-header {
-    color: white;
+	color: white;
+	width: 100%;
 }
 
 .post-content {
-    width: 100%;
+	width: 100%;
+}
+
+.text-area-container {
+	background-color: rgb(0, 0, 0);
+}
+
+textarea {
+	background-color: rgb(0, 0, 0);
+	color: white;
+	border-bottom: 1px solid gray;
+}
+
+.post-button-container {
+	display: flex;
+	justify-content: flex-end;
+	border-bottom: 1px solid gray;
 }

@@ -14,7 +14,7 @@ export default function SideNavigation({ refreshTrigger }) {
 	const { profileInfo } = useGetProfileInfo(refreshTrigger);
 
 	return (
-		<section>
+		<section className="sidebar-container">
 			<span className="icons-container">
 				<li className="nav-item">
 					<Link>
@@ -72,7 +72,7 @@ export default function SideNavigation({ refreshTrigger }) {
 						<span className="nav-text">Settings</span>
 					</li>
 				</Link>
-				<button className="nav-item">Post</button>
+				<button className="side-nav-post-button">Post</button>
 			</span>
 		</section>
 	);

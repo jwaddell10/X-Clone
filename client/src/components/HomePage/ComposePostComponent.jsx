@@ -37,35 +37,60 @@ export default function ComposePostComponent() {
 	};
 
 	return (
-		<div>
+		<span className="post-container">
 			<div className="post-component-header-container">
 				<li className="post-component-header">
-					<button>All</button>
+					<button
+						style={{
+							backgroundColor: "black",
+							width: "100%",
+							color: "white",
+							cursor: "pointer",
+							border: "0px solid black"
+						}}
+					>
+						All
+					</button>
 				</li>
 				<li className="post-component-header">
-					<button>Following</button>
+					<button
+						style={{
+							backgroundColor: "black",
+							width: "100%",
+							color: "white",
+							cursor: "pointer",
+							border: "0px solid black"
+						}}
+					>
+						Following
+					</button>
 				</li>
 			</div>
 			<div className="post-form-container">
 				<form onSubmit={handleSubmit}>
-					<textarea
-						className="post-content"
-						name="post-content"
-						value={text}
-						onChange={handleChange}
-						placeholder="What is happening?!"
-					></textarea>
-					<Button
-						type="submit"
-						text="Post"
-						variant="postButton"
-						disabled={isDisabled}
-					/>
+					<div className="text-area-container">
+						<textarea
+							className="post-content"
+							name="post-content"
+							value={text}
+							onChange={handleChange}
+							placeholder="What is happening?!"
+						></textarea>
+						<div className="post-button-container">
+							<Button
+								type="submit"
+								text="Post"
+								variant="postButton"
+								disabled={isDisabled}
+							/>
+						</div>
+					</div>
+
 					{isLoading && <CircularProgress color="white" />}
 				</form>
 			</div>
 			<DisplayPost refreshTrigger={refreshTrigger} />
 			{error && <div>{error}</div>}
-		</div>
+		</span>
 	);
 }

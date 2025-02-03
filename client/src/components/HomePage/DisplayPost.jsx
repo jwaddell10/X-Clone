@@ -9,11 +9,11 @@ export default function DisplayPost({ refreshTrigger }) {
 		<div>
 			{posts &&
 				posts.map((item) => (
-					<ul className="display-post-container" key={item.id}>
+					<span className="display-post-container" key={item.id}>
 						<li>{item.author.name}</li>
 						<li>{item.createdAt}</li>
 						<li>{item.text}</li>
-					</ul>
+					</span>
 				))}
 		</div>
 	);
