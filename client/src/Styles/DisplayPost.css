@@ -1,15 +1,30 @@
-.display-post-container {
-    color: white;
-    border-bottom: 1px solid white;
+.name-container {
+	display: flex;
+	justify-content: flex-start;
+	border-top: 1px solid gray;
 }
 
-.name-container {
-    display: flex;
-    justify-content: flex-start;
+.display-post-container {
+	color: white;
+	border-bottom: 1px solid gray;
 }
 
 .profile-picture-icon {
-    width: 3vw; 
-    height: 5vh;
-    border-radius: 20px;
+	width: 3vw;
+	height: 5vh;
+	border-radius: 20px;
+}
+
+.reply-icon {
+	fill: #aab8c2;
+}
+
+.reply-icon:active {
+	opacity: 0.5;
+}
+
+.post-reaction-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }

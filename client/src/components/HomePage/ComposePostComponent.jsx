@@ -38,7 +38,7 @@ export default function ComposePostComponent({ profile, refreshTrigger, setRefre
 	return (
 		<span className="post-container">
 			<div className="post-component-header-container">
-				<li className="post-component-header">
+				<span className="post-component-header">
 					<button
 						style={{
 							backgroundColor: "black",
@@ -50,8 +50,8 @@ export default function ComposePostComponent({ profile, refreshTrigger, setRefre
 					>
 						All
 					</button>
-				</li>
-				<li className="post-component-header">
+				</span>
+				<span className="post-component-header">
 					<button
 						style={{
 							backgroundColor: "black",
@@ -63,7 +63,7 @@ export default function ComposePostComponent({ profile, refreshTrigger, setRefre
 					>
 						Following
 					</button>
-				</li>
+				</span>
 			</div>
 			<div className="post-form-container">
 				<form onSubmit={handlePostSubmit}>
