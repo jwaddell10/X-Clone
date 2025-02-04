@@ -1,8 +1,18 @@
 const { PrismaClient } = require("@prisma/client");
 const { faker } = require("@faker-js/faker");
 const urls = require("./services/cloudinary.js");
-const randomNumber = Math.floor(Math.random() * (urls.urls.length - 1));
 const prisma = new PrismaClient();
+
+const imageUrls = urls.urls.map(
+	(url) => "https://res.cloudinary.com/dak6py2ng/image/upload/" + url
+);
+
+for (let i = 0; i < 10; i++) {
+	console.log(
+		urls.urls[Math.floor(Math.random() * urls.urls.length)],
+		"random url?"
+	);
+}
 
 async function generateUsers() {
 	const amountOfUsers = 50;
@@ -14,7 +24,12 @@ async function generateUsers() {
 				password: faker.string.uuid(),
 				Profile: {
 					create: {
-						profilePicture: urls.urls[randomNumber],
+						profilePicture:
+							imageUrls[
+								Math.floor(
+									Math.random() * (urls.urls.length - 1)
+								)
+							],
 					},
 				},
 			},
@@ -45,7 +60,7 @@ async function generatePostsAndComments() {
 
 		for (let j = 0; j < amountOfCommentsPerPost; j++) {
 			const randomCommenter =
-				users[Math.floor(Math.random() * users.length)]; 
+				users[Math.floor(Math.random() * users.length)];
 
 			await prisma.comment.create({
 				data: {
@@ -64,5 +79,5 @@ async function generatePostsAndComments() {
 	);
 }
 
-generateUsers();
-generatePostsAndComments();
+// generateUsers();
+// generatePostsAndComments();

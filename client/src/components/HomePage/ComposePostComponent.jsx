@@ -5,14 +5,13 @@ import "../../Styles/ComposePostComponent.css";
 import DisplayPost from "./DisplayPost";
 import CircularProgress from "@mui/material/CircularProgress";
 
-export default function ComposePostComponent() {
+export default function ComposePostComponent({ profile, refreshTrigger, setRefreshTrigger }) {
 	const [text, setText] = useState("");
 	const [error, setError] = useState(null);
 	const [isDisabled, setIsDisabled] = useState(true);
 	const [isLoading, setIsLoading] = useState(false);
-	const [refreshTrigger, setRefreshTrigger] = useState(0);
 
-	const handleSubmit = async (event) => {
+	const handlePostSubmit = async (event) => {
 		event.preventDefault();
 		if (text.trim() === "") {
 			return;
@@ -30,7 +29,7 @@ export default function ComposePostComponent() {
 		}
 	};
 
-	const handleChange = (event) => {
+	const handlePostFormChange = (event) => {
 		const postText = event.target.value;
 		setText(postText);
 		setIsDisabled(postText.trim() === "");
@@ -46,7 +45,7 @@ export default function ComposePostComponent() {
 							width: "100%",
 							color: "white",
 							cursor: "pointer",
-							border: "0px solid black"
+							border: "0px solid black",
 						}}
 					>
 						All
@@ -59,7 +58,7 @@ export default function ComposePostComponent() {
 							width: "100%",
 							color: "white",
 							cursor: "pointer",
-							border: "0px solid black"
+							border: "0px solid black",
 						}}
 					>
 						Following
@@ -67,13 +66,20 @@ export default function ComposePostComponent() {
 				</li>
 			</div>
 			<div className="post-form-container">
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handlePostSubmit}>
 					<div className="text-area-container">
+						{profile && (
+							<img
+							className="profile-picture-icon"
+								src={profile.profilePicture}
+								alt="profile-picture"
+							/>
+						)}
 						<textarea
 							className="post-content"
 							name="post-content"
 							value={text}
-							onChange={handleChange}
+							onChange={handlePostFormChange}
 							placeholder="What is happening?!"
 							maxLength={280}
 						></textarea>
@@ -86,7 +92,6 @@ export default function ComposePostComponent() {
 							/>
 						</div>
 					</div>
-
 					{isLoading && <CircularProgress color="white" />}
 				</form>
 			</div>

@@ -7,11 +7,9 @@ import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import MoreHorizSharpIcon from "@mui/icons-material/MoreHorizSharp";
 import "../../Styles/SideNavigation.css";
 import { Link } from "react-router";
-import useGetProfileInfo from "../../helpers/useGetProfileInfo";
 import PropTypes from "prop-types";
 
-export default function SideNavigation({ refreshTrigger }) {
-	const { profileInfo } = useGetProfileInfo(refreshTrigger);
+export default function SideNavigation({ profileInfo }) {
 
 	return (
 		<section className="sidebar-container">
@@ -73,6 +71,18 @@ export default function SideNavigation({ refreshTrigger }) {
 					</li>
 				</Link>
 				<button className="side-nav-post-button">Post</button>
+				{profileInfo && (
+					<div style={{display: "flex"}}>
+						<img
+							className="profile-picture-icon"
+							src={profileInfo.profilePicture}
+							alt="profile-picture"
+						/>
+						<div style={{ color: "white" }}>
+							{profileInfo.user.name}
+						</div>
+					</div>
+				)}
 			</span>
 		</section>
 	);
