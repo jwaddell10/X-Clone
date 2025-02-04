@@ -75,6 +75,7 @@ export default function ComposePostComponent() {
 							value={text}
 							onChange={handleChange}
 							placeholder="What is happening?!"
+							maxLength={280}
 						></textarea>
 						<div className="post-button-container">
 							<Button

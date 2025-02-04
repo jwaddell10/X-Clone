@@ -137,13 +137,18 @@ module.exports = {
 				select: {
 					id: true,
 					createdAt: true,
-					author: {
-						omit: {
-							password: true,
-						},
-					},
 					text: true,
-				},
+					author: {
+						select: {
+							name: true,
+							Profile: {
+								select: {
+									profilePicture: true
+								}
+							}
+						}
+					}
+				}
 			});
 			return posts;
 		} catch (error) {

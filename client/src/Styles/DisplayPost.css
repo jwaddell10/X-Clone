@@ -1,7 +1,14 @@
 .display-post-container {
     color: white;
+    border-bottom: 1px solid white;
 }
 
-li {
-    list-style-type: none;
+.name-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.profile-picture-icon {
+    width: 3vw; 
+    border-radius: 20px;
 }

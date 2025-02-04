@@ -1,6 +1,7 @@
-const {PrismaClient } = require("@prisma/client")
-const { faker } = require("@faker-js/faker")
-
+const { PrismaClient } = require("@prisma/client");
+const { faker } = require("@faker-js/faker");
+const urls = require("./services/cloudinary.js");
+const randomNumber = Math.floor(Math.random() * (urls.urls.length - 1));
 const prisma = new PrismaClient();
 
 async function generateUsers() {
@@ -9,21 +10,59 @@ async function generateUsers() {
 	for (let i = 0; i < amountOfUsers; i++) {
 		const fakeUsers = await prisma.user.create({
 			data: {
-				id: faker.number.int(),
 				name: faker.internet.username(),
 				password: faker.string.uuid(),
-				profile: {
-					create: [
-						{
-							id: faker.number.int(),
-							profilePicture: faker.image.avatar(),
-						}
-					]
+				Profile: {
+					create: {
+						profilePicture: urls.urls[randomNumber],
+					},
 				},
-			}
-		})
-		return fakeUsers;
+			},
+		});
 	}
 }
 
+async function generatePostsAndComments() {
+	const amountOfPosts = 50;
+	const amountOfCommentsPerPost = 5;
+
+	const users = await prisma.user.findMany({ select: { id: true } });
+
+	if (users.length === 0) {
+		console.error("❌ No users found! Create users first.");
+		return;
+	}
+
+	for (let i = 0; i < amountOfPosts; i++) {
+		const randomUser = users[Math.floor(Math.random() * users.length)];
+
+		const post = await prisma.post.create({
+			data: {
+				text: faker.lorem.paragraph().slice(0, 280),
+				authorId: randomUser.id,
+			},
+		});
+
+		for (let j = 0; j < amountOfCommentsPerPost; j++) {
+			const randomCommenter =
+				users[Math.floor(Math.random() * users.length)]; 
+
+			await prisma.comment.create({
+				data: {
+					text: faker.lorem.sentence().slice(0, 280),
+					authorId: randomCommenter.id,
+					postId: post.id,
+				},
+			});
+		}
+	}
+
+	console.log(
+		`✅ Created ${amountOfPosts} posts and ${
+			amountOfPosts * amountOfCommentsPerPost
+		} comments.`
+	);
+}
+
 generateUsers();
+generatePostsAndComments();
