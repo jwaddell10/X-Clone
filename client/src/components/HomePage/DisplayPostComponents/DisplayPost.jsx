@@ -1,6 +1,6 @@
-import useFetchPosts from "../../helpers/useFetchPosts";
+import useFetchPosts from "../../../helpers/useFetchPosts";
 import PersonIcon from "@mui/icons-material/Person";
-import "../../Styles/DisplayPost.css";
+import "../../../Styles/DisplayPost.css";
 import PropTypes from "prop-types";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 // import FavoriteIcon from "@mui/icons-material/Favorite";
