@@ -132,6 +132,22 @@ module.exports = {
 			return error;
 		}
 	},
+
+	/*model Post {
+		id        Int       @unique @default(autoincrement())
+		text      String
+		createdAt DateTime  @default(now())
+		author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+		authorId  Int
+		likes     Likes[]
+		Comment   Comment[]
+	  }*/
+
+		/*model Likes {
+			id     Int  @unique @default(autoincrement())
+			post   Post @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+			postId Int  @unique
+		  }*/
 	findAllPosts: async () => {
 		try {
 			const posts = await prisma.post.findMany({
@@ -139,6 +155,8 @@ module.exports = {
 					id: true,
 					createdAt: true,
 					text: true,
+					likes: true,
+					Comment: true,
 					author: {
 						select: {
 							name: true,
