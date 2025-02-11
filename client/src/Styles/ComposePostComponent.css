@@ -13,6 +13,8 @@
 .post-component-header {
 	color: white;
 	width: 100%;
+	display: flex;
+	justify-content: center;
 }
 
 .post-content {
@@ -20,15 +22,18 @@
 }
 
 .text-area-container {
+	display: flex;
+	border: none;
+	outline: none;
 	background-color: rgb(0, 0, 0);
 }
 
 textarea {
 	border: none;
 	outline: none;
+	resize: none;
 	background-color: rgb(0, 0, 0);
 	color: white;
-	border-bottom: 1px solid gray;
 }
 
 .post-button-container {

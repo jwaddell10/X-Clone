@@ -1,5 +1,9 @@
 .user-sidebar {
     display: flex;
+    justify-content: space-between;
     color: white;
-    width: 30vw;
+}
+
+ul {
+    padding: 0
 }

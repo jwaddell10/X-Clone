@@ -3,12 +3,13 @@ import PersonIcon from "@mui/icons-material/Person";
 import "../../Styles/DisplayPost.css";
 import PropTypes from "prop-types";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+// import FavoriteIcon from "@mui/icons-material/Favorite";
 import RepeatIcon from "@mui/icons-material/Repeat";
+// import timeAgo from "../../helpers/timeAgo";
 
 export default function DisplayPost({ refreshTrigger }) {
 	const { posts } = useFetchPosts(refreshTrigger);
-
+	
 	return (
 		<div>
 			{posts?.map((post) => (

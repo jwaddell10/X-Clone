@@ -1,6 +1,7 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 const db = require("../db/queries");
+const timeAgo = require("../helpers/timeAgo.js")
 
 exports.getAllPosts = asyncHandler(async (req, res, next) => {
 	const posts = await db.findAllPosts();

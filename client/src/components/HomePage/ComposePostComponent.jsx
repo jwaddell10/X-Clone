@@ -5,7 +5,11 @@ import "../../Styles/ComposePostComponent.css";
 import DisplayPost from "./DisplayPost";
 import CircularProgress from "@mui/material/CircularProgress";
 
-export default function ComposePostComponent({ profile, refreshTrigger, setRefreshTrigger }) {
+export default function ComposePostComponent({
+	profileInfo,
+	refreshTrigger,
+	setRefreshTrigger,
+}) {
 	const [text, setText] = useState("");
 	const [error, setError] = useState(null);
 	const [isDisabled, setIsDisabled] = useState(true);
@@ -37,41 +41,21 @@ export default function ComposePostComponent({ profile, refreshTrigger, setRefre
 
 	return (
 		<span className="post-container">
-			<div className="post-component-header-container">
+			{/* <div className="post-component-header-container">
 				<span className="post-component-header">
-					<button
-						style={{
-							backgroundColor: "black",
-							width: "100%",
-							color: "white",
-							cursor: "pointer",
-							border: "0px solid black",
-						}}
-					>
-						All
-					</button>
+					<StyledButton>All</StyledButton>
 				</span>
 				<span className="post-component-header">
-					<button
-						style={{
-							backgroundColor: "black",
-							width: "100%",
-							color: "white",
-							cursor: "pointer",
-							border: "0px solid black",
-						}}
-					>
-						Following
-					</button>
+					<StyledButton>Following</StyledButton>
 				</span>
-			</div>
+			</div> */}
 			<div className="post-form-container">
 				<form onSubmit={handlePostSubmit}>
 					<div className="text-area-container">
-						{profile && (
+						{profileInfo && (
 							<img
-							className="profile-picture-icon"
-								src={profile.profilePicture}
+								className="profile-picture-icon"
+								src={profileInfo.profilePicture}
 								alt="profile-picture"
 							/>
 						)}
@@ -83,14 +67,14 @@ export default function ComposePostComponent({ profile, refreshTrigger, setRefre
 							placeholder="What is happening?!"
 							maxLength={280}
 						></textarea>
-						<div className="post-button-container">
-							<Button
-								type="submit"
-								text="Post"
-								variant="postButton"
-								disabled={isDisabled}
-							/>
-						</div>
+					</div>
+					<div className="post-button-container">
+						<Button
+							type="submit"
+							text="Post"
+							variant="postButton"
+							disabled={isDisabled}
+						/>
 					</div>
 					{isLoading && <CircularProgress color="white" />}
 				</form>
@@ -100,3 +84,20 @@ export default function ComposePostComponent({ profile, refreshTrigger, setRefre
 		</span>
 	);
 }
+
+// const StyledButton = styled.button`
+// 	background-color: black;
+// 	color: white;
+// 	border: 0px solid black;
+// 	cursor: pointer;
+// 	&:focus {
+// 		border-bottom: 0.3rem solid rgb(29, 155, 240);
+// 		border-radius: 3px;
+// 	}
+// `;
+
+// const StyledButton = styled.button`
+// 	&:active {
+// 		text-decoration: underline;
+// 	}
+// `;
