@@ -16,8 +16,11 @@ export default function PostReaction({ post }) {
 			const response = await fetch(
 				`${import.meta.env.VITE_API_URL}/post/${post.id}/like`,
 				{
+					headers: {
+						"Content-type": "application/json"
+					},
 					method: "POST",
-					body: userId,
+					body: JSON.stringify({userId}),
 				}
 			);
 			const data = await response.json();

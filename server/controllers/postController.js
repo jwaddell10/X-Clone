@@ -5,7 +5,6 @@ const timeAgo = require("../helpers/timeAgo.js");
 
 exports.getAllPosts = asyncHandler(async (req, res, next) => {
 	const posts = await db.findAllPosts();
-
 	if (posts === null) {
 		res.json({ message: "No posts available" });
 	}
@@ -42,7 +41,10 @@ exports.likePost = asyncHandler(async (req, res, next) => {
 
 	//else need to add a like here, probably a create query
 
-	// if (post) {
-	// 	await 
-	// }
+		const likeAdded = await db.createLike(
+			parseInt(req.params.id),
+			parseInt(req.body.userId)
+		);
+		console.log(likeAdded, 'like added')
+
 });

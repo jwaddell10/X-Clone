@@ -193,15 +193,43 @@ module.exports = {
 			return error;
 		}
 	},
-	createLike: async(postId, userId) => {
+	addPostLike: async (postId, userId) => {
+		console.log(postId, userId, 'postid userid')
+		try {
+			const addLike = await prisma.post.update({
+				where: {
+					id: postId,
+				},
+				data: {
+					likes: {
+						increment: 1,
+					},
+				},
+			});
+			console.log(addLike, "like");
+		} catch (error) {
+			return error;
+		}
+	},
+	createLike: async (postId, userId) => {
 		try {
 			const like = await prisma.likes.create({
 				data: {
-					User: userId
-				}
-			})
+					post: {
+						connect: {
+							id: postId,
+						},
+					},
+					author: {
+						connect: {
+							id: userId,
+						},
+					},
+				},
+			});
+			console.log(like, "like");
 		} catch (error) {
-			return error
+			return error;
 		}
-	}
+	},
 };
