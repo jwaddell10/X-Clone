@@ -6,4 +6,6 @@ const JWTMethods = require("../passport/passportJWT")
 router.get("/", postController.getAllPosts)
 router.post("/", postController.submitPost)
 
+router.post("/:id/like", postController.likePost)
+
 module.exports = router;

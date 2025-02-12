@@ -133,21 +133,25 @@ module.exports = {
 		}
 	},
 
-	/*model Post {
-		id        Int       @unique @default(autoincrement())
-		text      String
-		createdAt DateTime  @default(now())
-		author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-		authorId  Int
-		likes     Likes[]
-		Comment   Comment[]
-	  }*/
-
-		/*model Likes {
-			id     Int  @unique @default(autoincrement())
-			post   Post @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-			postId Int  @unique
-		  }*/
+	findPost: async (postId) => {
+		try {
+			const post = await prisma.post.findUnique({
+				select: {
+					id: true,
+					text: true,
+					createdAt: true,
+					authorId: true,
+					likes: true,
+				},
+				where: {
+					id: postId,
+				},
+			});
+			return post;
+		} catch (error) {
+			return error;
+		}
+	},
 	findAllPosts: async () => {
 		try {
 			const posts = await prisma.post.findMany({
@@ -162,12 +166,12 @@ module.exports = {
 							name: true,
 							Profile: {
 								select: {
-									profilePicture: true
-								}
-							}
-						}
-					}
-				}
+									profilePicture: true,
+								},
+							},
+						},
+					},
+				},
 			});
 			return posts;
 		} catch (error) {
@@ -189,4 +193,15 @@ module.exports = {
 			return error;
 		}
 	},
+	createLike: async(postId, userId) => {
+		try {
+			const like = await prisma.likes.create({
+				data: {
+					User: userId
+				}
+			})
+		} catch (error) {
+			return error
+		}
+	}
 };
