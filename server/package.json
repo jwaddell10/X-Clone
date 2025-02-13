@@ -7,7 +7,7 @@
     "test": "jest ./tests"
   },
   "dependencies": {
-    "@prisma/client": "^6.2.1",
+    "@prisma/client": "^6.3.1",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.5.1",
     "cookie-parser": "~1.4.4",
@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^9.4.0",
-    "prisma": "^6.2.1",
+    "prisma": "^6.3.1",
     "prisma-generator-fake-data": "^0.14.3",
     "supertest": "^7.0.0"
   }

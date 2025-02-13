@@ -6,10 +6,12 @@ import PostReaction from "./PostReaction";
 // import timeAgo from "../../helpers/timeAgo";
 
 export default function DisplayPost({ refreshTrigger }) {
-	const { posts } = useFetchPosts(refreshTrigger);
-
+	const { posts, error } = useFetchPosts(refreshTrigger);
+//unlike thing
+//add get likes
 	return (
 		<div>
+			{error && <div style={{color: "white"}}>{error.message}</div>}
 			{posts?.map((post) => (
 				<div className="display-post-container" key={post.id}>
 					<div style={{ display: "flex" }}>
