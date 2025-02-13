@@ -20,6 +20,9 @@ model User {
   Profile  Profile?
   Post     Post[]
   Comment  Comment[]
+  likes    Likes[]
+  likesId  Int?
+  postId   Int?
 }
 
 model Profile {
@@ -47,8 +50,9 @@ model Post {
   createdAt DateTime  @default(now())
   author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   authorId  Int
-  likes     Int?
   Comment   Comment[]
+  likes     Likes[]
+  likesId   Int
 }
 
 model Comment {
@@ -64,7 +68,11 @@ model Comment {
 }
 
 model Likes {
-  id     Int @unique @default(autoincrement())
-  postId Int @unique
+  id     Int  @unique @default(autoincrement())
+  postId Int
   userId Int
+  user   User @relation(fields: [userId], references: [id])
+  post   Post @relation(fields: [postId], references: [id])
+
+  @@unique([postId, userId])
 }
