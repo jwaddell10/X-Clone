@@ -193,41 +193,35 @@ module.exports = {
 			return error;
 		}
 	},
-	addPostLike: async (postId, userId) => {
-		console.log(postId, userId, 'postid userid')
-		try {
-			const addLike = await prisma.post.update({
-				where: {
-					id: postId,
-				},
-				data: {
-					likes: {
-						increment: 1,
-					},
-				},
-			});
-			console.log(addLike, "like");
-		} catch (error) {
-			return error;
-		}
-	},
+	// addPostLike: async (postId, userId) => {
+	// 	// console.log(postId, userId, 'postid userid')
+	// 	try {
+	// 		const addLike = await prisma.post.update({
+	// 			where: {
+	// 				id: postId,
+	// 			},
+	// 			data: {
+	// 				Likes: {
+	// 					postId: postId,
+	// 					userId: userId,
+	// 				},
+	// 			},
+	// 		});
+	// 		console.log(addLike, "like");
+	// 	} catch (error) {
+	// 		return error;
+	// 	}
+	// },
 	createLike: async (postId, userId) => {
 		try {
 			const like = await prisma.likes.create({
 				data: {
-					post: {
-						connect: {
-							id: postId,
-						},
-					},
-					author: {
-						connect: {
-							id: userId,
-						},
-					},
+					postId: postId,
+					userId: userId,
 				},
 			});
 			console.log(like, "like");
+			return like;
 		} catch (error) {
 			return error;
 		}

@@ -18,7 +18,6 @@ model User {
   name     String    @unique
   password String
   Profile  Profile?
-  Likes    Likes[]
   Post     Post[]
   Comment  Comment[]
 }
@@ -48,7 +47,7 @@ model Post {
   createdAt DateTime  @default(now())
   author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   authorId  Int
-  likes     Likes[]
+  likes     Int?
   Comment   Comment[]
 }
 
@@ -65,9 +64,7 @@ model Comment {
 }
 
 model Likes {
-  id     Int   @unique @default(autoincrement())
-  post   Post  @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  postId Int   @unique
-  author User? @relation(fields: [authorId], references: [id])
-  authorId Int?
+  id     Int @unique @default(autoincrement())
+  postId Int @unique
+  userId Int
 }

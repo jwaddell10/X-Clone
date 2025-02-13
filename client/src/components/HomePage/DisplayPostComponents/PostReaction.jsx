@@ -12,21 +12,40 @@ export default function PostReaction({ post }) {
 		const userId = localStorage.getItem("id");
 		setIsLiked(!isLiked);
 
-		try {
-			const response = await fetch(
-				`${import.meta.env.VITE_API_URL}/post/${post.id}/like`,
-				{
-					headers: {
-						"Content-type": "application/json"
-					},
-					method: "POST",
-					body: JSON.stringify({userId}),
-				}
-			);
-			const data = await response.json();
-			console.log(data, "data from fetch call");
-		} catch (error) {
-			console.log(error, "error");
+		if (!isLiked) {
+			try {
+				const response = await fetch(
+					`${import.meta.env.VITE_API_URL}/post/${post.id}/like`,
+					{
+						headers: {
+							"Content-type": "application/json",
+						},
+						method: "POST",
+						body: JSON.stringify({ userId }),
+					}
+				);
+				const data = await response.json();
+				console.log(data, "data from fetch call");
+			} catch (error) {
+				console.log(error, "error");
+			}
+		} else if (isLiked) {
+			try {
+				const response = await fetch(
+					`${import.meta.env.VITE_API_URL}/post/${post.id}/unlike`,
+					{
+						headers: {
+							"Content-type": "application/json",
+						},
+						method: "POST",
+						body: JSON.stringify({ userId }),
+					}
+				);
+				const data = await response.json();
+				console.log(data, "data from fetch call when unlike");
+			} catch (error) {
+				console.log(error, "error");
+			}
 		}
 	};
 
