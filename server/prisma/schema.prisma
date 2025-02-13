@@ -21,8 +21,6 @@ model User {
   Post     Post[]
   Comment  Comment[]
   likes    Likes[]
-  likesId  Int?
-  postId   Int?
 }
 
 model Profile {
@@ -52,7 +50,6 @@ model Post {
   authorId  Int
   Comment   Comment[]
   likes     Likes[]
-  likesId   Int
 }
 
 model Comment {
