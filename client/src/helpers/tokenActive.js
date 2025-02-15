@@ -2,6 +2,10 @@ import { jwtDecode } from "jwt-decode";
 
 export default function tokenActive(token) {
 	try {
+		if (token === null) {
+			return false;
+		}
+		
 		const decodedToken = jwtDecode(token);
 
 		if (!decodedToken.exp) {

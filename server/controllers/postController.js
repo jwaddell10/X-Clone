@@ -5,6 +5,7 @@ const timeAgo = require("../helpers/timeAgo.js");
 
 exports.getAllPosts = asyncHandler(async (req, res, next) => {
 	const posts = await db.findAllPosts();
+	
 	if (posts === null) {
 		res.json({ message: "No posts available" });
 	}
@@ -39,12 +40,30 @@ exports.likePost = asyncHandler(async (req, res, next) => {
 		res.json({ errorMessage: "Unable to fetch post. Try again later" });
 	}
 
-	//else need to add a like here, probably a create query
+	const addedLike = await db.createLike(
+		parseInt(req.params.id),
+		parseInt(req.body.loggedInUserId)
+	);
 
-		const likeAdded = await db.createLike(
-			parseInt(req.params.id),
-			parseInt(req.body.userId)
-		);
-		console.log(likeAdded, 'like added')
+	if (addedLike === null) {
+		return res.json({ message: "Unable to add like" });
+	}
 
+	res.json({ addedLike });
+});
+
+exports.unLikePost = asyncHandler(async (req, res, next) => {
+	const post = await db.findPost(parseInt(req.params.id));
+
+	if (post === null) {
+		res.json({ errorMessage: "Unable to find post. Try again later" });
+	}
+
+	const deletedLike = await db.deleteLike(
+		parseInt(req.params.id),
+		parseInt(req.body.loggedInUserId)
+	);
+	res.json({
+		deletedLike: deletedLike,
+	});
 });

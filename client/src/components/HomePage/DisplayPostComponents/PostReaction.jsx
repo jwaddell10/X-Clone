@@ -3,49 +3,37 @@ import RepeatIcon from "@mui/icons-material/Repeat";
 import DisplayLikeCount from "./DisplayLikeCount";
 import DisplayCommentCount from "./DisplayCommentCount";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import handleToggleLike from "../../../helpers/toggleLike";
 
 export default function PostReaction({ post }) {
 	const [isLiked, setIsLiked] = useState(false);
+	const [likeCount, setLikeCount] = useState(null);
+
+	const loggedInUserId = localStorage.getItem("id");
+
+	// Check if the logged-in user has liked the post
+	const isPostLikedByUser = post.likes.some(
+		(like) => like.userId == loggedInUserId
+	);
+
+	// Total number of likes on the post
+	const totalLikes = post.likes.length;
+
+	// Update state based on whether the post is liked and the total likes
+	useEffect(() => {
+		setIsLiked(isPostLikedByUser);
+		setLikeCount(totalLikes);
+	}, [isPostLikedByUser, totalLikes]);
 
 	const toggleLike = async () => {
-		const userId = localStorage.getItem("id");
 		setIsLiked(!isLiked);
-
 		if (!isLiked) {
-			try {
-				const response = await fetch(
-					`${import.meta.env.VITE_API_URL}/post/${post.id}/like`,
-					{
-						headers: {
-							"Content-type": "application/json",
-						},
-						method: "POST",
-						body: JSON.stringify({ userId }),
-					}
-				);
-				const data = await response.json();
-				console.log(data, "data from fetch call");
-			} catch (error) {
-				console.log(error, "error");
-			}
+			setLikeCount((prevCount) => prevCount + 1);
+			handleToggleLike(isLiked, loggedInUserId, post);
 		} else if (isLiked) {
-			try {
-				const response = await fetch(
-					`${import.meta.env.VITE_API_URL}/post/${post.id}/unlike`,
-					{
-						headers: {
-							"Content-type": "application/json",
-						},
-						method: "POST",
-						body: JSON.stringify({ userId }),
-					}
-				);
-				const data = await response.json();
-				console.log(data, "data from fetch call when unlike");
-			} catch (error) {
-				console.log(error, "error");
-			}
+			setLikeCount((prevCount) => prevCount - 1);
+			handleToggleLike(isLiked, loggedInUserId, post);
 		}
 	};
 
@@ -80,14 +68,18 @@ export default function PostReaction({ post }) {
 				}}
 			>
 				{isLiked ? (
-					<FavoriteIcon sx={{ color: "red" }} onClick={toggleLike} />
+					<>
+						<DisplayLikeCount isLiked={isLiked} likes={likeCount} />
+						<FavoriteIcon
+							sx={{ color: "red" }}
+							onClick={toggleLike}
+						/>
+					</>
 				) : (
-					<FavoriteBorderIcon onClick={toggleLike} />
-				)}
-				{isLiked ? (
-					<DisplayLikeCount likes={post.likes + 1} />
-				) : (
-					<DisplayLikeCount likes={post.likes - 1} />
+					<>
+						<DisplayLikeCount isLiked={isLiked} likes={likeCount} />
+						<FavoriteBorderIcon onClick={toggleLike} />
+					</>
 				)}
 			</div>
 		</div>

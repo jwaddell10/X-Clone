@@ -7,8 +7,6 @@ import PostReaction from "./PostReaction";
 
 export default function DisplayPost({ refreshTrigger }) {
 	const { posts, error } = useFetchPosts(refreshTrigger);
-//unlike thing
-//add get likes
 	return (
 		<div>
 			{error && <div style={{color: "white"}}>{error.message}</div>}
