@@ -3,15 +3,20 @@ import PersonIcon from "@mui/icons-material/Person";
 import "../../../Styles/DisplayPost.css";
 import PropTypes from "prop-types";
 import PostReaction from "./PostReaction";
+import { Link } from "react-router";
 // import timeAgo from "../../helpers/timeAgo";
 
-export default function DisplayPost({ refreshTrigger }) {
+export default function AllPosts({ refreshTrigger }) {
 	const { posts, error } = useFetchPosts(refreshTrigger);
 	return (
 		<div>
-			{error && <div style={{color: "white"}}>{error.message}</div>}
+			{error && <div style={{ color: "white" }}>{error.message}</div>}
 			{posts?.map((post) => (
-				<div className="display-post-container" key={post.id}>
+				<Link
+					to={`${post.author.name}/${post.id}`}
+					className="display-post-container"
+					key={post.id}
+				>
 					<div style={{ display: "flex" }}>
 						{post.author.Profile === null ? (
 							<div>
@@ -36,12 +41,12 @@ export default function DisplayPost({ refreshTrigger }) {
 						</div>
 					</div>
 					<PostReaction post={post} />
-				</div>
+				</Link>
 			))}
 		</div>
 	);
 }
 
-DisplayPost.propTypes = {
+AllPosts.propTypes = {
 	refreshTrigger: PropTypes.number,
 };

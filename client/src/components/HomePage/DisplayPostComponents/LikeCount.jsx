@@ -1,4 +1,4 @@
-export default function DisplayLikeCount({ isLiked, likes }) {
+export default function LikeCount({ isLiked, likes }) {
 	return (
 		<>
 			{isLiked ? (

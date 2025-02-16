@@ -2,19 +2,17 @@ import { useEffect, useState } from "react";
 
 export default function useGetProfileInfo(refreshTrigger) {
 	// const JWTToken = localStorage.getItem("token");
-	const id = localStorage.getItem("id");
-	const [profileInfo, setProfileInfo] = useState(null);
+	const loggedInUserId = localStorage.getItem("id");
+	const [profileInfo, setProfileInfo] = useState();
 	const [error, setError] = useState("");
-
 	useEffect(() => {
 		const fetchProfileInfo = async () => {
 			try {
 				const response = await fetch(
-					`${import.meta.env.VITE_API_URL}/user/profile/${id}`
+					`${import.meta.env.VITE_API_URL}/user/profile/${loggedInUserId}`
 				);
-
 				const data = await response.json();
-				
+
 				if (data.errorMessage) {
 					setError(data.errorMessage);
 				}
@@ -24,7 +22,7 @@ export default function useGetProfileInfo(refreshTrigger) {
 			}
 		};
 		fetchProfileInfo();
-	}, [refreshTrigger, id]);
+	}, [refreshTrigger, loggedInUserId]);
 
 	return { profileInfo, error };
 }

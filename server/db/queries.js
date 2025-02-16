@@ -140,8 +140,29 @@ module.exports = {
 					id: true,
 					text: true,
 					createdAt: true,
-					authorId: true,
+					author: {
+						select: {
+							Profile: true,
+						},
+					},
 					likes: true,
+					Comment: {
+						select: {
+							author: {
+								select: {
+									Profile: {
+										select: {
+											profilePicture: true,
+										},
+									},
+									name: true,
+									likes: true,
+								},
+							},
+							text: true,
+							createdAt: true,
+						},
+					},
 				},
 				where: {
 					id: postId,
@@ -160,7 +181,7 @@ module.exports = {
 					createdAt: true,
 					text: true,
 					likes: true,
-					Comment: true,
+					// Comment: true,
 					author: {
 						select: {
 							name: true,
@@ -174,6 +195,43 @@ module.exports = {
 				},
 			});
 			return posts;
+		} catch (error) {
+			return error;
+		}
+	},
+	findComment: async (id) => {
+		try {
+			const comment = await prisma.comment.findUnique({
+				where: {
+					id: id,
+				},
+			});
+			return comment;
+		} catch (error) {
+			return error;
+		}
+	},
+	findComments: async (postId) => {
+		try {
+			const comments = await prisma.comment.findMany({
+				where: {
+					postId: postId,
+				},
+				include: {
+					author: {
+						select: {
+							name: true,
+							Profile: {
+								select: {
+									profilePicture: true,
+								},
+							},
+						},
+					},
+					likes: true,
+				},
+			});
+			return comments;
 		} catch (error) {
 			return error;
 		}
@@ -193,12 +251,30 @@ module.exports = {
 			return error;
 		}
 	},
-	createLike: async (postId, userId) => {
+	createPostLike: async (postId, userId) => {
 		try {
 			const like = await prisma.likes.create({
 				data: {
 					postId: postId,
 					userId: userId,
+				},
+			});
+			return like;
+		} catch (error) {
+			return error;
+		}
+	},
+	createCommentLike: async (commentId, userId, postId) => {
+		try {
+			const like = await prisma.likes.create({
+				data: {
+					id: commentId,
+					user: {
+						connect: { id: userId },
+					},
+					post: {
+						connect: {id: postId}
+					}
 				},
 			});
 			return like;

@@ -5,13 +5,25 @@ const timeAgo = require("../helpers/timeAgo.js");
 
 exports.getAllPosts = asyncHandler(async (req, res, next) => {
 	const posts = await db.findAllPosts();
-	
+
 	if (posts === null) {
 		res.json({ message: "No posts available" });
 	}
 
 	if (posts) {
 		res.json({ posts });
+	}
+});
+
+exports.getComments = asyncHandler(async (req, res, next) => {
+	const comments = await db.findComments(parseInt(req.params.id));
+
+	if (comments === null) {
+		res.json({ message: "No comments available" });
+	}
+
+	if (comments) {
+		res.json({ comments });
 	}
 });
 
@@ -40,10 +52,30 @@ exports.likePost = asyncHandler(async (req, res, next) => {
 		res.json({ errorMessage: "Unable to fetch post. Try again later" });
 	}
 
-	const addedLike = await db.createLike(
+	const addedLike = await db.createPostLike(
 		parseInt(req.params.id),
 		parseInt(req.body.loggedInUserId)
 	);
+
+	if (addedLike === null) {
+		return res.json({ message: "Unable to add like" });
+	}
+
+	res.json({ addedLike });
+});
+
+exports.likeComment = asyncHandler(async (req, res, next) => {
+	const comment = await db.findComment(parseInt(req.params.commentId));
+	if (comment === null) {
+		res.json({ errorMessage: "Unable to fetch post. Try again later" });
+	}
+
+	const addedLike = await db.createCommentLike(
+		parseInt(req.params.commentId),
+		parseInt(req.body.loggedInUserId),
+		parseInt(req.params.id)
+	);
+	console.log(addedLike, 'added like')
 
 	if (addedLike === null) {
 		return res.json({ message: "Unable to add like" });

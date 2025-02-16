@@ -1,9 +1,9 @@
-import ComposePostComponent from "./ComposePostComponent";
 import SideNavigation from "./SideNavigation";
 import WhoToFollowSidebar from "./WhoToFollowSidebar";
 import useGetProfileInfo from "../../helpers/useGetProfileInfo";
 import { useState } from "react";
-import "../../Styles/HomePage.css"
+import HomeTimeline from "./HomeTimeline";
+import "../../Styles/HomePage.css";
 
 export default function HomePage() {
 	const [refreshTrigger, setRefreshTrigger] = useState(0);
@@ -12,11 +12,11 @@ export default function HomePage() {
 	return (
 		<main>
 			<SideNavigation profileInfo={profileInfo} />
-			<ComposePostComponent
+			<HomeTimeline
 				profileInfo={profileInfo}
 				refreshTrigger={refreshTrigger}
 				setRefreshTrigger={setRefreshTrigger}
-			/>
+			></HomeTimeline>
 			<WhoToFollowSidebar />
 		</main>
 	);

@@ -60,16 +60,19 @@ model Comment {
   authorId  Int
   post      Post     @relation(fields: [postId], references: [id])
   postId    Int
+  likes     Likes[]
 
   @@map("comments")
 }
 
 model Likes {
-  id     Int  @unique @default(autoincrement())
-  postId Int
-  userId Int
-  user   User @relation(fields: [userId], references: [id])
-  post   Post @relation(fields: [postId], references: [id])
+  id        Int     @unique @default(autoincrement())
+  postId    Int
+  userId    Int
+  commentId Int?
+  comment   Comment? @relation(fields: [commentId], references: [id])
+  user      User    @relation(fields: [userId], references: [id])
+  post      Post    @relation(fields: [postId], references: [id])
 
-  @@unique([postId, userId])
+  @@unique([postId, userId, commentId])
 }

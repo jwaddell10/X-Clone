@@ -2,14 +2,14 @@ import { useState } from "react";
 import submitPost from "../../helpers/submitPost";
 import Button from "../../helpers/Button";
 import "../../Styles/ComposePostComponent.css";
-import DisplayPost from "./DisplayPostComponents/DisplayPost";
 import CircularProgress from "@mui/material/CircularProgress";
 
-export default function ComposePostComponent({
+export default function ComposePost({
 	profileInfo,
 	refreshTrigger,
 	setRefreshTrigger,
 }) {
+
 	const [text, setText] = useState("");
 	const [error, setError] = useState(null);
 	const [isDisabled, setIsDisabled] = useState(true);
@@ -40,7 +40,7 @@ export default function ComposePostComponent({
 	};
 
 	return (
-		<span className="post-container">
+		<span >
 			{/* <div className="post-component-header-container">
 				<span className="post-component-header">
 					<StyledButton>All</StyledButton>
@@ -79,7 +79,6 @@ export default function ComposePostComponent({
 					{isLoading && <CircularProgress color="white" />}
 				</form>
 			</div>
-			<DisplayPost refreshTrigger={refreshTrigger} />
 			{error && <div>{error}</div>}
 		</span>
 	);

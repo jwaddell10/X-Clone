@@ -4,10 +4,14 @@ const postController = require('../controllers/postController')
 const JWTMethods = require("../passport/passportJWT")
 
 router.get("/", postController.getAllPosts)
+router.get("/:id/comment", postController.getComments)
 
 router.post("/", postController.submitPost)
 router.post("/:id/like", postController.likePost)
+router.post("/:id/comment/:commentId/like", postController.likeComment)
 
 router.delete("/:id/unlike", postController.unLikePost)
+// router.delete("/comment/:commentId/unlike", postController.unLikeComment)
+
 
 module.exports = router;

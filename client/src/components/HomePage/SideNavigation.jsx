@@ -10,6 +10,7 @@ import { Link } from "react-router";
 import PropTypes from "prop-types";
 
 export default function SideNavigation({ profileInfo }) {
+	const loggedInUserId = localStorage.getItem("id")
 
 	return (
 		<section className="sidebar-container">
@@ -49,8 +50,8 @@ export default function SideNavigation({ profileInfo }) {
 						<span className="nav-text">Messages</span>
 					</li>
 				</Link>
-				{profileInfo && (
-					<Link to={`/profile/${profileInfo.id}`}>
+				{/* {profileInfo && ( */}
+					<Link to={`/profile/${loggedInUserId}`}>
 						<li className="nav-item">
 							<PermIdentityIcon
 								className="icons"
@@ -59,7 +60,7 @@ export default function SideNavigation({ profileInfo }) {
 							<span className="nav-text">Profile</span>
 						</li>
 					</Link>
-				)}
+				{/* )} */}
 
 				<Link>
 					<li className="nav-item">
