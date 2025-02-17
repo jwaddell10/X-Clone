@@ -1,11 +1,7 @@
-export default function LikeCount({ isLiked, likes }) {
+export default function LikeCount({ likes }) {
 	return (
 		<>
-			{isLiked ? (
-				<span>{likes}</span>
-			) : (
-				<span>{likes}</span>
-			)}
+			<span>{likes}</span>
 		</>
 	);
 }

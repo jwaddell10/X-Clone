@@ -181,7 +181,7 @@ module.exports = {
 					createdAt: true,
 					text: true,
 					likes: true,
-					// Comment: true,
+					Comment: true,
 					author: {
 						select: {
 							name: true,
@@ -217,7 +217,8 @@ module.exports = {
 				where: {
 					postId: postId,
 				},
-				include: {
+				select: {
+					id: true,
 					author: {
 						select: {
 							name: true,
@@ -228,6 +229,9 @@ module.exports = {
 							},
 						},
 					},
+					post: true,
+					text: true,
+					createdAt: true,
 					likes: true,
 				},
 			});
@@ -273,8 +277,11 @@ module.exports = {
 						connect: { id: userId },
 					},
 					post: {
-						connect: {id: postId}
-					}
+						connect: { id: postId },
+					},
+					comment: {
+						connect: { id: commentId },
+					},
 				},
 			});
 			return like;
@@ -292,6 +299,7 @@ module.exports = {
 					},
 				},
 			});
+			console.log(deletedLike, 'deletedlike')
 			return deletedLike;
 		} catch (error) {
 			return error;

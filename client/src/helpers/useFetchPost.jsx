@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 export default function useFetchPost(username, postId) {
 	const [post, setPost] = useState();
 	const [error, setError] = useState();
-
 	useEffect(() => {
 		const fetchPost = async () => {
 			try {

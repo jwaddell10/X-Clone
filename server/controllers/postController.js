@@ -23,7 +23,7 @@ exports.getComments = asyncHandler(async (req, res, next) => {
 	}
 
 	if (comments) {
-		res.json({ comments });
+		res.json({comments});
 	}
 });
 
@@ -95,6 +95,7 @@ exports.unLikePost = asyncHandler(async (req, res, next) => {
 		parseInt(req.params.id),
 		parseInt(req.body.loggedInUserId)
 	);
+	console.log(deletedLike, 'deleted like')
 	res.json({
 		deletedLike: deletedLike,
 	});

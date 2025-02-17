@@ -2,7 +2,7 @@ import RepeatIcon from "@mui/icons-material/Repeat";
 import CommentReaction from "./CommentReaction";
 import LikeReaction from "./LikeReaction";
 import { useState, useEffect } from "react";
-import handleToggleLike from "../../../helpers/handlePostToggleLike";
+import handlePostToggleLike from "../../../helpers/handlePostToggleLike";
 
 export default function PostReaction({ post }) {
 	const [isLiked, setIsLiked] = useState(false);
@@ -24,7 +24,7 @@ export default function PostReaction({ post }) {
 	const toggleLike = async () => {
 		setIsLiked(!isLiked);
 		setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
-		await handleToggleLike(isLiked, loggedInUserId, post);
+		await handlePostToggleLike(isLiked, loggedInUserId, post);
 	};
 
 	return (

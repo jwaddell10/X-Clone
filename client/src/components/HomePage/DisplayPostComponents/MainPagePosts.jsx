@@ -6,7 +6,7 @@ import PostReaction from "./PostReaction";
 import { Link } from "react-router";
 // import timeAgo from "../../helpers/timeAgo";
 
-export default function AllPosts({ refreshTrigger }) {
+export default function MainPagePosts({ refreshTrigger }) {
 	const { posts, error } = useFetchPosts(refreshTrigger);
 	return (
 		<div>
@@ -47,6 +47,6 @@ export default function AllPosts({ refreshTrigger }) {
 	);
 }
 
-AllPosts.propTypes = {
+MainPagePosts.propTypes = {
 	refreshTrigger: PropTypes.number,
 };

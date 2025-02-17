@@ -5,7 +5,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 export default function LikeReaction({ isLiked, likes, toggleLike }) {
 	return (
 		<div style={{ display: "flex", alignItems: "center", gap: "0.25vw" }}>
-			<LikeCount isLiked={isLiked} likes={likes} />
+			<LikeCount likes={likes} />
 			{isLiked ? (
 				<FavoriteIcon sx={{ color: "red" }} onClick={toggleLike} />
 			) : (

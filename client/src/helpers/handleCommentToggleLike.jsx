@@ -1,5 +1,4 @@
-export default async function handlePostToggleLike(isLiked, loggedInUserId, postId, comment) {
-    console.log(comment, 'comment')
+export default async function handleCommentToggleLike(isLiked, loggedInUserId, comment, postId) {
 	if (!isLiked) {
 		//add like
 		try {
@@ -22,7 +21,7 @@ export default async function handlePostToggleLike(isLiked, loggedInUserId, post
 		try {
 			//remove like
 			const response = await fetch(
-				`${import.meta.env.VITE_API_URL}/post/comment/${comment.id}/unlike`,
+				`${import.meta.env.VITE_API_URL}/post/${postId}/comment/${comment.id}/unlike`,
 				{
 					headers: {
 						"Content-type": "application/json",
