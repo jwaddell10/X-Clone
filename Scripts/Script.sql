@@ -1,1 +1,1 @@
-select * from "User";
+delete from "User" where name = 'testing';

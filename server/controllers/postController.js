@@ -23,7 +23,7 @@ exports.getComments = asyncHandler(async (req, res, next) => {
 	}
 
 	if (comments) {
-		res.json({comments});
+		res.json({ comments });
 	}
 });
 
@@ -75,7 +75,7 @@ exports.likeComment = asyncHandler(async (req, res, next) => {
 		parseInt(req.body.loggedInUserId),
 		parseInt(req.params.id)
 	);
-	console.log(addedLike, 'added like')
+	console.log(addedLike, "added like");
 
 	if (addedLike === null) {
 		return res.json({ message: "Unable to add like" });
@@ -95,8 +95,24 @@ exports.unLikePost = asyncHandler(async (req, res, next) => {
 		parseInt(req.params.id),
 		parseInt(req.body.loggedInUserId)
 	);
-	console.log(deletedLike, 'deleted like')
+	console.log(deletedLike, "deleted like");
 	res.json({
 		deletedLike: deletedLike,
 	});
+});
+
+exports.unLikeComment = asyncHandler(async (req, res, next) => {
+	const comment = await db.findComment(parseInt(req.params.commentId));
+	
+	if (!comment) {
+		return res.json({ errorMessage: "No comment found. Try again later" });
+	}
+
+	const deletedLike = await db.deleteCommentLike(
+		parseInt(req.params.commentId),
+		parseInt(req.params.id),
+		parseInt(req.body.loggedInUserId)
+	);
+
+	res.json({ deletedLike });
 });

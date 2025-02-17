@@ -11,7 +11,7 @@ router.post("/:id/like", postController.likePost)
 router.post("/:id/comment/:commentId/like", postController.likeComment)
 
 router.delete("/:id/unlike", postController.unLikePost)
-// router.delete("/comment/:commentId/unlike", postController.unLikeComment)
+router.delete("/:id/comment/:commentId/unlike", postController.unLikeComment)
 
 
 module.exports = router;

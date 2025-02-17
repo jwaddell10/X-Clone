@@ -1,10 +1,10 @@
 import LikeReaction from "./LikeReaction";
 import RepeatIcon from "@mui/icons-material/Repeat";
 import handleCommentToggleLike from "../../../helpers/handleCommentToggleLike";
+import CommentReaction from "./CommentReaction";
 import { useState, useEffect } from "react";
 
 export default function Comment({ comment, id }) {
-    console.log(comment, 'commentin comment')
 	const [isLiked, setIsLiked] = useState(false);
 	const [likeCount, setLikeCount] = useState(null);
 
@@ -24,7 +24,12 @@ export default function Comment({ comment, id }) {
 	const toggleLike = async () => {
 		setIsLiked(!isLiked);
 		setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
-		await handleCommentToggleLike(isLiked, loggedInUserId, comment, comment.post.id);
+		await handleCommentToggleLike(
+			isLiked,
+			loggedInUserId,
+			comment,
+			comment.post.id
+		);
 	};
 	return (
 		<div key={id}>
@@ -33,7 +38,7 @@ export default function Comment({ comment, id }) {
 				<div>{comment.author.name}</div>
 			</div>
 			<div className="text-container">{comment.text}</div>
-			{/* <CommentReaction comment={comment} /> */}
+			<CommentReaction comments={comment} />
 			<RepeatIcon />
 			<LikeReaction
 				isLiked={isLiked}

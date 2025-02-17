@@ -79,5 +79,5 @@ async function generatePostsAndComments() {
 	);
 }
 
-// generateUsers();
-// generatePostsAndComments();
+generateUsers();
+generatePostsAndComments();

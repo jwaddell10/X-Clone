@@ -52,21 +52,20 @@ module.exports = {
 
 		try {
 			const salt = bcryptjs.genSaltSync(10);
-			const hashedPassword = bcryptjs.hashSync("B4c0//", salt);
+			const hashedPassword = bcryptjs.hashSync(password, salt); // Use the provided password
+
 			const user = await prisma.user.create({
 				data: {
 					name: username,
 					password: hashedPassword,
 					Profile: {
 						create: {
-							bio: "",
 							profilePicture: defaultImageUrl,
 						},
 					},
-					// include: {
-					// 	followedBy: true,
-					// 	following: true,
-					// }
+				},
+				include: {
+					Profile: true,
 				},
 			});
 			return user;
@@ -289,7 +288,7 @@ module.exports = {
 			return error;
 		}
 	},
-	deleteLike: async (postId, loggedInUserId) => {
+	deletePostLike: async (postId, loggedInUserId) => {
 		try {
 			const deletedLike = await prisma.likes.delete({
 				where: {
@@ -299,10 +298,25 @@ module.exports = {
 					},
 				},
 			});
-			console.log(deletedLike, 'deletedlike')
 			return deletedLike;
 		} catch (error) {
 			return error;
 		}
 	},
+	deleteCommentLike: async(commentId, postId, loggedInUserId) => {
+		try {
+			const deletedLike = await prisma.likes.delete({
+				where: {
+					postId_userId: {
+						postId: postId,
+						userId: loggedInUserId
+					},
+					commentId: commentId
+				}
+			})
+			return deletedLike;
+		} catch (error) {
+			return error;
+		}
+	}
 };

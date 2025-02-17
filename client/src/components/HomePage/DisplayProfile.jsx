@@ -7,7 +7,7 @@ export default function DisplayProfile() {
 	const [refreshTrigger, setRefreshTrigger] = useState(0);
 	const [showEditForm, setShowEditForm] = useState(false);
 	const { profileInfo, error } = useGetProfileInfo(refreshTrigger);
-
+console.log(profileInfo, 'profileInfo')
 	return (
 		<>
 			{profileInfo && (
