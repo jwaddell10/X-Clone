@@ -1,13 +1,13 @@
 import SideNavigation from "./SideNavigation";
 import WhoToFollowSidebar from "./WhoToFollowSidebar";
-import useGetProfileInfo from "../../helpers/useGetProfileInfo";
 import { useState } from "react";
 import HomeTimeline from "./HomeTimeline";
 import "../../Styles/HomePage.css";
+import useGetLoggedInUserProfileInfo from "../../helpers/useGetLoggedInUserProfileInfo";
 
 export default function HomePage() {
 	const [refreshTrigger, setRefreshTrigger] = useState(0);
-	const { profileInfo } = useGetProfileInfo(refreshTrigger);
+	const { profileInfo } = useGetLoggedInUserProfileInfo(refreshTrigger);
 
 	return (
 		<main>

@@ -8,14 +8,12 @@ import { Link } from "react-router";
 
 export default function MainPagePosts({ refreshTrigger }) {
 	const { posts, error } = useFetchPosts(refreshTrigger);
+	console.log(posts, 'posts')
 	return (
 		<div>
 			{error && <div style={{ color: "white" }}>{error.message}</div>}
 			{posts?.map((post) => (
-				<div
-					className="display-post-container"
-					key={post.id}
-				>
+				<div className="display-post-container" key={post.id}>
 					<Link
 						to={`${post.author.name}/${post.id}`}
 						className="main-post-container"
@@ -27,11 +25,19 @@ export default function MainPagePosts({ refreshTrigger }) {
 								</div>
 							) : (
 								<div style={{ display: "flex" }}>
-									<img
-										className="profile-picture-icon"
-										src={post.author.Profile.profilePicture}
-										alt="profile-picture-icon"
-									/>
+									<Link
+										to={`/profile/${post.author.Profile.id}`}
+									>
+										<img
+											className="profile-picture-icon"
+											src={
+												post.author.Profile
+													.profilePicture
+											}
+											alt="profile-picture-icon"
+										/>
+									</Link>
+
 									<span>{post.author.name}</span>
 									<span>{post.createdAt}</span>
 								</div>

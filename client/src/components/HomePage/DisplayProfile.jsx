@@ -1,13 +1,12 @@
-import useGetProfileInfo from "../../helpers/useGetProfileInfo";
 import EditProfile from "./EditProfile";
 import "../.././Styles/DisplayProfile.css";
+import useGetOtherUserProfileInfo from "../../helpers/useGetOtherUserProfileInfo.jsx"
 import { useState } from "react";
 
-export default function DisplayProfile() {
+export default function DisplayProfile({profileId}) {
 	const [refreshTrigger, setRefreshTrigger] = useState(0);
 	const [showEditForm, setShowEditForm] = useState(false);
-	const { profileInfo, error } = useGetProfileInfo(refreshTrigger);
-console.log(profileInfo, 'profileInfo')
+	const { profileInfo, error } = useGetOtherUserProfileInfo(refreshTrigger, profileId);
 	return (
 		<>
 			{profileInfo && (

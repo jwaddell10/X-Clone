@@ -186,6 +186,7 @@ module.exports = {
 							name: true,
 							Profile: {
 								select: {
+									id: true,
 									profilePicture: true,
 								},
 							},

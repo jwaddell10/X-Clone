@@ -9,7 +9,7 @@ export default function Router() {
 		<BrowserRouter>
 			<Routes>
 				<Route index element={<Home />} />
-				<Route path="/profile/:id" element={<Profile />}></Route>
+				<Route path="/profile/:profileId" element={<Profile />}></Route>
 				<Route
 					path="/:username/:postId"
 					element={<Post />}

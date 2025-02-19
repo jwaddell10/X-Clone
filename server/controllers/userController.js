@@ -30,7 +30,7 @@ exports.getAllUsers = asyncHandler(async (req, res, next) => {
 });
 
 exports.getProfile = asyncHandler(async (req, res, next) => {
-	const profile = await db.findProfileByUserId(parseInt(req.params.id));
+	const profile = await db.findProfileByUserId(parseInt(req.params.profileId));
 	if (!profile) {
 		res.json({ errorMessage: "Profile not found" });
 	}
