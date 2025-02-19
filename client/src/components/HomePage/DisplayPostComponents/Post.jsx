@@ -6,6 +6,7 @@ import Comments from "./Comments";
 import useFetchComments from "../../../helpers/useFetchComments";
 import SideNavigation from "../SideNavigation";
 import WhoToFollowSidebar from "../WhoToFollowSidebar";
+import { Link } from "react-router";
 
 export default function Post() {
 	const { username, postId } = useParams();
@@ -25,10 +26,13 @@ export default function Post() {
 				{post && (
 					<div>
 						<header className="post-header">
-							<img
-								src={post.author.Profile.profilePicture}
-								alt=""
-							/>
+							<Link to={`/profile/${post.author.Profile.id}`}>
+								<img
+									src={post.author.Profile.profilePicture}
+									alt=""
+								/>
+							</Link>
+
 							<div>{username}</div>
 						</header>
 

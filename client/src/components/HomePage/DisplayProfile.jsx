@@ -4,14 +4,18 @@ import useGetOtherUserProfileInfo from "../../helpers/useGetOtherUserProfileInfo
 import { useState } from "react";
 import { styled } from "styled-components";
 import UserProfilePosts from "./UserProfilePosts.jsx";
+import Button from "../../helpers/Button.jsx";
 
 export default function DisplayProfile({ profileId }) {
+	const loggedInUserId = localStorage.getItem("id");
+	const [followButton, showFollowButton] = useState(false);
 	const [refreshTrigger, setRefreshTrigger] = useState(0);
 	const [showEditForm, setShowEditForm] = useState(false);
 	const { profileInfo, error } = useGetOtherUserProfileInfo(
 		refreshTrigger,
 		profileId
 	);
+
 	return (
 		<StyledDiv>
 			{profileInfo && (
@@ -25,12 +29,17 @@ export default function DisplayProfile({ profileId }) {
 							src={profileInfo.profilePicture}
 							alt="profile-picture"
 						/>
-						<button
-							className="edit-profile-button"
-							onClick={() => setShowEditForm(true)}
-						>
-							Edit Profile
-						</button>
+						{profileInfo.id == loggedInUserId ? (
+							<button
+								className="edit-profile-button"
+								onClick={() => setShowEditForm(true)}
+							>
+								Edit Profile
+							</button>
+						) : (
+							<Button text="Follow" variant="postButton" />
+						)}
+
 						{showEditForm && (
 							<EditProfile
 								setRefreshTrigger={setRefreshTrigger}
@@ -50,7 +59,7 @@ export default function DisplayProfile({ profileId }) {
 					</div>
 				</div>
 			)}
-			<UserProfilePosts profileId={profileId}/>
+			<UserProfilePosts profileId={profileId} />
 			{error && <div style={{ color: "white" }}>{error.message}</div>}
 		</StyledDiv>
 	);
