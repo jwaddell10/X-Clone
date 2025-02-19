@@ -5,14 +5,16 @@ import { useState, useEffect } from "react";
 import handlePostToggleLike from "../../../helpers/handlePostToggleLike";
 
 export default function PostReaction({ post }) {
+	console.log(post, 'post in postreaction')
 	const [isLiked, setIsLiked] = useState(false);
 	const [likeCount, setLikeCount] = useState(null);
 
 	const loggedInUserId = localStorage.getItem("id");
 
-	const isPostLikedByUser = post.likes.some(
+	const isPostLikedByUser = post.likes?.some(
 		(like) => like.userId == loggedInUserId
 	);
+	console.log(post.likes, 'post likes')
 
 	const totalLikes = post.likes.length;
 

@@ -199,6 +199,33 @@ module.exports = {
 			return error;
 		}
 	},
+	findAllUserPosts: async (id) => {
+		try {
+			const userPosts = await prisma.post.findMany({
+				where: {
+					authorId: id,
+				},
+				include: {
+					author: {
+						select: {
+							id: true,
+							name: true,
+							Profile: {
+								select: {
+									profilePicture: true,
+								}
+							}
+						}
+					},
+					likes: true,
+					Comment: true,
+				}
+			});
+			return userPosts;
+		} catch (error) {
+			return error;
+		}
+	},
 	findComment: async (id) => {
 		try {
 			const comment = await prisma.comment.findUnique({
@@ -291,7 +318,7 @@ module.exports = {
 	},
 	deletePostLike: async (postId, loggedInUserId) => {
 		try {
-			console.log(postId, loggedInUserId, 'ids')
+			console.log(postId, loggedInUserId, "ids");
 			const deletedLike = await prisma.likes.delete({
 				where: {
 					postId_userId: {
@@ -300,26 +327,26 @@ module.exports = {
 					},
 				},
 			});
-			console.log(deletedLike, 'deleted like')
+			console.log(deletedLike, "deleted like");
 			return deletedLike;
 		} catch (error) {
 			return error;
 		}
 	},
-	deleteCommentLike: async(commentId, postId, loggedInUserId) => {
+	deleteCommentLike: async (commentId, postId, loggedInUserId) => {
 		try {
 			const deletedLike = await prisma.likes.delete({
 				where: {
 					postId_userId: {
 						postId: postId,
-						userId: loggedInUserId
+						userId: loggedInUserId,
 					},
-					commentId: commentId
-				}
-			})
+					commentId: commentId,
+				},
+			});
 			return deletedLike;
 		} catch (error) {
 			return error;
 		}
-	}
+	},
 };

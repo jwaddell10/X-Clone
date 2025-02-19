@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 
 export default function useGetLoggedInUserProfileInfo(refreshTrigger, profileId) {
-    console.log(profileId, 'profileid')
-	// const JWTToken = localStorage.getItem("token");
 	const [profileInfo, setProfileInfo] = useState();
 	const [error, setError] = useState("");
 	useEffect(() => {

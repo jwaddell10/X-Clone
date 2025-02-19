@@ -31,3 +31,13 @@ exports.editProfile = asyncHandler(async (req, res, next) => {
 		res.status(200).json(profile);
 	}
 });
+
+exports.getProfilePosts = asyncHandler(async (req, res, next) => {
+	const profilePosts = await db.findAllUserPosts(parseInt(req.params.id));
+
+	if (profilePosts === null) {
+		return res.json({ errorMessage: "No posts at this time" });
+	}
+
+	res.json({ profilePosts });
+});

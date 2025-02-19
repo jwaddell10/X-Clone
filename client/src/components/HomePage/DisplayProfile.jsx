@@ -3,6 +3,7 @@ import "../.././Styles/DisplayProfile.css";
 import useGetOtherUserProfileInfo from "../../helpers/useGetOtherUserProfileInfo.jsx";
 import { useState } from "react";
 import { styled } from "styled-components";
+import UserProfilePosts from "./UserProfilePosts.jsx";
 
 export default function DisplayProfile({ profileId }) {
 	const [refreshTrigger, setRefreshTrigger] = useState(0);
@@ -49,6 +50,7 @@ export default function DisplayProfile({ profileId }) {
 					</div>
 				</div>
 			)}
+			<UserProfilePosts profileId={profileId}/>
 			{error && <div style={{ color: "white" }}>{error.message}</div>}
 		</StyledDiv>
 	);
