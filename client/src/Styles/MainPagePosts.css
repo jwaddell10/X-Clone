@@ -29,3 +29,8 @@
     justify-content: space-around;
     align-items: center;
 }
+
+.main-post-container {
+	cursor: pointer;
+	color: white;
+}
