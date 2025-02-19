@@ -6,9 +6,8 @@ import PostReaction from "./PostReaction";
 import { Link } from "react-router";
 // import timeAgo from "../../helpers/timeAgo";
 
-export default function MainPagePosts({ refreshTrigger }) {
+export default function TimelinePosts({ refreshTrigger }) {
 	const { posts, error } = useFetchPosts(refreshTrigger);
-	console.log(posts, 'posts')
 	return (
 		<div>
 			{error && <div style={{ color: "white" }}>{error.message}</div>}
@@ -58,6 +57,6 @@ export default function MainPagePosts({ refreshTrigger }) {
 	);
 }
 
-MainPagePosts.propTypes = {
+TimelinePosts.propTypes = {
 	refreshTrigger: PropTypes.number,
 };

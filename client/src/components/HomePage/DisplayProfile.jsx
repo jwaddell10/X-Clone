@@ -1,14 +1,18 @@
 import EditProfile from "./EditProfile";
 import "../.././Styles/DisplayProfile.css";
-import useGetOtherUserProfileInfo from "../../helpers/useGetOtherUserProfileInfo.jsx"
+import useGetOtherUserProfileInfo from "../../helpers/useGetOtherUserProfileInfo.jsx";
 import { useState } from "react";
+import { styled } from "styled-components";
 
-export default function DisplayProfile({profileId}) {
+export default function DisplayProfile({ profileId }) {
 	const [refreshTrigger, setRefreshTrigger] = useState(0);
 	const [showEditForm, setShowEditForm] = useState(false);
-	const { profileInfo, error } = useGetOtherUserProfileInfo(refreshTrigger, profileId);
+	const { profileInfo, error } = useGetOtherUserProfileInfo(
+		refreshTrigger,
+		profileId
+	);
 	return (
-		<>
+		<StyledDiv>
 			{profileInfo && (
 				<div
 					className="header-container"
@@ -46,6 +50,12 @@ export default function DisplayProfile({profileId}) {
 				</div>
 			)}
 			{error && <div style={{ color: "white" }}>{error.message}</div>}
-		</>
+		</StyledDiv>
 	);
 }
+
+const StyledDiv = styled.div`
+	width: 50vw;
+	margin-left: 5vw;
+	margin-right: 5vw;
+`;

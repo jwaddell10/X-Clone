@@ -1,5 +1,5 @@
 import ComposePost from "./ComposePost";
-import MainPagePosts from "./DisplayPostComponents/MainPagePosts";
+import TimelinePosts from "./DisplayPostComponents/TimelinePosts";
 
 export default function HomeTimeline({
 	profileInfo,
@@ -13,7 +13,7 @@ export default function HomeTimeline({
 				refreshTrigger={refreshTrigger}
 				setRefreshTrigger={setRefreshTrigger}
 			/>
-			<MainPagePosts refreshTrigger={refreshTrigger} />
+			<TimelinePosts refreshTrigger={refreshTrigger} />
 		</div>
 	);
 }

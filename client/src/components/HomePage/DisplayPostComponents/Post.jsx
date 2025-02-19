@@ -4,14 +4,24 @@ import PostReaction from "./PostReaction";
 import ComposePost from "../ComposePost";
 import Comments from "./Comments";
 import useFetchComments from "../../../helpers/useFetchComments";
+import SideNavigation from "../SideNavigation";
+import WhoToFollowSidebar from "../WhoToFollowSidebar";
 
 export default function Post() {
 	const { username, postId } = useParams();
 	const { post } = useFetchPost(username, postId);
-	const { comments } = useFetchComments(postId)
+	const { comments } = useFetchComments(postId);
 	return (
-		<>
-			<div style={{ color: "white" }}>
+		<div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
+			<SideNavigation />
+			<div
+				style={{
+					color: "white",
+					width: "50vw",
+					marginLeft: "5vw",
+					marginRight: "5vw",
+				}}
+			>
 				{post && (
 					<div>
 						<header className="post-header">
@@ -27,10 +37,11 @@ export default function Post() {
 						<ComposePost
 							profileInfo={post.author.Profile}
 						></ComposePost>
-						<Comments post={post} comments={comments}/>
+						<Comments post={post} comments={comments} />
 					</div>
 				)}
 			</div>
-		</>
+			<WhoToFollowSidebar />
+		</div>
 	);
 }

@@ -10,7 +10,7 @@ import { Link } from "react-router";
 import PropTypes from "prop-types";
 
 export default function SideNavigation({ profileInfo }) {
-	const loggedInUserId = localStorage.getItem("id")
+	const loggedInUserId = localStorage.getItem("id");
 
 	return (
 		<section className="sidebar-container">
@@ -51,15 +51,12 @@ export default function SideNavigation({ profileInfo }) {
 					</li>
 				</Link>
 				{/* {profileInfo && ( */}
-					<Link to={`/profile/${loggedInUserId}`}>
-						<li className="nav-item">
-							<PermIdentityIcon
-								className="icons"
-								fontSize="large"
-							/>
-							<span className="nav-text">Profile</span>
-						</li>
-					</Link>
+				<Link to={`/profile/${loggedInUserId}`}>
+					<li className="nav-item">
+						<PermIdentityIcon className="icons" fontSize="large" />
+						<span className="nav-text">Profile</span>
+					</li>
+				</Link>
 				{/* )} */}
 
 				<Link>
@@ -73,7 +70,7 @@ export default function SideNavigation({ profileInfo }) {
 				</Link>
 				<button className="side-nav-post-button">Post</button>
 				{profileInfo && (
-					<div style={{display: "flex"}}>
+					<div style={{ display: "flex" }}>
 						<img
 							className="profile-picture-icon"
 							src={profileInfo.profilePicture}
