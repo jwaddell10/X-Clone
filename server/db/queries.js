@@ -290,6 +290,7 @@ module.exports = {
 	},
 	deletePostLike: async (postId, loggedInUserId) => {
 		try {
+			console.log(postId, loggedInUserId, 'ids')
 			const deletedLike = await prisma.likes.delete({
 				where: {
 					postId_userId: {
@@ -298,6 +299,7 @@ module.exports = {
 					},
 				},
 			});
+			console.log(deletedLike, 'deleted like')
 			return deletedLike;
 		} catch (error) {
 			return error;

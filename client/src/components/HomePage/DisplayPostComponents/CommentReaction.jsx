@@ -1,7 +1,6 @@
 import CommentCount from "./CommentCount";
 
 export default function CommentReaction({ comments }) {
-	console.log(comments, 'comments in comment reaction')
 	return (
 		<div style={{ display: "flex", alignItems: "center", gap: "0.25vw" }}>
 			<svg

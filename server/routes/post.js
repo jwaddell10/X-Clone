@@ -10,7 +10,7 @@ router.post("/", postController.submitPost)
 router.post("/:id/like", postController.likePost)
 router.post("/:id/comment/:commentId/like", postController.likeComment)
 
-router.delete("/:id/unlike", postController.unLikePost)
+router.delete("/:postId/unlike", postController.unLikePost)
 router.delete("/:id/comment/:commentId/unlike", postController.unLikeComment)
 
 

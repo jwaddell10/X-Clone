@@ -1,4 +1,5 @@
 export default async function handlePostToggleLike(isLiked, loggedInUserId, post) {
+	console.log(loggedInUserId, 'loggedinuserid')
 	if (!isLiked) {
 		//add like
 		try {
@@ -9,7 +10,7 @@ export default async function handlePostToggleLike(isLiked, loggedInUserId, post
 						"Content-type": "application/json",
 					},
 					method: "POST",
-					body: JSON.stringify({ loggedInUserId }),
+					body: JSON.stringify({ loggedInUserId: loggedInUserId }),
 				}
 			);
 			const data = await response.json();
@@ -27,7 +28,7 @@ export default async function handlePostToggleLike(isLiked, loggedInUserId, post
 						"Content-type": "application/json",
 					},
 					method: "DELETE",
-					body: JSON.stringify({ loggedInUserId }),
+					body: JSON.stringify({ loggedInUserId: loggedInUserId }),
 				}
 			);
 			const data = await response.json();

@@ -85,17 +85,16 @@ exports.likeComment = asyncHandler(async (req, res, next) => {
 });
 
 exports.unLikePost = asyncHandler(async (req, res, next) => {
-	const post = await db.findPost(parseInt(req.params.id));
-
+	console.log(req.params, 'req body unlike post')
+	const post = await db.findPost(parseInt(req.params.postId));
 	if (post === null) {
 		res.json({ errorMessage: "Unable to find post. Try again later" });
 	}
 
-	const deletedLike = await db.deleteLike(
-		parseInt(req.params.id),
+	const deletedLike = await db.deletePostLike(
+		parseInt(req.params.postId),
 		parseInt(req.body.loggedInUserId)
 	);
-	console.log(deletedLike, "deleted like");
 	res.json({
 		deletedLike: deletedLike,
 	});
