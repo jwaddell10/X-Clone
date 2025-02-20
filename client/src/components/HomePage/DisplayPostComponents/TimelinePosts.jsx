@@ -1,6 +1,6 @@
 import useFetchPosts from "../../../helpers/useFetchPosts";
 import PersonIcon from "@mui/icons-material/Person";
-import "../../../Styles/MainPagePosts.css";
+import "../../../Styles/TimeLinePosts.css";
 import PropTypes from "prop-types";
 import PostReaction from "./PostReaction";
 import { Link } from "react-router";

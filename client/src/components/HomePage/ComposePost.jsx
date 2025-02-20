@@ -1,7 +1,7 @@
 import { useState } from "react";
 import submitPost from "../../helpers/submitPost";
 import Button from "../../helpers/Button";
-import "../../Styles/ComposePostComponent.css";
+import "../../Styles/ComposePost.css";
 import CircularProgress from "@mui/material/CircularProgress";
 
 export default function ComposePost({

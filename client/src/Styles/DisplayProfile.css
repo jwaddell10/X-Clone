@@ -41,3 +41,8 @@
 .close-icon {
     color: white;
 }
+
+.profile-picture-display-profile {
+    width: 10vw;
+    border-radius: 50px;
+}

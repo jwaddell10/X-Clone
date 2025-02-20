@@ -60,6 +60,7 @@ export default function DisplayProfile({ profileId }) {
 				>
 					<div className="profile-picture">
 						<img
+						className="profile-picture-display-profile"
 							style={{ width: "5rem" }}
 							src={profileInfo.profilePicture}
 							alt="profile-picture"

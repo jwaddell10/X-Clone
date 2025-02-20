@@ -60,7 +60,7 @@ model Comment {
   authorId  Int
   post      Post      @relation(fields: [postId], references: [id])
   postId    Int
-  Children  Comment[] @relation("Comment_Children")
+  children  Comment[] @relation("Comment_Children")
   parentId  Int?
   parent    Comment?  @relation("Comment_Children", fields: [parentId], references: [id])
   likes     Likes[]

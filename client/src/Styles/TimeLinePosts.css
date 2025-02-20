@@ -8,12 +8,13 @@
 	color: white;
 	border-bottom: 1px solid gray;
 	cursor: pointer;
+	padding: 10px;
 }
 
 .profile-picture-icon {
 	width: 3vw;
-	height: 5vh;
 	border-radius: 20px;
+	max-width: 100%;
 }
 
 .reply-icon {
