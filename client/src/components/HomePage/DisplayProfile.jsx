@@ -4,18 +4,53 @@ import useGetOtherUserProfileInfo from "../../helpers/useGetOtherUserProfileInfo
 import { useState } from "react";
 import { styled } from "styled-components";
 import UserProfilePosts from "./UserProfilePosts.jsx";
-import Button from "../../helpers/Button.jsx";
 
 export default function DisplayProfile({ profileId }) {
 	const loggedInUserId = localStorage.getItem("id");
-	const [followButton, showFollowButton] = useState(false);
 	const [refreshTrigger, setRefreshTrigger] = useState(0);
 	const [showEditForm, setShowEditForm] = useState(false);
 	const { profileInfo, error } = useGetOtherUserProfileInfo(
 		refreshTrigger,
-		profileId
+		profileId,
 	);
 
+	//working on follow feature
+	const handleFollow = async (event, profileId) => {
+		if (event.target.innerText === "Follow") {
+			try {
+				const response = await fetch(
+					`${
+						import.meta.env.VITE_API_URL
+					}/profile/${loggedInUserId}/${profileId}/follow`,
+					{
+						method: "POST",
+					}
+				);
+				const data = await response.json();
+				console.log(data, "data in response");
+				setRefreshTrigger((prevState) => prevState + 1)
+			} catch (error) {
+				console.log(error, "error");
+			}
+		} else if (event.target.innerText === "Unfollow") {
+			try {
+				const response = await fetch(
+					`${
+						import.meta.env.VITE_API_URL
+					}/profile/${loggedInUserId}/${profileId}/unfollow`,
+					{
+						method: "DELETE",
+					}
+				);
+				const data = await response.json();
+				console.log(data, "data");
+				setRefreshTrigger((prevState) => prevState + 1)
+
+			} catch (error) {
+				console.log(error, "error");
+			}
+		}
+	};
 	return (
 		<StyledDiv>
 			{profileInfo && (
@@ -29,6 +64,7 @@ export default function DisplayProfile({ profileId }) {
 							src={profileInfo.profilePicture}
 							alt="profile-picture"
 						/>
+						{/* if user is logged in, show edit profile button, otherwise show follow button */}
 						{profileInfo.id == loggedInUserId ? (
 							<button
 								className="edit-profile-button"
@@ -37,7 +73,17 @@ export default function DisplayProfile({ profileId }) {
 								Edit Profile
 							</button>
 						) : (
-							<Button text="Follow" variant="postButton" />
+							<button
+								onClick={(event) => {
+									handleFollow(event, profileInfo.id);
+								}}
+							>
+								{profileInfo.followedBy.map(
+									(followData) => followData.followingId
+								) == loggedInUserId
+									? "Unfollow"
+									: "Follow"}
+							</button>
 						)}
 
 						{showEditForm && (

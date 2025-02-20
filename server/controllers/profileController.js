@@ -41,3 +41,28 @@ exports.getProfilePosts = asyncHandler(async (req, res, next) => {
 
 	res.json({ profilePosts });
 });
+
+exports.followProfile = asyncHandler(async (req, res, next) => {
+	const followProfile = await db.createFollowProfile(
+		parseInt(req.params.userId),
+		parseInt(req.params.id)
+	);
+	if (!followProfile) {
+		return res.json({ error: "Error occurred when following profile" });
+	}
+
+	res.json({ followProfile });
+});
+
+exports.unFollowProfile = asyncHandler(async (req, res, next) => {
+	const unFollowProfile = await db.deleteFollowProfile(
+		parseInt(req.params.userId),
+		parseInt(req.params.id)
+	);
+	
+	if (!unFollowProfile) {
+		return res.json({ error: "Error occurred when following profile" });
+	}
+
+	res.json({ unFollowProfile });
+});

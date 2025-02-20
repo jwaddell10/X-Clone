@@ -213,13 +213,13 @@ module.exports = {
 							Profile: {
 								select: {
 									profilePicture: true,
-								}
-							}
-						}
+								},
+							},
+						},
 					},
 					likes: true,
 					Comment: true,
-				}
+				},
 			});
 			return userPosts;
 		} catch (error) {
@@ -316,6 +316,19 @@ module.exports = {
 			return error;
 		}
 	},
+	createFollowProfile: async (userId, userToFollowId) => {
+		try {
+			const follow = await prisma.follows.create({
+				data: {
+					followedById: userToFollowId,
+					followingId: userId,
+				},
+			});
+			return follow;
+		} catch (error) {
+			return error;
+		}
+	},
 	deletePostLike: async (postId, loggedInUserId) => {
 		try {
 			console.log(postId, loggedInUserId, "ids");
@@ -345,6 +358,21 @@ module.exports = {
 				},
 			});
 			return deletedLike;
+		} catch (error) {
+			return error;
+		}
+	},
+	deleteFollowProfile: async (userId, userToFollowId) => {
+		try {
+			const deletedFollow = await prisma.follows.delete({
+				where: {
+					followingId_followedById: {
+						followedById: userToFollowId,
+						followingId: userId,
+					},
+				},
+			});
+			return deletedFollow;
 		} catch (error) {
 			return error;
 		}

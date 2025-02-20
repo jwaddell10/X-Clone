@@ -14,7 +14,6 @@ export default function useFetchProfilePosts(profileId) {
                     throw new Error("Failed to fetch posts");
                 }
                 const data = await response.json();
-                console.log(data, 'data from fetchprofileposts')
                 setPosts(data.profilePosts);
             } catch (err) {
                 console.error(err.message);

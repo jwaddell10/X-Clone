@@ -1,1 +1,1 @@
-delete from "User" where name = 'testing';
+delete from "Follows";
