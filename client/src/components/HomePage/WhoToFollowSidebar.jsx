@@ -19,7 +19,7 @@ export default function WhoToFollowSidebar() {
 	}, [users]);
 
 	return (
-		<div>
+		<div style={{marginRight: "7vw"}}>
 			<SearchBar />
 			<h1 style={{ color: "white" }}>Who to Follow</h1>
 			{displayedUsers &&

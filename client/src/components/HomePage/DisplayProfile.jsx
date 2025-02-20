@@ -112,7 +112,5 @@ export default function DisplayProfile({ profileId }) {
 }
 
 const StyledDiv = styled.div`
-	width: 50vw;
-	margin-left: 5vw;
-	margin-right: 5vw;
+	width: 45vw;
 `;

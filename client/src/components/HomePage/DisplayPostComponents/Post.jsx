@@ -18,8 +18,7 @@ export default function Post() {
 			<div
 				style={{
 					color: "white",
-					width: "50vw",
-					marginLeft: "5vw",
+					width: "45vw",
 					marginRight: "5vw",
 				}}
 			>

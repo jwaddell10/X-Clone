@@ -8,12 +8,12 @@ export default function Home() {
     const { user } = useAuth();
 	const [action, setAction] = useState("");
 	return (
-		<main>
+		<section>
 			{user ? (
 				<HomePage />
 			) : (
 				<WelcomePage action={action} setAction={setAction} />
 			)}
-		</main>
+		</section>
 	);
 }

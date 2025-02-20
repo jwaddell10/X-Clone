@@ -6,7 +6,7 @@ import WhoToFollowSidebar from "./WhoToFollowSidebar";
 export default function Profile() {
 	const { profileId } = useParams();
 	return (
-		<div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
+		<div style={{ display: "grid", gridTemplateColumns: "1fr 2fr 1fr" }}>
 			<SideNavigation />
 			<DisplayProfile profileId={profileId} />
 			<WhoToFollowSidebar />

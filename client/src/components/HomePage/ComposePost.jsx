@@ -40,15 +40,7 @@ export default function ComposePost({
 	};
 
 	return (
-		<span >
-			{/* <div className="post-component-header-container">
-				<span className="post-component-header">
-					<StyledButton>All</StyledButton>
-				</span>
-				<span className="post-component-header">
-					<StyledButton>Following</StyledButton>
-				</span>
-			</div> */}
+		<span>
 			<div className="post-form-container">
 				<form onSubmit={handlePostSubmit}>
 					<div className="text-area-container">
