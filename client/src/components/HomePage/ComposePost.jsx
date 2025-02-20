@@ -8,8 +8,13 @@ export default function ComposePost({
 	profileInfo,
 	refreshTrigger,
 	setRefreshTrigger,
+	placeholderText,
 }) {
 
+	if (placeholderText === undefined) {
+		console.log(placeholderText)
+		placeholderText = "What is happening?!"
+	}
 	const [text, setText] = useState("");
 	const [error, setError] = useState(null);
 	const [isDisabled, setIsDisabled] = useState(true);
@@ -56,7 +61,7 @@ export default function ComposePost({
 							name="post-content"
 							value={text}
 							onChange={handlePostFormChange}
-							placeholder="What is happening?!"
+							placeholder={placeholderText}
 							maxLength={280}
 						></textarea>
 					</div>

@@ -7,6 +7,7 @@ import useFetchComments from "../../../helpers/useFetchComments";
 import SideNavigation from "../SideNavigation";
 import WhoToFollowSidebar from "../WhoToFollowSidebar";
 import { Link } from "react-router";
+import { styled } from "styled-components";
 
 export default function Post() {
 	const { username, postId } = useParams();
@@ -23,22 +24,33 @@ export default function Post() {
 				}}
 			>
 				{post && (
-					<div>
-						<header className="post-header">
+					<div
+						style={{
+							borderWidth: "1px 1px 0px 1px",
+							borderStyle: "solid",
+							borderColor: "gray",
+						}}
+					>
+						<StyledHeader className="post-header">
 							<Link to={`/profile/${post.author.Profile.id}`}>
 								<img
 									src={post.author.Profile.profilePicture}
 									alt=""
+									style={{
+										width: "3vw",
+										borderRadius: "20px",
+									}}
 								/>
 							</Link>
 
 							<div>{username}</div>
-						</header>
+						</StyledHeader>
 
 						<div className="post-text-contaiiner">{post.text}</div>
 						<PostReaction post={post}></PostReaction>
 						<ComposePost
 							profileInfo={post.author.Profile}
+							placeholderText={"Post your reply"}
 						></ComposePost>
 						<Comments post={post} comments={comments} />
 					</div>
@@ -48,3 +60,7 @@ export default function Post() {
 		</div>
 	);
 }
+
+const StyledHeader = styled.header`
+	display: flex;
+`;

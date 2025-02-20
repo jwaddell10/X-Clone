@@ -3,6 +3,7 @@ import RepeatIcon from "@mui/icons-material/Repeat";
 import handleCommentToggleLike from "../../../helpers/handleCommentToggleLike";
 import CommentReaction from "./CommentReaction";
 import { useState, useEffect } from "react";
+import { styled } from "styled-components";
 
 export default function Comment({ comment, id }) {
 	const [isLiked, setIsLiked] = useState(false);
@@ -32,21 +33,31 @@ export default function Comment({ comment, id }) {
 		);
 	};
 	return (
-		<div key={id}>
-			<div className="header-container">
-				<img src={comment.author.Profile.profilePicture} alt="" />
+		<div key={id} style={{borderBottom: "1px solid gray"}}>
+			<StyledHeader className="header-container">
+				<img
+					src={comment.author.Profile.profilePicture}
+					alt=""
+					style={{ width: "3vw", borderRadius: "20px" }}
+				/>
 				<div>{comment.author.name}</div>
-			</div>
+			</StyledHeader>
 			<div className="text-container">{comment.text}</div>
-			<CommentReaction comments={comment} />
-			<RepeatIcon />
-			<LikeReaction
-				isLiked={isLiked}
-				likes={likeCount}
-				toggleLike={() => {
-					toggleLike(comment);
-				}}
-			/>
+			<div className="reaction-container" style={{display: "flex", justifyContent: "space-around"}}>
+				<CommentReaction comments={comment} />
+				<RepeatIcon />
+				<LikeReaction
+					isLiked={isLiked}
+					likes={likeCount}
+					toggleLike={() => {
+						toggleLike(comment);
+					}}
+				/>
+			</div>
 		</div>
 	);
 }
+
+const StyledHeader = styled.header`
+	display: flex;
+`;
