@@ -33,17 +33,19 @@ export default function Comment({ comment, id }) {
 		);
 	};
 	return (
-		<div key={id} style={{borderBottom: "1px solid gray"}}>
+		<div key={id} style={{ borderBottom: "1px solid gray" }}>
 			<StyledHeader className="header-container">
 				<img
 					src={comment.author.Profile.profilePicture}
-					alt=""
-					style={{ width: "3vw", borderRadius: "20px" }}
+					alt="profile picture"
 				/>
 				<div>{comment.author.name}</div>
 			</StyledHeader>
 			<div className="text-container">{comment.text}</div>
-			<div className="reaction-container" style={{display: "flex", justifyContent: "space-around"}}>
+			<div
+				className="reaction-container"
+				style={{ display: "flex", justifyContent: "space-around" }}
+			>
 				<CommentReaction comments={comment} />
 				<RepeatIcon />
 				<LikeReaction

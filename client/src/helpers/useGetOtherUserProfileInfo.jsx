@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useGetLoggedInUserProfileInfo(refreshTrigger, profileId) {
+export default function useGetLoggedInUserProfileInfo(profileId, refreshTrigger) {
 	const [profileInfo, setProfileInfo] = useState();
 	const [error, setError] = useState("");
 	useEffect(() => {

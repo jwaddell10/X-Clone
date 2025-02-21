@@ -10,10 +10,9 @@ export default function ComposePost({
 	setRefreshTrigger,
 	placeholderText,
 }) {
-
 	if (placeholderText === undefined) {
-		console.log(placeholderText)
-		placeholderText = "What is happening?!"
+		console.log(placeholderText);
+		placeholderText = "What is happening?!";
 	}
 	const [text, setText] = useState("");
 	const [error, setError] = useState(null);
@@ -47,7 +46,10 @@ export default function ComposePost({
 	return (
 		<span>
 			<div className="post-form-container">
-				<form onSubmit={handlePostSubmit}>
+				<form
+					style={{ borderTop: "1px solid gray" }}
+					onSubmit={handlePostSubmit}
+				>
 					<div className="text-area-container">
 						{profileInfo && (
 							<img
@@ -80,20 +82,3 @@ export default function ComposePost({
 		</span>
 	);
 }
-
-// const StyledButton = styled.button`
-// 	background-color: black;
-// 	color: white;
-// 	border: 0px solid black;
-// 	cursor: pointer;
-// 	&:focus {
-// 		border-bottom: 0.3rem solid rgb(29, 155, 240);
-// 		border-radius: 3px;
-// 	}
-// `;
-
-// const StyledButton = styled.button`
-// 	&:active {
-// 		text-decoration: underline;
-// 	}
-// `;

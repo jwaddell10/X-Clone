@@ -43,3 +43,44 @@
 		width: 4vw;
 	}
 }
+
+/* Mobile Styles */
+@media screen and (max-width: 500px) {
+	.sidebar-container {
+		width: 100vw; /* Full width */
+		align-items: center; /* Center content */
+		position: fixed; /* Fix to the bottom */
+		bottom: 0; /* Position at the bottom */
+		left: 0;
+		background-color: black; /* Optional: Add background color */
+		z-index: 1000; /* Ensure it's above other content */
+	}
+
+	.icons-container {
+		position: static; /* Remove fixed positioning */
+		flex-direction: row; /* Display icons horizontally */
+		justify-content: space-around; /* Space icons evenly */
+		width: 100%; /* Full width */
+		padding: 10px 0; /* Add padding */
+		gap: 0; /* Remove vertical gap */
+	}
+
+	.nav-item {
+		flex-direction: column; /* Stack icon and text vertically */
+		gap: 5px; /* Reduce gap */
+	}
+
+	.icons {
+		height: 24px; /* Fixed height for icons */
+		width: 24px; /* Fixed width for icons */
+	}
+
+	.side-nav-post-button {
+		width: auto; /* Adjust button width */
+		padding: 5px 10px; /* Add padding */
+	}
+
+	.profile-picture-icon {
+		display: none; /* Hide profile picture on mobile */
+	}
+}

@@ -1,66 +1,44 @@
-import { useParams } from "react-router";
-import useFetchPost from "../../../helpers/useFetchPost";
 import PostReaction from "./PostReaction";
-import ComposePost from "../ComposePost";
-import Comments from "./Comments";
-import useFetchComments from "../../../helpers/useFetchComments";
-import SideNavigation from "../SideNavigation";
-import WhoToFollowSidebar from "../WhoToFollowSidebar";
 import { Link } from "react-router";
 import { styled } from "styled-components";
+import "../../../Styles/Post.css";
 
-export default function Post() {
-	const { username, postId } = useParams();
-	const { post } = useFetchPost(username, postId);
-	const { comments } = useFetchComments(postId);
+export default function Post({ post }) {
 	return (
-		<div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
-			<SideNavigation />
-			<div
-				style={{
-					color: "white",
-					width: "45vw",
-					marginRight: "5vw",
-				}}
-			>
+		<div>
+			<StyledLink to={`${post.author.name}/${post.id}`}>
 				{post && (
 					<div
+						className="post-item-container"
 						style={{
-							borderWidth: "1px 1px 0px 1px",
-							borderStyle: "solid",
-							borderColor: "gray",
+							padding: "10px",
 						}}
 					>
 						<StyledHeader className="post-header">
 							<Link to={`/profile/${post.author.Profile.id}`}>
 								<img
 									src={post.author.Profile.profilePicture}
-									alt=""
-									style={{
-										width: "3vw",
-										borderRadius: "20px",
-									}}
+									alt="profile picture"
 								/>
 							</Link>
-
-							<div>{username}</div>
+							<div className="created-at">{post.createdAt}</div>
 						</StyledHeader>
-
 						<div className="post-text-contaiiner">{post.text}</div>
 						<PostReaction post={post}></PostReaction>
-						<ComposePost
-							profileInfo={post.author.Profile}
-							placeholderText={"Post your reply"}
-						></ComposePost>
-						<Comments post={post} comments={comments} />
 					</div>
 				)}
-			</div>
-			<WhoToFollowSidebar />
+			</StyledLink>
 		</div>
 	);
 }
 
 const StyledHeader = styled.header`
 	display: flex;
+`;
+
+const StyledLink = styled(Link)`
+	border-bottom: 1px solid gray;
+	color: white;
+	text-decoration: none;
+	display: block;
 `;

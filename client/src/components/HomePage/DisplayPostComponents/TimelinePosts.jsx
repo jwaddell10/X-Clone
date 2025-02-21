@@ -1,10 +1,7 @@
 import useFetchPosts from "../../../helpers/useFetchPosts";
-import PersonIcon from "@mui/icons-material/Person";
 import "../../../Styles/TimeLinePosts.css";
 import PropTypes from "prop-types";
-import PostReaction from "./PostReaction";
-import { Link } from "react-router";
-// import timeAgo from "../../helpers/timeAgo";
+import Post from "./Post";
 
 export default function TimelinePosts({ refreshTrigger }) {
 	const { posts, error } = useFetchPosts(refreshTrigger);
@@ -12,46 +9,7 @@ export default function TimelinePosts({ refreshTrigger }) {
 		<div>
 			{error && <div style={{ color: "white" }}>{error.message}</div>}
 			{posts?.map((post) => (
-				<div className="display-post-container" key={post.id}>
-					<Link
-						to={`${post.author.name}/${post.id}`}
-						className="main-post-container"
-					>
-						<div style={{ display: "flex" }}>
-							{post.author.Profile === null ? (
-								<div>
-									<PersonIcon />
-								</div>
-							) : (
-								<div style={{ display: "flex" }}>
-									<Link
-										to={`/profile/${post.author.Profile.id}`}
-									>
-										<img
-											className="profile-picture-icon"
-											src={
-												post.author.Profile
-													.profilePicture
-											}
-											alt="profile-picture-icon"
-										/>
-									</Link>
-
-									<span>{post.author.name}</span>
-									<span>{post.createdAt}</span>
-								</div>
-							)}
-						</div>
-
-						<div className="text-container">
-							<div className="text-body-container">
-								<span>{post.text}</span>
-							</div>
-						</div>
-					</Link>
-
-					<PostReaction post={post} />
-				</div>
+				<Post post={post} key={post.id}/>
 			))}
 		</div>
 	);

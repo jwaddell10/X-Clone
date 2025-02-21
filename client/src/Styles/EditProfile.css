@@ -1,5 +1,10 @@
 .edit-profile-form {
-    border: 1px solid white
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 70vh;
+	border: 1px solid white;
 }
 
 .edit-profile-button {
@@ -22,6 +27,12 @@
 	outline: 1px solid #00ff00;
 }
 
+.profile-picture-container {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(4, 1fr);
+	width: 40vw;
+}
 /* .image-container:active {
 	border-color: green;
 } */

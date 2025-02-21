@@ -86,8 +86,8 @@ export default function EditProfile({
 					minLength="5"
 					required
 				/>
+				<Button type="submit" text="Save" variant="saveButton" />
 			</div>
-			<Button type="submit" text="Save" variant="saveButton" />
 			{editProfileError && (
 				<div style={{ color: "white" }}>{editProfileError.message}</div>
 			)}

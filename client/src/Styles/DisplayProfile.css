@@ -1,15 +1,17 @@
-
+.profile-container {
+    border: 1px solid gray;
+}
 
 .edit-profile-form {
     position: absolute;
     background-color: black;
 }
 
-.profile-picture-container {
+/* .profile-picture-container {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-}
+} */
 
 .profile-picture {
     display: flex;

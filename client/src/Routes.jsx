@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import Home from "./components/Home";
 import Profile from "./components/HomePage/Profile";
-import Post from "./components/HomePage/DisplayPostComponents/Post";
+import PostDetails from "./components/HomePage/DisplayPostComponents/PostDetails";
 
 export default function Router() {
 
@@ -12,7 +12,7 @@ export default function Router() {
 				<Route path="/profile/:profileId" element={<Profile />}></Route>
 				<Route
 					path="/:username/:postId"
-					element={<Post />}
+					element={<PostDetails />}
 				></Route>
 			</Routes>
 		</BrowserRouter>

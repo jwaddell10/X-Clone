@@ -5,15 +5,17 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import UserProfilePosts from "./UserProfilePosts.jsx";
 
-export default function DisplayProfile({ profileId }) {
+export default function DisplayProfile({ refreshTrigger, setRefreshTrigger, profileId }) {
 	const loggedInUserId = localStorage.getItem("id");
-	const [refreshTrigger, setRefreshTrigger] = useState(0);
 	const [showEditForm, setShowEditForm] = useState(false);
 	const { profileInfo, error } = useGetOtherUserProfileInfo(
-		refreshTrigger,
 		profileId,
+		refreshTrigger,
 	);
 
+	// if (showEditForm) {
+	// 	document.querySelector('.big-container').style.filter = 'blur(5px)'
+	// }
 	//working on follow feature
 	const handleFollow = async (event, profileId) => {
 		if (event.target.innerText === "Follow") {
@@ -53,10 +55,10 @@ export default function DisplayProfile({ profileId }) {
 	};
 	return (
 		<StyledDiv>
-			{profileInfo && (
+			<div className="profile-container">	{profileInfo && (
 				<div
 					className="header-container"
-					style={{ border: "1px solid white" }}
+					style={{borderBottom: "1px solid gray"}}
 				>
 					<div className="profile-picture">
 						<img
@@ -107,7 +109,8 @@ export default function DisplayProfile({ profileId }) {
 				</div>
 			)}
 			<UserProfilePosts profileId={profileId} />
-			{error && <div style={{ color: "white" }}>{error.message}</div>}
+			{error && <div style={{ color: "white" }}>{error.message}</div>}</div>
+		
 		</StyledDiv>
 	);
 }

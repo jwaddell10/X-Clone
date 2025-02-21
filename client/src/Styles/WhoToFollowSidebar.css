@@ -1,3 +1,9 @@
+@media (max-width: 975px) {
+	.who-to-follow-sidebar {
+	  display: none;
+	}
+  }
+
 .user-sidebar {
     display: flex;
     justify-content: space-between;

@@ -35,3 +35,13 @@
 	cursor: pointer;
 	color: white;
 }
+
+@media screen and (max-width: 768px) {
+	.post-container {
+		width: 75vw;
+	}
+
+	.post-item-container {
+		width: 75vw;
+	}
+}

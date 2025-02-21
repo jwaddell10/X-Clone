@@ -1,3 +1,8 @@
 body {
   background-color: black;
 }
+
+img {
+  width: 3vw;
+  border-radius: 20px;
+}
