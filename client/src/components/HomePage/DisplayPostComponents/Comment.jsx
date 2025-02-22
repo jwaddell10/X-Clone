@@ -23,13 +23,15 @@ export default function Comment({ comment, id }) {
 	}, [isCommentLikedByUser, totalLikes]);
 
 	const toggleLike = async () => {
+		console.log(comment.likes[0].id, 'comment toggle like')
 		setIsLiked(!isLiked);
 		setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
 		await handleCommentToggleLike(
 			isLiked,
 			loggedInUserId,
-			comment,
-			comment.post.id
+			comment.post.id,
+			comment.likes[0].id
+
 		);
 	};
 	return (

@@ -8,10 +8,10 @@ router.get("/:id/comment", postController.getComments)
 
 router.post("/", postController.submitPost)
 router.post("/:id/like", postController.likePost)
-router.post("/:id/comment/:commentId/like", postController.likeComment)
+router.post("/comment/:commentId/like", postController.likeComment)
 
-router.delete("/:postId/unlike", postController.unLikePost)
-router.delete("/:id/comment/:commentId/unlike", postController.unLikeComment)
+router.delete("/:likeId/unlike", postController.unLikePost)
+router.delete("/comment/:likeId/unlike", postController.unLikeComment)
 
 
 module.exports = router;

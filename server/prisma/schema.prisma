@@ -70,12 +70,12 @@ model Comment {
 
 model Likes {
   id        Int      @unique @default(autoincrement())
-  postId    Int
+  postId    Int?
   userId    Int
   commentId Int?
   comment   Comment? @relation(fields: [commentId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
-  post      Post     @relation(fields: [postId], references: [id])
+  post      Post?     @relation(fields: [postId], references: [id])
 
   @@unique([postId, userId])
 }

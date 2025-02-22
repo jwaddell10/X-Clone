@@ -1,1 +1,1 @@
-delete from "Follows";
+SELECT * FROM "comments" WHERE "authorId" = 1;
