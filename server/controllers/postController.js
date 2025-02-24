@@ -86,30 +86,20 @@ exports.likeComment = asyncHandler(async (req, res, next) => {
 });
 
 exports.unLikePost = asyncHandler(async (req, res, next) => {
-	const post = await db.findPost(parseInt(req.params.postId));
-	if (post === null) {
-		res.json({ errorMessage: "Unable to find post. Try again later" });
-	}
 
-	const deletedLike = await db.deletePostLike(
-		parseInt(req.params.postId),
-		parseInt(req.body.loggedInUserId)
-	);
+	const deletedLike = await db.deleteLike(parseInt(req.body.likeId));
+	if (!deletedLike) {
+		res.json({errorMessage: "Unable to remove like"})
+	}
 	res.json({
 		deletedLike: deletedLike,
 	});
 });
 
 exports.unLikeComment = asyncHandler(async (req, res, next) => {
-	const like = await db.findLike(
-		parseInt(req.params.likeId)
-	);
-
-	if (!like) {
-		return res.json({ errorMessage: "No comment found. Try again later" });
+	const deletedLike = await db.deleteLike(parseInt(req.body.likeId));
+	if (!deletedLike) {
+		res.json({errorMessage: "Unable to remove like"})
 	}
-
-	const deletedLike = await db.deleteCommentLike(parseInt(like.id));
-
 	res.json({ deletedLike });
 });

@@ -1,12 +1,13 @@
 import SideNavigation from "./SideNavigation";
 import WhoToFollowSidebar from "./WhoToFollowSidebar";
-import { useState } from "react";
+import { useContext } from "react";
+import { RefreshContext } from "../../context/refreshTriggerContext";
 import HomeTimeline from "./HomeTimeline";
 import "../../Styles/HomePage.css";
 import useGetLoggedInUserProfileInfo from "../../helpers/useGetLoggedInUserProfileInfo";
 
 export default function HomePage() {
-	const [refreshTrigger, setRefreshTrigger] = useState(0);
+	const { refreshTrigger, triggerRefresh } = useContext(RefreshContext);
 	const { profileInfo } = useGetLoggedInUserProfileInfo(refreshTrigger);
 
 	return (
@@ -14,8 +15,6 @@ export default function HomePage() {
 			<SideNavigation profileInfo={profileInfo} />
 			<HomeTimeline
 				profileInfo={profileInfo}
-				refreshTrigger={refreshTrigger}
-				setRefreshTrigger={setRefreshTrigger}
 			></HomeTimeline>
 			<WhoToFollowSidebar />
 		</main>

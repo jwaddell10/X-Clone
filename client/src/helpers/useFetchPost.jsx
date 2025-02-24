@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useFetchPost(username, postId) {
+export default function useFetchPost(username, postId, refreshTrigger) {
 	const [post, setPost] = useState();
 	const [error, setError] = useState();
 	useEffect(() => {
@@ -16,7 +16,7 @@ export default function useFetchPost(username, postId) {
 			}
 		};
 		fetchPost();
-	}, [postId, username]);
+	}, [postId, username, refreshTrigger]);
 
 	return { post, error };
 }

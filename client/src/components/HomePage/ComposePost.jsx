@@ -6,12 +6,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 export default function ComposePost({
 	profileInfo,
-	refreshTrigger,
 	setRefreshTrigger,
 	placeholderText,
 }) {
 	if (placeholderText === undefined) {
-		console.log(placeholderText);
 		placeholderText = "What is happening?!";
 	}
 	const [text, setText] = useState("");

@@ -9,16 +9,18 @@ import SideNavigation from "../SideNavigation";
 import WhoToFollowSidebar from "../WhoToFollowSidebar";
 import ComposePost from "../ComposePost";
 import useGetLoggedInUserProfileInfo from "../../../helpers/useGetLoggedInUserProfileInfo";
+import { RefreshContext } from "../../../context/refreshTriggerContext";
+import { useContext } from "react";
 
 export default function PostDetails() {
 	// Access URL parameters
 	const { username, postId } = useParams();
-
+    const { refreshTrigger } = useContext(RefreshContext)
 	// Fetch post data
-	const { post, loading, error } = useFetchPost(username, postId);
+	const { post, loading, error } = useFetchPost(username, postId, refreshTrigger);
 
 	// Fetch comments for the post
-	const { comments } = useFetchComments(postId);
+	const { comments } = useFetchComments(postId, refreshTrigger);
 
 	const { profileInfo } = useGetLoggedInUserProfileInfo();
 
@@ -47,7 +49,7 @@ export default function PostDetails() {
 					</StyledHeader>
 
 					<div className="post-text-container">{post.text}</div>
-					<PostReaction post={post} />
+					<PostReaction post={post}/>
 					<ComposePost profileInfo={profileInfo} />
 					<Comments post={post} comments={comments} />
 				</StyledDiv>

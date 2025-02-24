@@ -267,11 +267,12 @@ module.exports = {
 			return error;
 		}
 	},
-	findLike: async(likeId) => {
+	findLike: async(commentId, userId) => {
 		try {
 			const like = await prisma.likes.findUnique({
 				where: {
-					id: likeId,
+					commentId: commentId,
+					userId: userId,
 				}
 			})
 			return like;
@@ -303,6 +304,7 @@ module.exports = {
 					userId: userId,
 				},
 			});
+			console.log(like, 'id from pst like')
 			return like;
 		} catch (error) {
 			return error;
@@ -340,27 +342,12 @@ module.exports = {
 			return error;
 		}
 	},
-	deletePostLike: async (postId, loggedInUserId) => {
-		try {
-			console.log(postId, loggedInUserId, "ids");
-			const deletedLike = await prisma.likes.delete({
-				where: {
-					postId_userId: {
-						postId: postId,
-						userId: loggedInUserId,
-					},
-				},
-			});
-			return deletedLike;
-		} catch (error) {
-			return error;
-		}
-	},
-	deleteCommentLike: async (id) => {
+	deleteLike: async (likeId) => {
+		console.log(likeId, 'likeid in delete like')
 		try {
 			const deletedLike = await prisma.likes.delete({
 				where: {
-					id: id
+					id: likeId
 				},
 			});
 			return deletedLike;

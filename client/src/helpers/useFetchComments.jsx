@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function useFetchComments(postId) {
+export default function useFetchComments(postId, refreshTrigger) {
     const [comments, setComments] = useState();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -25,7 +25,7 @@ export default function useFetchComments(postId) {
         };
 
         fetchComments();
-    }, [postId]);
+    }, [postId, refreshTrigger]);
 
     return { comments, loading, error };
 }

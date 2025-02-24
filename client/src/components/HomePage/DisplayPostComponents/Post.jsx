@@ -4,9 +4,10 @@ import { styled } from "styled-components";
 import "../../../Styles/Post.css";
 
 export default function Post({ post }) {
+	// const { refreshTrigger, triggerRefresh } = useContext(RefreshContext);
 	return (
 		<div>
-			<StyledLink to={`${post.author.name}/${post.id}`}>
+			<StyledDiv to={`${post.author.name}/${post.id}`}>
 				{post && (
 					<div
 						className="post-item-container"
@@ -14,20 +15,31 @@ export default function Post({ post }) {
 							padding: "10px",
 						}}
 					>
-						<StyledHeader className="post-header">
-							<Link to={`/profile/${post.author.Profile.id}`}>
-								<img
-									src={post.author.Profile.profilePicture}
-									alt="profile picture"
-								/>
-							</Link>
-							<div className="created-at">{post.createdAt}</div>
-						</StyledHeader>
-						<div className="post-text-contaiiner">{post.text}</div>
+						<Link
+							to={`${post.author.name}/${post.id}`}
+							className="header-and-text-container"
+							style={{ color: "inherit", textDecoration: "none" }}
+						>
+							<StyledHeader className="post-header">
+								<Link to={`/profile/${post.author.Profile.id}`}>
+									<img
+										src={post.author.Profile.profilePicture}
+										alt="profile picture"
+									/>
+								</Link>
+								<div className="created-at">
+									{post.createdAt}
+								</div>
+							</StyledHeader>
+							<div className="post-text-contaiiner">
+								{post.text}
+							</div>
+						</Link>
+
 						<PostReaction post={post}></PostReaction>
 					</div>
 				)}
-			</StyledLink>
+			</StyledDiv>
 		</div>
 	);
 }
@@ -36,7 +48,7 @@ const StyledHeader = styled.header`
 	display: flex;
 `;
 
-const StyledLink = styled(Link)`
+const StyledDiv = styled.div`
 	border-bottom: 1px solid gray;
 	color: white;
 	text-decoration: none;

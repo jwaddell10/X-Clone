@@ -2,12 +2,15 @@ import LikeReaction from "./LikeReaction";
 import RepeatIcon from "@mui/icons-material/Repeat";
 import handleCommentToggleLike from "../../../helpers/handleCommentToggleLike";
 import CommentReaction from "./CommentReaction";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { RefreshContext } from "../../../context/refreshTriggerContext";
 import { styled } from "styled-components";
 
 export default function Comment({ comment, id }) {
 	const [isLiked, setIsLiked] = useState(false);
 	const [likeCount, setLikeCount] = useState(null);
+
+	const { triggerRefresh } = useContext(RefreshContext);
 
 	const loggedInUserId = localStorage.getItem("id");
 
@@ -23,16 +26,24 @@ export default function Comment({ comment, id }) {
 	}, [isCommentLikedByUser, totalLikes]);
 
 	const toggleLike = async () => {
-		console.log(comment.likes[0].id, 'comment toggle like')
+		const likeId = comment.likes.find(
+			(like) => like.userId == loggedInUserId
+		)?.id;
+
 		setIsLiked(!isLiked);
 		setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
-		await handleCommentToggleLike(
-			isLiked,
-			loggedInUserId,
-			comment.post.id,
-			comment.likes[0].id
+		try {
+			const data = await handleCommentToggleLike(
+				isLiked,
+				loggedInUserId,
+				comment.id,
+				likeId
+			);
 
-		);
+			triggerRefresh();
+		} catch (error) {
+			console.log(error, "error comment");
+		}
 	};
 	return (
 		<div key={id} style={{ borderBottom: "1px solid gray" }}>
