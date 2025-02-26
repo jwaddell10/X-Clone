@@ -63,6 +63,25 @@ exports.replyToPost = asyncHandler(async (req, res, next) => {
 	}
 });
 
+exports.replyToComment = asyncHandler(async (req, res, next) => {
+	console.log(req.params, "req params", req.body, "req body");
+
+	const replyToComment = await db.createReplyToComment(
+		parseInt(req.params.postId),
+		parseInt(req.params.commentId),
+		parseInt(req.body.loggedInUserId),
+		req.body.text
+	);
+	console.log(replyToComment, "comment reply");
+
+	if (!replyToComment) {
+		res.json({ errorMessage: "Error occurred creating comment" });
+	}
+	if (replyToComment) {
+		res.json({ replyToComment });
+	}
+});
+
 exports.likePost = asyncHandler(async (req, res, next) => {
 	const post = await db.findPost(parseInt(req.params.id));
 

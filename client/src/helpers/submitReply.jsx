@@ -33,7 +33,7 @@ export default async function submitReply(text, postId, commentId) {
 					Authorization: `Bearer ${JWTToken}`,
 				},
 				method: "POST",
-				body: JSON.stringify({ text: text, id: loggedInUserId }),
+				body: JSON.stringify({ text: text, loggedInUserId: loggedInUserId }),
 			}
 		);
 

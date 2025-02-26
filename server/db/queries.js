@@ -267,17 +267,17 @@ module.exports = {
 			return error;
 		}
 	},
-	findLike: async(commentId, userId) => {
+	findLike: async (commentId, userId) => {
 		try {
 			const like = await prisma.likes.findUnique({
 				where: {
 					commentId: commentId,
 					userId: userId,
-				}
-			})
+				},
+			});
 			return like;
 		} catch (error) {
-			console.log(error, 'error in foundlike')
+			console.log(error, "error in foundlike");
 			return error;
 		}
 	},
@@ -306,11 +306,27 @@ module.exports = {
 					authorId: loggedInUserId,
 					text: text,
 					postId: postId,
-				}
-			})
+				},
+			});
 			return replyToPost;
 		} catch (error) {
-			console.log(error, 'error')
+			console.log(error, "error");
+			return error;
+		}
+	},
+	createReplyToComment: async (postId, commentId, loggedInUserId, text) => {
+		try {
+			const replyToComment = await prisma.comment.create({
+				data: {
+					authorId: loggedInUserId,
+					text: text,
+					postId: postId,
+					parentId: commentId,
+				},
+			});
+			return replyToComment;
+		} catch (error) {
+			console.log(error, "error in create reploy comment");
 			return error;
 		}
 	},
@@ -322,7 +338,7 @@ module.exports = {
 					userId: userId,
 				},
 			});
-			console.log(like, 'id from pst like')
+			console.log(like, "id from pst like");
 			return like;
 		} catch (error) {
 			return error;
@@ -361,16 +377,16 @@ module.exports = {
 		}
 	},
 	deleteLike: async (likeId) => {
-		console.log(likeId, 'likeid in delete like')
+		console.log(likeId, "likeid in delete like");
 		try {
 			const deletedLike = await prisma.likes.delete({
 				where: {
-					id: likeId
+					id: likeId,
 				},
 			});
 			return deletedLike;
 		} catch (error) {
-			console.log(error, 'error')
+			console.log(error, "error");
 			return error;
 		}
 	},
