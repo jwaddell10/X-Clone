@@ -45,6 +45,24 @@ exports.submitPost = asyncHandler(async (req, res, next) => {
 	}
 });
 
+exports.replyToPost = asyncHandler(async (req, res, next) => {
+	console.log(req.params, "req params", req.body, "req body");
+
+	const replyToPost = await db.createReplyToPost(
+		parseInt(req.params.postId),
+		parseInt(req.body.loggedInUserId),
+		req.body.text
+	);
+	console.log(replyToPost, "post reply");
+
+	if (!replyToPost) {
+		res.json({ errorMessage: "Error occurred creating comment" });
+	}
+	if (replyToPost) {
+		res.json({ replyToPost });
+	}
+});
+
 exports.likePost = asyncHandler(async (req, res, next) => {
 	const post = await db.findPost(parseInt(req.params.id));
 
@@ -86,10 +104,9 @@ exports.likeComment = asyncHandler(async (req, res, next) => {
 });
 
 exports.unLikePost = asyncHandler(async (req, res, next) => {
-
 	const deletedLike = await db.deleteLike(parseInt(req.body.likeId));
 	if (!deletedLike) {
-		res.json({errorMessage: "Unable to remove like"})
+		res.json({ errorMessage: "Unable to remove like" });
 	}
 	res.json({
 		deletedLike: deletedLike,
@@ -99,7 +116,7 @@ exports.unLikePost = asyncHandler(async (req, res, next) => {
 exports.unLikeComment = asyncHandler(async (req, res, next) => {
 	const deletedLike = await db.deleteLike(parseInt(req.body.likeId));
 	if (!deletedLike) {
-		res.json({errorMessage: "Unable to remove like"})
+		res.json({ errorMessage: "Unable to remove like" });
 	}
 	res.json({ deletedLike });
 });

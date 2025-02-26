@@ -1,11 +1,11 @@
 import { useState, useContext } from "react";
-import { RefreshContext } from "../../context/refreshTriggerContext";
-import submitPost from "../../helpers/submitPost";
+import submitReply from "../../helpers/submitReply";
 import Button from "../../helpers/Button";
 import "../../Styles/ComposePost.css";
 import CircularProgress from "@mui/material/CircularProgress";
+import { RefreshContext } from "../../context/refreshTriggerContext";
 
-export default function ComposePost({ profileInfo }) {
+export default function ComposeReply({ profileInfo, postId, commentId }) {
 	const { triggerRefresh } = useContext(RefreshContext);
 	const [text, setText] = useState("");
 	const [error, setError] = useState(null);
@@ -17,16 +17,19 @@ export default function ComposePost({ profileInfo }) {
 		if (text.trim() === "") {
 			return;
 		}
-
 		try {
 			setIsLoading(true);
 			setIsDisabled(true);
-			await submitPost(text, "post");
+			
+            if (commentId === undefined) {
+				await submitReply(text, postId, null);
+			} else await submitReply(text, postId, commentId);
 		} catch (error) {
 			setError(error);
 		} finally {
 			triggerRefresh();
 			setIsLoading(false);
+            setText("")
 		}
 	};
 
@@ -56,14 +59,14 @@ export default function ComposePost({ profileInfo }) {
 							name="post-content"
 							value={text}
 							onChange={handlePostFormChange}
-							placeholder="What is happening?!"
+							placeholder="Post your reply"
 							maxLength={280}
 						></textarea>
 					</div>
 					<div className="post-button-container">
 						<Button
 							type="submit"
-							text="Post"
+							text="Reply"
 							variant="postButton"
 							disabled={isDisabled}
 						/>

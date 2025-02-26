@@ -7,6 +7,7 @@ router.get("/", postController.getAllPosts)
 router.get("/:id/comment", postController.getComments)
 
 router.post("/", postController.submitPost)
+router.post("/:postId/comment", postController.replyToPost)
 router.post("/:id/like", postController.likePost)
 router.post("/comment/:commentId/like", postController.likeComment)
 

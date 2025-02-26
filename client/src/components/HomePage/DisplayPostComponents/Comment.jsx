@@ -6,7 +6,10 @@ import { useState, useEffect, useContext } from "react";
 import { RefreshContext } from "../../../context/refreshTriggerContext";
 import { styled } from "styled-components";
 
-export default function Comment({ comment, id }) {
+export default function Comment({ post, comment, index, id }) {
+	// console.log(comment, "comment");
+	// console.log(post, 'post in comment')
+	// console.log(id, 'id in comment')
 	const [isLiked, setIsLiked] = useState(false);
 	const [likeCount, setLikeCount] = useState(null);
 
@@ -46,20 +49,25 @@ export default function Comment({ comment, id }) {
 		}
 	};
 	return (
-		<div key={id} style={{ borderBottom: "1px solid gray" }}>
+		<div
+			key={index}
+			className="comment"
+			style={{ borderBottom: "1px solid gray", color: "white" }}
+		>
 			<StyledHeader className="header-container">
 				<img
 					src={comment.author.Profile.profilePicture}
 					alt="profile picture"
 				/>
 				<div>{comment.author.name}</div>
+				<div className="created-at">{comment.createdAt}</div>
 			</StyledHeader>
 			<div className="text-container">{comment.text}</div>
 			<div
 				className="reaction-container"
 				style={{ display: "flex", justifyContent: "space-around" }}
 			>
-				<CommentReaction comments={comment} />
+				<CommentReaction post={post} comments={comment} />
 				<RepeatIcon />
 				<LikeReaction
 					isLiked={isLiked}

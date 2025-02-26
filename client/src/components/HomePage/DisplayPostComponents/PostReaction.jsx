@@ -5,7 +5,7 @@ import { useState, useEffect, useContext } from "react";
 import handlePostToggleLike from "../../../helpers/handlePostToggleLike";
 import { RefreshContext } from "../../../context/refreshTriggerContext";
 
-export default function PostReaction({ post }) {
+export default function PostReaction({ post, comments }) {
 	const { triggerRefresh } = useContext(RefreshContext);
 
 	const [isLiked, setIsLiked] = useState(false);
@@ -61,7 +61,7 @@ export default function PostReaction({ post }) {
 
 	return (
 		<div className="post-reaction-container">
-			<CommentReaction comments={post.Comment} />
+			<CommentReaction post={post} comments={comments}/>
 			<RepeatIcon />
 			<LikeReaction
 				isLiked={isLiked}

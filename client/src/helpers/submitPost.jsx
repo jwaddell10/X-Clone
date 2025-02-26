@@ -1,6 +1,6 @@
 export default async function submitPost(text, url) {
 	const JWTToken = localStorage.getItem("token");
-	const id = localStorage.getItem("id");
+	const loggedInUserId = localStorage.getItem("id");
 
 	const response = await fetch(`${import.meta.env.VITE_API_URL}/${url}`, {
 		headers: {
@@ -8,7 +8,7 @@ export default async function submitPost(text, url) {
 			Authorization: `Bearer ${JWTToken}`,
 		},
 		method: "POST",
-		body: JSON.stringify({ text: text, id: id }),
+		body: JSON.stringify({ text: text, loggedInUserId: loggedInUserId }),
 	});
 
 	if (!response.ok) {

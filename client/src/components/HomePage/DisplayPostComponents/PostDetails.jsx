@@ -7,7 +7,7 @@ import { styled } from "styled-components";
 import { useParams } from "react-router";
 import SideNavigation from "../SideNavigation";
 import WhoToFollowSidebar from "../WhoToFollowSidebar";
-import ComposePost from "../ComposePost";
+import ComposeReply from "../../HomePage/ComposeReply"
 import useGetLoggedInUserProfileInfo from "../../../helpers/useGetLoggedInUserProfileInfo";
 import { RefreshContext } from "../../../context/refreshTriggerContext";
 import { useContext } from "react";
@@ -18,7 +18,6 @@ export default function PostDetails() {
     const { refreshTrigger } = useContext(RefreshContext)
 	// Fetch post data
 	const { post, loading, error } = useFetchPost(username, postId, refreshTrigger);
-
 	// Fetch comments for the post
 	const { comments } = useFetchComments(postId, refreshTrigger);
 
@@ -49,8 +48,8 @@ export default function PostDetails() {
 					</StyledHeader>
 
 					<div className="post-text-container">{post.text}</div>
-					<PostReaction post={post}/>
-					<ComposePost profileInfo={profileInfo} />
+					<PostReaction post={post} comments={comments}/>
+					<ComposeReply profileInfo={profileInfo} postId={post.id} />
 					<Comments post={post} comments={comments} />
 				</StyledDiv>
 			)}

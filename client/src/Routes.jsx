@@ -4,7 +4,6 @@ import Profile from "./components/HomePage/Profile";
 import PostDetails from "./components/HomePage/DisplayPostComponents/PostDetails";
 
 export default function Router() {
-
 	return (
 		<BrowserRouter>
 			<Routes>

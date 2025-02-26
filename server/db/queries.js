@@ -296,6 +296,24 @@ module.exports = {
 			return error;
 		}
 	},
+	createReplyToPost: async (postId, loggedInUserId, text) => {
+		try {
+			const replyToPost = await prisma.comment.create({
+				// where: {
+				// 	postId: postId
+				// },
+				data: {
+					authorId: loggedInUserId,
+					text: text,
+					postId: postId,
+				}
+			})
+			return replyToPost;
+		} catch (error) {
+			console.log(error, 'error')
+			return error;
+		}
+	},
 	createPostLike: async (postId, userId) => {
 		try {
 			const like = await prisma.likes.create({
