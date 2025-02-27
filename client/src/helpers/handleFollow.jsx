@@ -1,4 +1,4 @@
-const handleFollow = async (event, profileId, triggerRefresh) => {
+const handleFollow = async (event, profileId) => {
 	const loggedInUserId = localStorage.getItem("id");
 
 	if (event.target.innerText === "Follow") {
@@ -13,7 +13,6 @@ const handleFollow = async (event, profileId, triggerRefresh) => {
 			);
 			const data = await response.json();
 			console.log(data, "data in response");
-			triggerRefresh();
 		} catch (error) {
             console.log(error, 'error')
 			return error;
@@ -30,7 +29,6 @@ const handleFollow = async (event, profileId, triggerRefresh) => {
 			);
 			const data = await response.json();
 			console.log(data, "data");
-			triggerRefresh()
 		} catch (error) {
 			console.log(error, "error");
             return error;
