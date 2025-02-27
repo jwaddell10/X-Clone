@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { RefreshContext } from "../../context/refreshTriggerContext.jsx";
 import Button from "../../helpers/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import "../.././Styles/EditProfile.css";
@@ -6,11 +7,9 @@ import submitEditProfile from "../../helpers/submitEditProfile.jsx";
 import CircularProgress from "@mui/material/CircularProgress";
 import PropTypes from "prop-types";
 
-export default function EditProfile({
-	setRefreshTrigger,
-	profileInfo,
-	onClose,
-}) {
+export default function EditProfile({ profileInfo, onClose }) {
+	const { triggerRefresh } = useContext(RefreshContext);
+
 	const [isLoading, setIsLoading] = useState(false);
 	const [editProfileError, setEditProfileError] = useState(null);
 	const [borderToSelectedUrl, setBorderToSelectedUrl] = useState(false);
@@ -40,7 +39,7 @@ export default function EditProfile({
 			const data = await submitEditProfile({ formData }, profileInfo.id);
 			if (data) {
 				onClose();
-				setRefreshTrigger((prevState) => prevState + 1);
+				triggerRefresh();
 			}
 		} catch (error) {
 			setEditProfileError(error);
@@ -97,7 +96,6 @@ export default function EditProfile({
 }
 
 EditProfile.propTypes = {
-	setRefreshTrigger: PropTypes.func,
 	profileInfo: PropTypes.object,
 	onClose: PropTypes.func,
 };

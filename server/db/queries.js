@@ -26,6 +26,7 @@ module.exports = {
 					Profile: {
 						select: {
 							profilePicture: true,
+							followedBy: true,
 						},
 					},
 				},
@@ -232,6 +233,9 @@ module.exports = {
 				where: {
 					id: id,
 				},
+				include: {
+					parentId: true
+				}
 			});
 			return comment;
 		} catch (error) {
@@ -260,6 +264,7 @@ module.exports = {
 					text: true,
 					createdAt: true,
 					likes: true,
+					parentId: true,
 				},
 			});
 			return comments;
@@ -338,7 +343,6 @@ module.exports = {
 					userId: userId,
 				},
 			});
-			console.log(like, "id from pst like");
 			return like;
 		} catch (error) {
 			return error;
@@ -377,7 +381,6 @@ module.exports = {
 		}
 	},
 	deleteLike: async (likeId) => {
-		console.log(likeId, "likeid in delete like");
 		try {
 			const deletedLike = await prisma.likes.delete({
 				where: {

@@ -1,11 +1,15 @@
 import EditProfile from "./EditProfile";
 import "../.././Styles/DisplayProfile.css";
 import useGetOtherUserProfileInfo from "../../helpers/useGetOtherUserProfileInfo.jsx";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { RefreshContext } from "../../context/refreshTriggerContext.jsx";
 import { styled } from "styled-components";
 import UserProfilePosts from "./UserProfilePosts.jsx";
+import handleFollow from "../../helpers/handleFollow.jsx";
 
-export default function DisplayProfile({ refreshTrigger, setRefreshTrigger, profileId }) {
+export default function DisplayProfile({ profileId }) {
+		const { refreshTrigger, triggerRefresh } = useContext(RefreshContext);
+	
 	const loggedInUserId = localStorage.getItem("id");
 	const [showEditForm, setShowEditForm] = useState(false);
 	const { profileInfo, error } = useGetOtherUserProfileInfo(
@@ -17,41 +21,8 @@ export default function DisplayProfile({ refreshTrigger, setRefreshTrigger, prof
 	// 	document.querySelector('.big-container').style.filter = 'blur(5px)'
 	// }
 	//working on follow feature
-	const handleFollow = async (event, profileId) => {
-		if (event.target.innerText === "Follow") {
-			try {
-				const response = await fetch(
-					`${
-						import.meta.env.VITE_API_URL
-					}/profile/${loggedInUserId}/${profileId}/follow`,
-					{
-						method: "POST",
-					}
-				);
-				const data = await response.json();
-				console.log(data, "data in response");
-				setRefreshTrigger((prevState) => prevState + 1)
-			} catch (error) {
-				console.log(error, "error");
-			}
-		} else if (event.target.innerText === "Unfollow") {
-			try {
-				const response = await fetch(
-					`${
-						import.meta.env.VITE_API_URL
-					}/profile/${loggedInUserId}/${profileId}/unfollow`,
-					{
-						method: "DELETE",
-					}
-				);
-				const data = await response.json();
-				console.log(data, "data");
-				setRefreshTrigger((prevState) => prevState + 1)
-
-			} catch (error) {
-				console.log(error, "error");
-			}
-		}
+	const toggleFollow = async (event, profileId) => {
+		handleFollow(event, profileId, triggerRefresh)
 	};
 	return (
 		<StyledDiv>
@@ -78,7 +49,7 @@ export default function DisplayProfile({ refreshTrigger, setRefreshTrigger, prof
 						) : (
 							<button
 								onClick={(event) => {
-									handleFollow(event, profileInfo.id);
+									toggleFollow(event, profileInfo.id);
 								}}
 							>
 								{profileInfo.followedBy.map(
@@ -91,7 +62,6 @@ export default function DisplayProfile({ refreshTrigger, setRefreshTrigger, prof
 
 						{showEditForm && (
 							<EditProfile
-								setRefreshTrigger={setRefreshTrigger}
 								profileInfo={profileInfo}
 								onClose={() => {
 									setShowEditForm(false);

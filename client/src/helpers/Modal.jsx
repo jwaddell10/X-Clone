@@ -20,7 +20,6 @@ export default function Modal({
 	}, [isOpen]);
 
 	const handleCloseModal = () => {
-		console.log('handle close runs')
 		onClose();
 	};
 	return (

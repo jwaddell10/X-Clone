@@ -32,7 +32,7 @@ export default function UserProfilePosts({ profileId }) {
 							</div>
 						</div>
 					</Link>
-					<PostReaction post={post} />
+					<PostReaction post={post} comments={post.Comment}/>
 				</div>
 			))}
 		</div>

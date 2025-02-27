@@ -17,7 +17,6 @@ exports.getAllPosts = asyncHandler(async (req, res, next) => {
 
 exports.getComments = asyncHandler(async (req, res, next) => {
 	const comments = await db.findComments(parseInt(req.params.id));
-
 	if (comments === null) {
 		res.json({ message: "No comments available" });
 	}
@@ -46,14 +45,11 @@ exports.submitPost = asyncHandler(async (req, res, next) => {
 });
 
 exports.replyToPost = asyncHandler(async (req, res, next) => {
-	console.log(req.params, "req params", req.body, "req body");
-
 	const replyToPost = await db.createReplyToPost(
 		parseInt(req.params.postId),
 		parseInt(req.body.loggedInUserId),
 		req.body.text
 	);
-	console.log(replyToPost, "post reply");
 
 	if (!replyToPost) {
 		res.json({ errorMessage: "Error occurred creating comment" });

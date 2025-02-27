@@ -7,9 +7,6 @@ import { RefreshContext } from "../../../context/refreshTriggerContext";
 import { styled } from "styled-components";
 
 export default function Comment({ post, comment, index, id }) {
-	// console.log(comment, "comment");
-	// console.log(post, 'post in comment')
-	// console.log(id, 'id in comment')
 	const [isLiked, setIsLiked] = useState(false);
 	const [likeCount, setLikeCount] = useState(null);
 
