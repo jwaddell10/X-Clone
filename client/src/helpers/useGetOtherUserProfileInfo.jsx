@@ -20,7 +20,7 @@ export default function useGetLoggedInUserProfileInfo(profileId, refreshTrigger)
 			}
 		};
 		fetchProfileInfo();
-	}, [refreshTrigger, profileId]);
+	}, [profileId, refreshTrigger]);
 
 	return { profileInfo, error };
 }

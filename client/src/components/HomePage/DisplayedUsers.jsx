@@ -8,18 +8,16 @@ export default function DisplayedUsers({ users }) {
 
 	const [followingStatusOfTop10users, setFollowingStatusOfTop10users] =
 		useState(null);
-	const { refreshTrigger } = useContext(RefreshContext);
+	const { triggerRefresh } = useContext(RefreshContext);
 
 	useEffect(() => {
 		if (users) {
 			const shuffledUsers = users
 				.sort(() => 0.5 - Math.random())
 				.slice(0, 10);
-			// console.log(Object.values(isFollowing), 'is following values')
 			setDisplayedUsers(shuffledUsers);
-			// setIsFollowing(shuffledUsers.map((user) => user.Profile.followedBy.some((item) => item.followingId == loggedInUserId)))
 		}
-	}, [refreshTrigger, users]);
+	}, [users]);
 
 	useEffect(() => {
 		if (displayedUsers) {
@@ -30,13 +28,14 @@ export default function DisplayedUsers({ users }) {
 			);
 			setFollowingStatusOfTop10users(followStatus);
 		}
-	}, [displayedUsers, loggedInUserId, refreshTrigger]);
+	}, [displayedUsers, loggedInUserId]);
 
 	const toggleFollow = async (event, userId, index) => {
 		const updatedItems = [...followingStatusOfTop10users];
 		updatedItems[index] = !followingStatusOfTop10users[index];
 		setFollowingStatusOfTop10users(updatedItems);
 		await handleFollow(event, userId);
+		triggerRefresh();
 	};
 
 	return (
