@@ -367,10 +367,17 @@ module.exports = {
 		try {
 			const replyToComment = await prisma.comment.create({
 				data: {
-					authorId: loggedInUserId,
+					author: {
+						connect: {
+							id: loggedInUserId,
+						},
+					},
 					text: text,
-					postId: postId,
-					parentId: commentId,
+					parent: {
+						connect: {
+							id: commentId,
+						},
+					},
 				},
 			});
 			return replyToComment;
@@ -389,7 +396,7 @@ module.exports = {
 			});
 			return like;
 		} catch (error) {
-			console.log(error, 'post like error')
+			console.log(error, "post like error");
 			return error;
 		}
 	},
