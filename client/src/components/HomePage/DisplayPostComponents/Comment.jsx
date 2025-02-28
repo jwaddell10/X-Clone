@@ -5,8 +5,9 @@ import CommentReaction from "./CommentReaction";
 import { useState, useEffect, useContext } from "react";
 import { RefreshContext } from "../../../context/refreshTriggerContext";
 import { styled } from "styled-components";
+import { Link } from "react-router";
 
-export default function Comment({ post, comment, index, id }) {
+export default function Comment({ post, comment }) {
 	const [isLiked, setIsLiked] = useState(false);
 	const [likeCount, setLikeCount] = useState(null);
 
@@ -47,19 +48,25 @@ export default function Comment({ post, comment, index, id }) {
 	};
 	return (
 		<div
-			key={index}
 			className="comment"
 			style={{ borderBottom: "1px solid gray", color: "white" }}
 		>
-			<StyledHeader className="header-container">
-				<img
-					src={comment.author.Profile.profilePicture}
-					alt="profile picture"
-				/>
-				<div>{comment.author.name}</div>
-				<div className="created-at">{comment.createdAt}</div>
-			</StyledHeader>
-			<div className="text-container">{comment.text}</div>
+			<Link
+				style={{ color: "white" }}
+				to={`/comment/${comment.author.name}/${comment.id}`}
+				className="header-text-container"
+			>
+				<StyledHeader className="header-container">
+					<Link to={`/profile/${comment.author.Profile.id}`}><img
+						src={comment.author.Profile.profilePicture}
+						alt="profile picture"
+					/></Link>
+					
+					<div>{comment.author.name}</div>
+					<div className="created-at">{comment.createdAt}</div>
+				</StyledHeader>
+				<div className="text-container">{comment.text}</div>
+			</Link>
 			<div
 				className="reaction-container"
 				style={{ display: "flex", justifyContent: "space-around" }}

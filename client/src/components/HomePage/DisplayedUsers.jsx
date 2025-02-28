@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { RefreshContext } from "../../context/refreshTriggerContext";
 import handleFollow from "../../helpers/handleFollow";
+import { styled } from "styled-components";
 
 export default function DisplayedUsers({ users }) {
 	const [displayedUsers, setDisplayedUsers] = useState(null);
@@ -46,7 +47,7 @@ export default function DisplayedUsers({ users }) {
 						{user.name}
 					</li>
 					{followingStatusOfTop10users && (
-						<button
+						<StyledButton
 							onClick={(event) =>
 								toggleFollow(event, user.id, index)
 							}
@@ -54,10 +55,19 @@ export default function DisplayedUsers({ users }) {
 							{followingStatusOfTop10users[index] == true
 								? "Unfollow"
 								: "Follow"}
-						</button>
+						</StyledButton>
 					)}
 				</ul>
 			))}
 		</>
 	);
 }
+
+const StyledButton = styled.button`
+	height: 5vh;
+	width: 8vw;
+	border-radius: 20px;
+	color: black;
+	cursor: pointer;
+`;
+

@@ -4,9 +4,6 @@ const db = require("../db/queries");
 const { getAllImages } = require("../services/cloudinary");
 
 exports.getUserPost = asyncHandler(async (req, res, next) => {
-	//find post with user id and postid
-	//send back all the data I need, I need comments, post data, likes
-
 	const post = await db.findPost(parseInt(req.params.postId));
 
 	if (post === null) {

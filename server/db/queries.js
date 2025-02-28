@@ -150,11 +150,7 @@ module.exports = {
 						select: {
 							author: {
 								select: {
-									Profile: {
-										select: {
-											profilePicture: true,
-										},
-									},
+									Profile: true,
 									name: true,
 									likes: true,
 								},
@@ -234,19 +230,20 @@ module.exports = {
 					id: id,
 				},
 				include: {
-					parentId: true
-				}
+					parentId: true,
+				},
 			});
 			return comment;
 		} catch (error) {
 			return error;
 		}
 	},
-	findComments: async (postId) => {
+	findCommentAndChildComments: async (commentId) => {
 		try {
-			const comments = await prisma.comment.findMany({
+			//trying to find a comment, and it's children comments
+			const commentAndChildComments = await prisma.comment.findUnique({
 				where: {
-					postId: postId,
+					id: commentId,
 				},
 				select: {
 					id: true,
@@ -255,9 +252,58 @@ module.exports = {
 							name: true,
 							Profile: {
 								select: {
+									id: true,
 									profilePicture: true,
 								},
 							},
+						},
+					},
+					text: true,
+					createdAt: true,
+					likes: true,
+					children: {
+						select: {
+							id: true,
+							text: true,
+							createdAt: true,
+							authorId: true,
+							postId: true,
+							parentId: true,
+							likes: true,
+							author: {
+								select: {
+									name: true,
+									Profile: {
+										select: {
+											id: true,
+											profilePicture: true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			});
+			return commentAndChildComments;
+		} catch (error) {
+			console.log(error, "error in find comment and child comments");
+			return error;
+		}
+	},
+	findParentCommentsForPost: async (postId) => {
+		try {
+			const comments = await prisma.comment.findMany({
+				where: {
+					postId: postId,
+					parentId: null,
+				},
+				select: {
+					id: true,
+					author: {
+						select: {
+							name: true,
+							Profile: true,
 						},
 					},
 					post: true,
@@ -266,7 +312,13 @@ module.exports = {
 					likes: true,
 					parentId: true,
 				},
+				// omit: {
+				// 	where: {
+				// 		parentId: { not: null },
+				// 	},
+				// },
 			});
+			// console.log(comments, "comments from findcomments");
 			return comments;
 		} catch (error) {
 			return error;

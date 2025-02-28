@@ -16,7 +16,7 @@ exports.getAllPosts = asyncHandler(async (req, res, next) => {
 });
 
 exports.getComments = asyncHandler(async (req, res, next) => {
-	const comments = await db.findComments(parseInt(req.params.id));
+	const comments = await db.findParentCommentsForPost(parseInt(req.params.id));
 	if (comments === null) {
 		res.json({ message: "No comments available" });
 	}

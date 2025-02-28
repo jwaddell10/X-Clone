@@ -4,7 +4,7 @@ export default function Comments({ post, comments }) {
 	return (
 		<>
 			{comments?.map((comment, index) => (
-				<Comment key={index} post={post} comment={comment} index={index}/>
+				<Comment key={index} post={post} comment={comment}/>
 			))}
 		</>
 	);

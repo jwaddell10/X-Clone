@@ -5,7 +5,7 @@ import "../../../Styles/Post.css";
 
 export default function Post({ post, showReactions = true }) {
 	return (
-		<StyledDiv to={`${post.author.name}/${post.id}`} className="post">
+		<StyledDiv to={`${post.author.name}/${post.id}`}>
 			{post && (
 				<div
 					className="post-item-container"
@@ -42,6 +42,12 @@ export default function Post({ post, showReactions = true }) {
 	);
 }
 
+const breakpoints = {
+	small: "600px",
+	medium: "768px",
+	large: "1200px",
+};
+
 const StyledHeader = styled.header`
 	display: flex;
 `;
@@ -51,4 +57,12 @@ const StyledDiv = styled.div`
 	color: white;
 	text-decoration: none;
 	display: block;
+
+	@media (max-width: ${breakpoints.medium}) {
+		width: 75vw;
+	}
+
+	@media (max-width: ${breakpoints.small}) {
+		width: 100vw;
+	}
 `;

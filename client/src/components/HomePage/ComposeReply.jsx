@@ -5,7 +5,7 @@ import "../../Styles/ComposePost.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import { RefreshContext } from "../../context/refreshTriggerContext";
 
-export default function ComposeReply({ profileInfo, postId, commentId }) {
+export default function ComposeReply({ profilePicture, postId, commentId }) {
 	const { triggerRefresh } = useContext(RefreshContext);
 	const [text, setText] = useState("");
 	const [error, setError] = useState(null);
@@ -47,10 +47,10 @@ export default function ComposeReply({ profileInfo, postId, commentId }) {
 					onSubmit={handlePostSubmit}
 				>
 					<div className="text-area-container">
-						{profileInfo && (
+						{profilePicture && (
 							<img
 								className="profile-picture-icon"
-								src={profileInfo.profilePicture}
+								src={profilePicture}
 								alt="profile-picture"
 							/>
 						)}
