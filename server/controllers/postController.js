@@ -16,7 +16,9 @@ exports.getAllPosts = asyncHandler(async (req, res, next) => {
 });
 
 exports.getComments = asyncHandler(async (req, res, next) => {
-	const comments = await db.findParentCommentsForPost(parseInt(req.params.id));
+	const comments = await db.findParentCommentsForPost(
+		parseInt(req.params.id)
+	);
 	if (comments === null) {
 		res.json({ message: "No comments available" });
 	}
@@ -80,15 +82,27 @@ exports.replyToComment = asyncHandler(async (req, res, next) => {
 
 exports.likePost = asyncHandler(async (req, res, next) => {
 	const post = await db.findPost(parseInt(req.params.id));
+	const comment = await db.findComment(parseInt(req.params.id));
 
-	if (post === null) {
-		res.json({ errorMessage: "Unable to fetch post. Try again later" });
+	if (post === null && comment === null) {
+		res.json({ message: "Unable to like item" });
 	}
 
-	const addedLike = await db.createPostLike(
-		parseInt(req.params.id),
-		parseInt(req.body.loggedInUserId)
-	);
+	let addedLike;
+
+	if (post !== null) {
+		addedLike = await db.createPostLike(
+			parseInt(req.params.id),
+			parseInt(req.body.loggedInUserId)
+		);
+	}
+
+	if (comment !== null) {
+		addedLike = await db.createCommentLike(
+			parseInt(req.params.id),
+			parseInt(req.body.loggedInUserId)
+		);
+	}
 
 	if (addedLike === null) {
 		return res.json({ message: "Unable to add like" });
@@ -98,7 +112,6 @@ exports.likePost = asyncHandler(async (req, res, next) => {
 });
 
 exports.likeComment = asyncHandler(async (req, res, next) => {
-	console.log(req.params, "req params");
 	const comment = await db.findComment(parseInt(req.params.commentId));
 	if (comment === null) {
 		res.json({ errorMessage: "Unable to fetch post. Try again later" });
@@ -109,7 +122,6 @@ exports.likeComment = asyncHandler(async (req, res, next) => {
 		parseInt(req.body.loggedInUserId),
 		parseInt(req.params.id)
 	);
-	console.log(addedLike, "added like");
 
 	if (addedLike === null) {
 		return res.json({ message: "Unable to add like" });

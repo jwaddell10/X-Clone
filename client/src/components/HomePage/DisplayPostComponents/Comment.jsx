@@ -27,6 +27,7 @@ export default function Comment({ post, comment }) {
 	}, [isCommentLikedByUser, totalLikes]);
 
 	const toggleLike = async () => {
+		console.log('toggle like comment runs')
 		const likeId = comment.likes.find(
 			(like) => like.userId == loggedInUserId
 		)?.id;

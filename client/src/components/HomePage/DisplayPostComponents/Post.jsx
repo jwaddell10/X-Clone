@@ -1,13 +1,12 @@
 import PostReaction from "./PostReaction";
 import { Link } from "react-router";
 import { styled } from "styled-components";
-import "../../../Styles/Post.css";
 
 export default function Post({ post, showReactions = true }) {
 	return (
-		<StyledDiv to={`${post.author.name}/${post.id}`}>
+		<OuterStyledDiv to={`${post.author.name}/${post.id}`}>
 			{post && (
-				<div
+				<InnerStyledDiv
 					className="post-item-container"
 					style={{
 						padding: "10px",
@@ -36,14 +35,14 @@ export default function Post({ post, showReactions = true }) {
 							comments={post.Comment}
 						></PostReaction>
 					)}
-				</div>
+				</InnerStyledDiv>
 			)}
-		</StyledDiv>
+		</OuterStyledDiv>
 	);
 }
 
 const breakpoints = {
-	small: "600px",
+	small: "500px",
 	medium: "768px",
 	large: "1200px",
 };
@@ -52,12 +51,23 @@ const StyledHeader = styled.header`
 	display: flex;
 `;
 
-const StyledDiv = styled.div`
+const OuterStyledDiv = styled.div`
 	border-bottom: 1px solid gray;
 	color: white;
 	text-decoration: none;
 	display: block;
 
+	@media (max-width: ${breakpoints.medium}) {
+		width: 75vw;
+	}
+
+	@media (max-width: ${breakpoints.small}) {
+		width: 100vw;
+	}
+`;
+
+
+const InnerStyledDiv = styled.div`
 	@media (max-width: ${breakpoints.medium}) {
 		width: 75vw;
 	}

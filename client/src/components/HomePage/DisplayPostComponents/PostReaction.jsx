@@ -28,7 +28,7 @@ export default function PostReaction({ post, comments }) {
 		const likeId = post.likes.find(
 			(like) => like.userId == loggedInUserId
 		)?.id;
-
+console.log(likeId, 'like id in toggle like')
 		// Optimistically update the UI
 		const previousIsLiked = isLiked;
 		const previousLikeCount = likeCount;

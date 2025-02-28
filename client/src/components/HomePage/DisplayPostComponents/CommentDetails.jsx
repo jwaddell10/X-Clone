@@ -8,10 +8,13 @@ import Comments from "./Comments";
 import { Link } from "react-router";
 import { styled } from "styled-components";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useContext } from "react";
+import { RefreshContext } from "../../../context/refreshTriggerContext";
 
 export default function CommentDetails() {
+    const { refreshTrigger } = useContext(RefreshContext)
 	const { username, commentId } = useParams();
-	const { comment, loading, error } = useFetchComment(username, commentId);
+	const { comment, loading, error } = useFetchComment(username, commentId, refreshTrigger);
 
 	if (loading) {
 		return <CircularProgress />;

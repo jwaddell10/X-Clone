@@ -23,7 +23,6 @@ export default function PostDetails() {
 	);
 
 	const { comments } = useFetchComments(postId, refreshTrigger);
-
 	const { profileInfo } = useGetLoggedInUserProfileInfo();
 
 	if (loading) {

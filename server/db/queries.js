@@ -230,7 +230,7 @@ module.exports = {
 					id: id,
 				},
 				include: {
-					parentId: true,
+					parent: true,
 				},
 			});
 			return comment;
@@ -311,14 +311,9 @@ module.exports = {
 					createdAt: true,
 					likes: true,
 					parentId: true,
+					children: true,
 				},
-				// omit: {
-				// 	where: {
-				// 		parentId: { not: null },
-				// 	},
-				// },
 			});
-			// console.log(comments, "comments from findcomments");
 			return comments;
 		} catch (error) {
 			return error;
@@ -356,9 +351,6 @@ module.exports = {
 	createReplyToPost: async (postId, loggedInUserId, text) => {
 		try {
 			const replyToPost = await prisma.comment.create({
-				// where: {
-				// 	postId: postId
-				// },
 				data: {
 					authorId: loggedInUserId,
 					text: text,
@@ -397,10 +389,11 @@ module.exports = {
 			});
 			return like;
 		} catch (error) {
+			console.log(error, 'post like error')
 			return error;
 		}
 	},
-	createCommentLike: async (commentId, userId, postId) => {
+	createCommentLike: async (commentId, userId) => {
 		try {
 			const like = await prisma.likes.create({
 				data: {
