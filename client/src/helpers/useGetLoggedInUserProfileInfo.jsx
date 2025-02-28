@@ -4,6 +4,7 @@ export default function useGetLoggedInUserProfileInfo(refreshTrigger) {
 	// const JWTToken = localStorage.getItem("token");
 	const id = localStorage.getItem("id");
 	const [profileInfo, setProfileInfo] = useState();
+	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState("");
 	useEffect(() => {
 		const fetchProfileInfo = async () => {
@@ -19,10 +20,12 @@ export default function useGetLoggedInUserProfileInfo(refreshTrigger) {
 				setProfileInfo(data.profile)
 			} catch (error) {
 				setError(error);
+			} finally {
+				setLoading(false)
 			}
 		};
 		fetchProfileInfo();
 	}, [refreshTrigger, id]);
 
-	return { profileInfo, error };
+	return { profileInfo, loading, error };
 }

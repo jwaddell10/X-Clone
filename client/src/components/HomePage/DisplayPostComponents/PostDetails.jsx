@@ -9,30 +9,29 @@ import SideNavigation from "../SideNavigation";
 import WhoToFollowSidebar from "../WhoToFollowSidebar";
 import ComposeReply from "../../HomePage/ComposeReply";
 import useGetLoggedInUserProfileInfo from "../../../helpers/useGetLoggedInUserProfileInfo";
+import CircularProgress from "@mui/material/CircularProgress";
 import { RefreshContext } from "../../../context/refreshTriggerContext";
 import { useContext } from "react";
 
 export default function PostDetails() {
-	// Access URL parameters
 	const { username, postId } = useParams();
 	const { refreshTrigger } = useContext(RefreshContext);
-	// Fetch post data
 	const { post, loading, error } = useFetchPost(
 		username,
 		postId,
 		refreshTrigger
 	);
-	// Fetch comments for the post
+
 	const { comments } = useFetchComments(postId, refreshTrigger);
 
 	const { profileInfo } = useGetLoggedInUserProfileInfo();
 
 	if (loading) {
-		return <div style={{color: 'white'}}>Loading...</div>;
+		return <CircularProgress />;
 	}
 
 	if (error) {
-		return <div>Error: {error}</div>;
+		return <div style={{ color: "white" }}>Error: {error}</div>;
 	}
 
 	return (
@@ -83,5 +82,6 @@ const StyledDiv = styled.section`
 	}
 
 	@media (max-width: ${breakpoints.small}) {
-	width: 100vw;}
+		width: 100vw;
+	}
 `;

@@ -9,8 +9,6 @@ export default function CommentReaction({ post, comments }) {
 	const [replyModalFormData, setReplyModalFormData] = useState("");
 
 	const handleOpenReplyFormModal = () => {
-		// console.log(comments.id)
-		// console.log(event.target.parentElement, 'event target')
 		setIsReplyModalOpen(true);
 	};
 

@@ -2,13 +2,12 @@ import { useState, useEffect } from "react";
 
 export default function useFetchUsers(url) {
 	const [users, setUsers] = useState(null);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState("");
 
 	useEffect(() => {
 		const fetchUsers = async () => {
 			try {
-				setIsLoading(true);
 				const response = await fetch(
 					`${import.meta.env.VITE_API_URL}/${url}`
 				);
@@ -22,9 +21,10 @@ export default function useFetchUsers(url) {
 					setError(data.errorMessage);
 				}
 				setUsers(data.users);
-				setIsLoading(false);
 			} catch (error) {
 				setError(error);
+			} finally {
+				setIsLoading(false);
 			}
 		};
 		fetchUsers();

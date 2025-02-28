@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 
-export default function useGetLoggedInUserProfileInfo(profileId, refreshTrigger) {
+export default function useGetLoggedInUserProfileInfo(
+	profileId,
+	refreshTrigger
+) {
 	const [profileInfo, setProfileInfo] = useState();
+	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState("");
 	useEffect(() => {
 		const fetchProfileInfo = async () => {
@@ -17,10 +21,12 @@ export default function useGetLoggedInUserProfileInfo(profileId, refreshTrigger)
 				setProfileInfo(data.profile);
 			} catch (error) {
 				setError(error);
+			} finally {
+				setLoading(false);
 			}
 		};
 		fetchProfileInfo();
 	}, [profileId, refreshTrigger]);
 
-	return { profileInfo, error };
+	return { profileInfo, loading, error };
 }

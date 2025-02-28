@@ -7,11 +7,19 @@ import ComposeReply from "../ComposeReply";
 import Comments from "./Comments";
 import { Link } from "react-router";
 import { styled } from "styled-components";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function CommentDetails() {
 	const { username, commentId } = useParams();
-	const { comment } = useFetchComment(username, commentId);
-    console.log(comment, 'comment')
+	const { comment, loading, error } = useFetchComment(username, commentId);
+
+	if (loading) {
+		return <CircularProgress />;
+	}
+
+	if (error) {
+		return <div style={{ color: "white" }}>{error}</div>;
+	}
 	return (
 		<div
 			style={{
@@ -21,7 +29,6 @@ export default function CommentDetails() {
 			}}
 		>
 			<SideNavigation />
-
 			{comment && (
 				<StyledDiv>
 					<StyledHeader className="post-header">

@@ -57,11 +57,13 @@ export default function Comment({ post, comment }) {
 				className="header-text-container"
 			>
 				<StyledHeader className="header-container">
-					<Link to={`/profile/${comment.author.Profile.id}`}><img
-						src={comment.author.Profile.profilePicture}
-						alt="profile picture"
-					/></Link>
-					
+					<Link to={`/profile/${comment.author.Profile.id}`}>
+						<img
+							src={comment.author.Profile.profilePicture}
+							alt="profile picture"
+						/>
+					</Link>
+
 					<div>{comment.author.name}</div>
 					<div className="created-at">{comment.createdAt}</div>
 				</StyledHeader>

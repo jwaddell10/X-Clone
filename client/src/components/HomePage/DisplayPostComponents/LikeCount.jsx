@@ -1,7 +1,3 @@
 export default function LikeCount({ likes }) {
-	return (
-		<>
-			<span>{likes}</span>
-		</>
-	);
+	return <>{likes && <span>{likes}</span>}</>;
 }

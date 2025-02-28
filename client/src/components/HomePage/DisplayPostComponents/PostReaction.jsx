@@ -25,7 +25,6 @@ export default function PostReaction({ post, comments }) {
 	}, [isPostLikedByUser, totalLikes]);
 
 	const toggleLike = async () => {
-		// Find the likeId for the logged-in user
 		const likeId = post.likes.find(
 			(like) => like.userId == loggedInUserId
 		)?.id;
@@ -38,22 +37,15 @@ export default function PostReaction({ post, comments }) {
 		setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
 
 		try {
-			// Call the API to toggle the like
 			const data = await handlePostToggleLike(
 				isLiked,
 				loggedInUserId,
 				post,
 				likeId
 			);
-
 			triggerRefresh();
-
-			// Optionally trigger a refresh if needed
-			// triggerRefresh();
 		} catch (error) {
 			console.error("Failed to toggle like:", error);
-
-			// Revert the UI state if the API request fails
 			setIsLiked(previousIsLiked);
 			setLikeCount(previousLikeCount);
 		}
@@ -61,7 +53,7 @@ export default function PostReaction({ post, comments }) {
 
 	return (
 		<div className="post-reaction-container">
-			<CommentReaction post={post} comments={comments}/>
+			<CommentReaction post={post} comments={comments} />
 			<RepeatIcon />
 			<LikeReaction
 				isLiked={isLiked}

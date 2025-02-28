@@ -5,21 +5,32 @@ import WhoToFollowSidebar from "./WhoToFollowSidebar";
 import useGetLoggedInUserProfileInfo from "../../helpers/useGetOtherUserProfileInfo";
 import { useContext } from "react";
 import { RefreshContext } from "../../context/refreshTriggerContext";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Profile() {
-	const {refreshTrigger } = useContext(RefreshContext)
+	const { refreshTrigger } = useContext(RefreshContext);
 	const { profileId } = useParams();
 	const loggedInUserId = localStorage.getItem("id");
-	const { profileInfo } = useGetLoggedInUserProfileInfo(
+	const { profileInfo, loading, error } = useGetLoggedInUserProfileInfo(
 		loggedInUserId,
 		refreshTrigger
 	);
+
+	if (loading) {
+		return <CircularProgress />;
+	}
+
+	if (error) {
+		return <div style={{ color: "white" }}>{error}</div>;
+	}
+	
 	return (
-		<div className="big-container" style={{ display: "grid", gridTemplateColumns: "1fr 2fr 1fr" }}>
+		<div
+			className="big-container"
+			style={{ display: "grid", gridTemplateColumns: "1fr 2fr 1fr" }}
+		>
 			<SideNavigation profileInfo={profileInfo} />
-			<DisplayProfile
-				profileId={profileId}
-			/>
+			<DisplayProfile profileId={profileId} />
 			<WhoToFollowSidebar />
 		</div>
 	);

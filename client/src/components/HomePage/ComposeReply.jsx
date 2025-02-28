@@ -20,8 +20,8 @@ export default function ComposeReply({ profilePicture, postId, commentId }) {
 		try {
 			setIsLoading(true);
 			setIsDisabled(true);
-			
-            if (commentId === undefined) {
+
+			if (commentId === undefined) {
 				await submitReply(text, postId, null);
 			} else await submitReply(text, postId, commentId);
 		} catch (error) {
@@ -29,7 +29,7 @@ export default function ComposeReply({ profilePicture, postId, commentId }) {
 		} finally {
 			triggerRefresh();
 			setIsLoading(false);
-            setText("")
+			setText("");
 		}
 	};
 

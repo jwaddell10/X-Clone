@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 
 export default function useFetchComment(username, commentId, refreshTrigger) {
 	const [comment, setComment] = useState();
-	const [loading, setLoading] = useState();
+	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState();
 	useEffect(() => {
 		const fetchComment = async () => {
 			try {
-				setLoading(true);
 				const response = await fetch(
 					`${
 						import.meta.env.VITE_API_URL

@@ -1,12 +1,21 @@
 import useFetchProfilePosts from "../../helpers/useFetchProfilePosts";
 import PostReaction from "./DisplayPostComponents/PostReaction";
 import { Link } from "react-router";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function UserProfilePosts({ profileId }) {
-	const { posts, error } = useFetchProfilePosts(profileId);
+	const { posts, loading, error } = useFetchProfilePosts(profileId);
+
+	if (loading) {
+		return <CircularProgress />;
+	}
+
+	if (error) {
+		return <div style={{ color: "white" }}>{error}</div>;
+	}
+
 	return (
 		<div>
-			{error && <div style={{ color: "white" }}>{error.message}</div>}
 			{posts?.map((post) => (
 				<div className="display-post-container" key={post.id}>
 					<Link
@@ -32,7 +41,7 @@ export default function UserProfilePosts({ profileId }) {
 							</div>
 						</div>
 					</Link>
-					<PostReaction post={post} comments={post.Comment}/>
+					<PostReaction post={post} comments={post.Comment} />
 				</div>
 			))}
 		</div>

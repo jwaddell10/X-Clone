@@ -1,6 +1,7 @@
 import EditProfile from "./EditProfile";
 import "../.././Styles/DisplayProfile.css";
 import useGetOtherUserProfileInfo from "../../helpers/useGetOtherUserProfileInfo.jsx";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useState, useContext } from "react";
 import { RefreshContext } from "../../context/refreshTriggerContext.jsx";
 import { styled } from "styled-components";
@@ -12,10 +13,18 @@ export default function DisplayProfile({ profileId }) {
 
 	const loggedInUserId = localStorage.getItem("id");
 	const [showEditForm, setShowEditForm] = useState(false);
-	const { profileInfo, error } = useGetOtherUserProfileInfo(
+	const { profileInfo, loading, error } = useGetOtherUserProfileInfo(
 		profileId,
 		refreshTrigger
 	);
+
+	if (loading) {
+		return <CircularProgress />;
+	}
+
+	if (error) {
+		return <div style={{ color: "white" }}>{error}</div>;
+	}
 
 	const toggleFollow = async (event, profileId) => {
 		await handleFollow(event, profileId);
@@ -83,7 +92,6 @@ export default function DisplayProfile({ profileId }) {
 					</div>
 				)}
 				<UserProfilePosts profileId={profileId} />
-				{error && <div style={{ color: "white" }}>{error.message}</div>}
 			</div>
 		</StyledDiv>
 	);

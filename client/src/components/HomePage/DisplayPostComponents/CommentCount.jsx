@@ -1,3 +1,3 @@
 export default function CommentCount({ comments }) {
-	return <>{comments.length}</>;
+	return <>{comments && <div>{comments.length}</div>}</>;
 }
