@@ -70,7 +70,6 @@ exports.replyToComment = asyncHandler(async (req, res, next) => {
 		parseInt(req.body.loggedInUserId),
 		req.body.text
 	);
-	console.log(replyToComment, "comment reply");
 
 	if (!replyToComment) {
 		res.json({ errorMessage: "Error occurred creating comment" });

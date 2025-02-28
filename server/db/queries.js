@@ -231,6 +231,7 @@ module.exports = {
 				},
 				include: {
 					parent: true,
+					children: true,
 				},
 			});
 			return comment;
@@ -269,6 +270,7 @@ module.exports = {
 							authorId: true,
 							postId: true,
 							parentId: true,
+							children: true,
 							likes: true,
 							author: {
 								select: {
