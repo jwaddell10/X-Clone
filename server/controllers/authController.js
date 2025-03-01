@@ -4,9 +4,7 @@ const db = require("../db/queries");
 const passportJWTStrategy = require("../passport/passportJWT.js");
 
 exports.signUp = asyncHandler(async (req, res, next) => {
-	console.log(req.body, "req body signup");
 	const user = await db.findUser(req.body.username);
-	console.log(user, "user in signup");
 
 	if (user !== null) {
 		throw new Error("User already exists. Please try another username");
@@ -30,13 +28,10 @@ exports.signUp = asyncHandler(async (req, res, next) => {
 });
 
 exports.logIn = asyncHandler(async (req, res, next) => {
-	console.log(req.body, "req body login");
 	const user = await db.findUser(req.body.username);
-	console.log(user, "user from finduserlogin");
 
 	if (user !== null) {
 		const token = passportJWTStrategy.createJWT(user);
-		console.log(user, "user");
 		if (token) {
 			res.status(200).json({
 				message: "User logged in successfully",

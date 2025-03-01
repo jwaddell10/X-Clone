@@ -16,5 +16,6 @@ export default async function submitPost(text, url) {
 	}
 
 	const data = await response.json();
+	console.log(data, 'data from submit post')
 	return data;
 }

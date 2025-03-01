@@ -1,30 +1,20 @@
-const { ExtractJwt, Strategy } = require("passport-jwt");
-const passport = require("passport");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const options = {
-	jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-	secretKey: process.env.JWT_SECRET,
-};
-
-exports.extractJWT = (token) => {
-	console.log(token, 'token')
-}
-
 exports.createJWT = (user) => {
-	console.log(user, "user in createJWT");
 	return jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: "1d" });
 };
 
-// exports.passportJWTStrategy = () => {
-// 	passport.use(
-// 		new Strategy(options, (payload, done) => {
-// 			try {
-// 				console.log(payload, "this is payload");
-// 			} catch (error) {
-// 				console.log(error, "error in passport");
-// 			}
-// 		})
-// 	);
-// };
+exports.verifyToken = (req, res, next) => {
+	const bearerHeader = req.headers["authorization"];
+	if (typeof bearerHeader !== "undefined") {
+		const bearer = bearerHeader.split(" ");
+		const bearerToken = bearer[1];
+
+		req.token = bearerToken;
+		const verifiedUser = jwt.verify(req.token, process.env.JWT_SECRET);
+		return verifiedUser;
+	} else {
+		res.sendStatus(403);
+	}
+};

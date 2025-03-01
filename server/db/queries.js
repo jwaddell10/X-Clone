@@ -335,18 +335,19 @@ module.exports = {
 			return error;
 		}
 	},
-	createPost: async (user, text) => {
+	createPost: async (userId, text) => {
 		try {
 			const post = await prisma.post.create({
 				data: {
 					author: {
-						connect: { id: user.id },
+						connect: { id: userId },
 					},
 					text: text,
 				},
 			});
 			return post;
 		} catch (error) {
+			console.log(error, "error in createPost");
 			return error;
 		}
 	},
@@ -361,11 +362,11 @@ module.exports = {
 			});
 			return replyToPost;
 		} catch (error) {
-			console.log(error, "error");
+			console.log(error, "error in create reply to post");
 			return error;
 		}
 	},
-	createReplyToComment: async (postId, commentId, loggedInUserId, text) => {
+	createReplyToComment: async (commentId, loggedInUserId, text) => {
 		try {
 			const replyToComment = await prisma.comment.create({
 				data: {
@@ -443,7 +444,7 @@ module.exports = {
 			});
 			return deletedLike;
 		} catch (error) {
-			console.log(error, "error");
+			console.log(error, "error in delete like");
 			return error;
 		}
 	},

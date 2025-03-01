@@ -6,13 +6,13 @@ const JWTMethods = require("../passport/passportJWT")
 router.get("/", postController.getAllPosts)
 router.get("/:id/comment", postController.getComments)
 
-router.post("/", postController.submitPost)
-router.post("/:postId/comment", postController.replyToPost)
-router.post("/:postId/comment/:commentId", postController.replyToComment);
-router.post("/:id/like", postController.likePost)
-router.post("/comment/:commentId/like", postController.likeComment)
+router.post("/", JWTMethods.verifyToken, postController.submitPost)
+router.post("/:postId/comment", JWTMethods.verifyToken, postController.replyToPost)
+router.post("/:postId/comment/:commentId", JWTMethods.verifyToken, postController.replyToComment);
+router.post("/:id/like", JWTMethods.verifyToken, postController.likePost)
+router.post("/comment/:commentId/like", JWTMethods.verifyToken, postController.likeComment)
 
-router.delete("/:postId/unlike", postController.unLikePost)
-router.delete("/comment/:commentId/unlike", postController.unLikeComment)
+router.delete("/:postId/unlike", JWTMethods.verifyToken, postController.unLikePost)
+router.delete("/comment/:commentId/unlike", JWTMethods.verifyToken, postController.unLikeComment)
 
 module.exports = router;
