@@ -40,27 +40,60 @@ export default function Login({ setAction }) {
 				onClick={() => {
 					setAction("");
 				}}
+				style={{
+					color: "#FFFFFF",
+					cursor: "pointer",
+					position: "absolute",
+					top: "10px",
+					right: "10px",
+				}}
 			/>
-			<h1>Login</h1>
+			<h1 className="form-header">Login</h1>
 			<input
+				className="form-input"
 				type="text"
 				{...usernameRegistered}
 				placeholder="Username"
 				autoComplete="username"
+				style={{
+					width: "100%",
+					padding: "10px",
+					marginBottom: "10px",
+					borderRadius: "8px",
+					border: "1px solid #38444D",
+					backgroundColor: "#192734",
+					color: "#FFFFFF",
+					outline: "none",
+				}}
 			/>
-			{errors.username && <div>{errors.username.message}</div>}
+			{errors.username && (
+				<div style={{ color: "#E0245E", marginBottom: "10px" }}>
+					{errors.username.message}
+				</div>
+			)}
 			<input
+				className="form-input"
 				type="password"
 				{...passwordRegistered}
 				placeholder="Password"
 				autoComplete="current-password"
 			/>
-			{errors.password && <div>{errors.password.message}</div>}
-			{error && <div>{error}</div>}
+			{errors.password && (
+				<div style={{ color: "#E0245E", marginBottom: "10px" }}>
+					{errors.password.message}
+				</div>
+			)}
+			{error && (
+				<div style={{ color: "#E0245E", marginBottom: "10px" }}>
+					{error}
+				</div>
+			)}
 			{isLoading ? (
-				<CircularProgress />
+				<CircularProgress style={{ color: "#1DA1F2" }} />
 			) : (
-				<button type="submit">Sign in</button>
+				<button className="form-button" type="submit">
+					Sign in
+				</button>
 			)}
 		</form>
 	);

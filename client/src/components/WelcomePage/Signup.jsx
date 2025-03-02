@@ -12,75 +12,74 @@ export default function Signup({ setAction }) {
 		watch,
 	} = useForm();
 
-	const { error, formHandler } = useSubmit(handleSubmit, "signup");
-	const usernameRegistered = {
-		...register("username", {
-			required: "Username is required",
-			minLength: {
-				value: 5,
-				message: "Username must be at least 5 characters",
-			},
-			maxLength: {
-				value: 20,
-				message: "Username must not exceed 20 characters",
-			},
-		}),
-	};
-
-	const passwordRegistered = {
-		...register("password", {
-			required: "Please enter password",
-		}),
-	};
-
-	const confirmPasswordRegistered = {
-		...register("confirmPassword", {
-			required: "Please enter password",
-			validate: (value) => {
-				return value === watch("password") || "Password does not match";
-			},
-		}),
-	};
+	const { error, isLoading, formHandler } = useSubmit(handleSubmit, "signup");
 
 	return (
-		<>
-			<form onSubmit={formHandler} className="signup-login-form">
-				<CloseIcon
-					onClick={() => {
-						setAction("");
-					}}
-				/>
-				<h1>Create your account</h1>
-				<input
-					type="text"
-					{...usernameRegistered}
-					placeholder="Username"
-					autoComplete="username"
-				/>
-				{errors.username && <div>{errors.username.message}</div>}
-				<input
-					type="password"
-					{...passwordRegistered}
-					placeholder="Password"
-					autoComplete="new-password"
-				/>
-				{errors.password && <div>{errors.password.message}</div>}
-				<input
-					type="password"
-					{...confirmPasswordRegistered}
-					placeholder="Confirm Password"
-					autoComplete="confirmPassword"
-				/>
-				{errors.confirmPassword && (
-					<div>{errors.confirmPassword.message}</div>
-				)}
-				{error && <div>{error}</div>}
-				<button type="submit">Sign up</button>
-			</form>
-		</>
+		<form onSubmit={formHandler} className="signup-login-form">
+			<CloseIcon
+				onClick={() => setAction("")}
+				style={{
+					color: "#FFFFFF",
+					cursor: "pointer",
+					position: "absolute",
+					top: "10px",
+					right: "10px",
+				}}
+			/>
+			<h1 className="form-header">Create your account</h1>
+			<input
+				className="form-input"
+				type="text"
+				{...register("username", { required: "Username is required" })}
+				placeholder="Username"
+				autoComplete="username"
+			/>
+			{errors.username && (
+				<div style={{ color: "#E0245E", marginBottom: "10px" }}>
+					{errors.username.message}
+				</div>
+			)}
+			<input
+				className="form-input"
+				type="password"
+				{...register("password", { required: "Please enter password" })}
+				placeholder="Password"
+				autoComplete="new-password"
+			/>
+			{errors.password && (
+				<div style={{ color: "#E0245E", marginBottom: "10px" }}>
+					{errors.password.message}
+				</div>
+			)}
+			<input
+				className="form-input"
+				type="password"
+				{...register("confirmPassword", {
+					required: "Please enter password",
+					validate: (value) =>
+						value === watch("password") ||
+						"Password does not match",
+				})}
+				placeholder="Confirm Password"
+				autoComplete="confirm-password"
+			/>
+			{errors.confirmPassword && (
+				<div style={{ color: "#E0245E", marginBottom: "10px" }}>
+					{errors.confirmPassword.message}
+				</div>
+			)}
+			{error && (
+				<div style={{ color: "#E0245E", marginBottom: "10px" }}>
+					{error}
+				</div>
+			)}
+			<button className="form-button" type="submit" disabled={isLoading}>
+				{isLoading ? "Signing up..." : "Sign up"}
+			</button>
+		</form>
 	);
 }
 
 Signup.propTypes = {
-	setAction: PropTypes.func,
+	setAction: PropTypes.func.isRequired,
 };

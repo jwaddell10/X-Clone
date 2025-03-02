@@ -1,7 +1,47 @@
 .signup-login-form {
 	position: fixed;
-	display: flex;
-	flex-direction: column;
-	background-color: white;
-	color: red;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #15202b;
+	color: #ffffff;
+	width: 300px;
+	padding: 20px;
+	border-radius: 16px;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-header {
+	margin: 0 0 20px 0;
+	color: #ffffff;
+	text-align: center;
+}
+
+.form-input {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	border-radius: 8px;
+	border: 1px solid #38444d;
+	background-color: #192734;
+	color: #ffffff;
+	outline: none;
+}
+
+.form-button {
+	width: 100%;
+	padding: 10px;
+	border-radius: 20px;
+	border: none;
+	background-color: #1da1f2;
+	color: #ffffff;
+	font-size: 16px;
+	cursor: pointer;
+	outline: none;
+}
+
+@media screen and (max-width: 500px) {
+	.signup-login-form {
+		width: 90%;
+	}
 }

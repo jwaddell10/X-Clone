@@ -1,5 +1,78 @@
-.x-logo {
-    max-width: 50vw;
-    place-self: center;
-    height: auto;
+.welcome-page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background-color: #000;
+	color: #fff;
+	padding: 20px;
+}
+
+.content-container {
+	display: flex;
+	align-items: center;
+	gap: 50px;
+	max-width: 1200px;
+	width: 100%;
+}
+
+.x-logo-welcome-page {
+	width: 40rem;
+}
+
+.homepage-container {
+	text-align: left;
+}
+
+.homepage-header {
+	margin: 0;
+	font-size: 4rem; /* Default font size for desktop */
+}
+
+.homepage-header:first-of-type {
+	margin-bottom: 10px;
+}
+
+.buttons {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-top: 20px;
+}
+
+/* Media query for screens smaller than 800px */
+@media screen and (max-width: 700px) {
+	.content-container {
+		flex-direction: column;
+		align-items: flex-start;
+        justify-content: center;
+        width: 75vw;
+	}
+
+	.x-logo-welcome-page {
+		width: 10%;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+	}
+
+	.homepage-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+		margin-top: 80px;
+		width: 100%;
+		padding: 0 20px;
+	}
+
+	.homepage-header {
+		font-size: 3rem; /* Font size for tablets and smaller screens */
+	}
+}
+
+/* Media query for screens smaller than 500px */
+@media screen and (max-width: 500px) {
+	.homepage-header {
+		font-size: 2rem;
+	}
 }

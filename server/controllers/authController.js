@@ -19,6 +19,7 @@ exports.signUp = asyncHandler(async (req, res, next) => {
 			res.status(200).json({
 				message: "User created successfully",
 				token: token,
+				id: createdUser.id
 			});
 		} else
 			res.json({
