@@ -1,6 +1,7 @@
 import PostReaction from "./PostReaction";
 import { Link } from "react-router";
 import { styled } from "styled-components";
+import formatDateXStyle from "../../../helpers/timeAgo";
 
 export default function Post({ post, showReactions = true }) {
 	return (

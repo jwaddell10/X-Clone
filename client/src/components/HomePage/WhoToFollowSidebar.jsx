@@ -17,9 +17,9 @@ export default function WhoToFollowSidebar() {
 	if (error) {
 		return <div style={{ color: "white" }}>{error}</div>;
 	}
-	
+
 	return (
-		<div className="who-to-follow-sidebar" style={{ marginRight: "7vw" }}>
+		<div className="who-to-follow-sidebar" style={{ width: "100%" }}>
 			<h1 style={{ color: "white" }}>Who to Follow</h1>
 			<DisplayedUsers users={users} />
 		</div>

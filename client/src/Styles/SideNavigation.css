@@ -11,6 +11,7 @@
 	flex-direction: column;
 	gap: 3vh;
 	height: 100%;
+	width: 12vw;
 }
 
 .nav-item {
@@ -28,19 +29,28 @@
 }
 
 .side-nav-post-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 7vh;
 	width: 120%;
 	border-radius: 20px;
 	color: black;
     cursor: pointer;
+	font-weight: bold;
 }
 
-@media screen and (max-width: 1400px) {
+.profile-picture-icon {
+	width: 4vw;
+}
+
+@media screen and (max-width: 768px) {
 	.nav-text {
 		display: none;
 		margin: 0;
 	}
 	.side-nav-post-button {
-		width: 4vw;
+		width: 50px;
 	}
 }
 

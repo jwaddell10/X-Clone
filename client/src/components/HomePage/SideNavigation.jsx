@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import XIcon from "@mui/icons-material/X";
 import HomeSharpIcon from "@mui/icons-material/HomeSharp";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
@@ -6,6 +6,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import MailOutlineSharpIcon from "@mui/icons-material/MailOutlineSharp";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import MoreHorizSharpIcon from "@mui/icons-material/MoreHorizSharp";
+import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 import "../../Styles/SideNavigation.css";
 import { Link } from "react-router";
 import PropTypes from "prop-types";
@@ -17,6 +18,14 @@ export default function SideNavigation({ profileInfo }) {
 	const loggedInUserId = localStorage.getItem("id");
 	const [logoutPopupOpen, setLogoutPopupOpen] = useState(false);
 	const anchorRef = useRef(null);
+	const [isMobile, setIsMobile] = useState(window.innerWidth < 746);
+
+	// Handle screen resize
+	useEffect(() => {
+		const handleResize = () => setIsMobile(window.innerWidth < 746);
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
 
 	const handleLogoutPopupToggle = () => {
 		setLogoutPopupOpen((prev) => !prev);
@@ -46,60 +55,46 @@ export default function SideNavigation({ profileInfo }) {
 						<span className="nav-text">Home</span>
 					</li>
 				</Link>
-				<Link>
-					<li className="nav-item">
-						<SearchSharpIcon className="icons" fontSize="large" />
-						<span className="nav-text">Explore</span>
-					</li>
-				</Link>
-				<Link>
-					<li className="nav-item">
-						<NotificationsNoneIcon
-							className="icons"
-							fontSize="large"
-						/>
-						<span className="nav-text">Notifications</span>
-					</li>
-				</Link>
-				<Link>
-					<li className="nav-item">
-						<MailOutlineSharpIcon
-							className="icons"
-							fontSize="large"
-						/>
-						<span className="nav-text">Messages</span>
-					</li>
-				</Link>
 				<Link to={`/profile/${loggedInUserId}`}>
 					<li className="nav-item">
 						<PermIdentityIcon className="icons" fontSize="large" />
 						<span className="nav-text">Profile</span>
 					</li>
 				</Link>
-				<Link>
-					<li className="nav-item">
-						<MoreHorizSharpIcon
-							className="icons"
-							fontSize="large"
-						/>
-						<span className="nav-text">Settings</span>
-					</li>
-				</Link>
-				<button className="side-nav-post-button">Post</button>
+
+				{/* Conditionally render Post button or icon based on screen size */}
+				<button className="side-nav-post-button">
+					{isMobile ? (
+						<AddCircleOutlineRoundedIcon fontSize="large" />
+					) : (
+						"Post"
+					)}
+				</button>
+
 				{profileInfo && (
 					<div
 						ref={anchorRef}
 						style={{ display: "flex", cursor: "pointer" }}
 						onClick={handleLogoutPopupToggle}
 					>
-						<img
-							className="profile-picture-icon"
-							src={profileInfo.profilePicture}
-							alt="profile-picture"
-						/>
-						<div style={{ color: "white" }}>
-							{profileInfo.user.name}
-						</div>
+						{isMobile ? (
+							<img
+								className="profile-picture-icon"
+								src={profileInfo.profilePicture}
+								alt="profile-picture"
+							/>
+						) : (
+							<>
+								<img
+									className="profile-picture-icon"
+									src={profileInfo.profilePicture}
+									alt="profile-picture"
+								/>
+								<div style={{ color: "white" }}>
+									{profileInfo.user.name}
+								</div>
+							</>
+						)}
 					</div>
 				)}
 			</span>
@@ -159,5 +154,10 @@ export default function SideNavigation({ profileInfo }) {
 }
 
 SideNavigation.propTypes = {
-	refreshTrigger: PropTypes.number,
+	profileInfo: PropTypes.shape({
+		profilePicture: PropTypes.string.isRequired,
+		user: PropTypes.shape({
+			name: PropTypes.string.isRequired,
+		}).isRequired,
+	}),
 };

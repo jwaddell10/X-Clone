@@ -66,8 +66,9 @@ export default function DisplayedUsers({ users }) {
 
 const StyledButton = styled.button`
 	height: 5vh;
-	width: 8vw;
+	min-width: 8vw;
 	border-radius: 20px;
 	color: black;
 	cursor: pointer;
+    font-weight: bold;
 `;
