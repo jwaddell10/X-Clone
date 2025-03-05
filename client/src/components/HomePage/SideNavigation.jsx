@@ -30,11 +30,11 @@ export default function SideNavigation({ profileInfo }) {
 	const loggedInUserId = localStorage.getItem("id");
 	const [logoutPopupOpen, setLogoutPopupOpen] = useState(false);
 	const anchorRef = useRef(null);
-	const [isMobile, setIsMobile] = useState(window.innerWidth < 746);
+	const [isMobile, setIsMobile] = useState(window.innerWidth < 769);
 
 	// Handle screen resize
 	useEffect(() => {
-		const handleResize = () => setIsMobile(window.innerWidth < 746);
+		const handleResize = () => setIsMobile(window.innerWidth < 769);
 		window.addEventListener("resize", handleResize);
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);

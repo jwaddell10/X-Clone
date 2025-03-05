@@ -16,7 +16,7 @@ export default function HomeTimeline({ profileInfo }) {
 
 const breakpoints = {
 	small: "500px",
-	medium: "768px",
+	medium: "769px",
 	large: "1200px",
 };
 

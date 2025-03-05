@@ -43,7 +43,7 @@ export default function DisplayedUsers({ users }) {
 		<>
 			{displayedUsers?.map((user, index) => (
 				<ul key={user.id} className="user-sidebar">
-					<img src={user.Profile.profilePicture} />
+					<StyledImage src={user.Profile.profilePicture} />
 					<li className="user-name" style={{ color: "white" }}>
 						{user.name}
 					</li>
@@ -70,5 +70,9 @@ const StyledButton = styled.button`
 	border-radius: 20px;
 	color: black;
 	cursor: pointer;
-    font-weight: bold;
+	font-weight: bold;
+`;
+
+const StyledImage = styled.img`
+	width: 40px;
 `;

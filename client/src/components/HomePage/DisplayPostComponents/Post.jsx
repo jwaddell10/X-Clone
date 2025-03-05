@@ -20,7 +20,7 @@ export default function Post({ post, showReactions = true }) {
 					>
 						<StyledHeader className="post-header">
 							<Link to={`/profile/${post.author.Profile.id}`}>
-								<img
+								<StyledImage
 									src={post.author.Profile.profilePicture}
 									alt="profile picture"
 								/>
@@ -78,4 +78,8 @@ const InnerStyledDiv = styled.div`
 	@media (max-width: ${breakpoints.small}) {
 		width: 100vw;
 	}
+`;
+
+const StyledImage = styled.img`
+	width: 40px;
 `;

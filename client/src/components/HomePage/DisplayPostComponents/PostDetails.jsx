@@ -40,7 +40,7 @@ export default function PostDetails() {
 				<StyledDiv>
 					<StyledHeader className="post-header">
 						<Link to={`/profile/${post.author.Profile.id}`}>
-							<img
+							<StyledImage
 								src={post.author.Profile.profilePicture}
 								alt="profile picture"
 							/>
@@ -85,4 +85,8 @@ const StyledDiv = styled.section`
 	@media (max-width: ${breakpoints.small}) {
 		width: 100vw;
 	}
+`;
+
+const StyledImage = styled.img`
+	width: 40px;
 `;

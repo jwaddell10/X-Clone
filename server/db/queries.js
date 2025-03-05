@@ -251,9 +251,6 @@ module.exports = {
 	findCommentAndChildComments: async (commentId) => {
 		try {
 			const commentAndChildComments = await prisma.comment.findUnique({
-				orderBy: {
-					createdAt: 'desc'
-				},
 				where: {
 					id: commentId,
 				},
@@ -274,6 +271,9 @@ module.exports = {
 					createdAt: true,
 					likes: true,
 					children: {
+						orderBy: {
+							createdAt: 'desc'
+						},
 						select: {
 							id: true,
 							text: true,

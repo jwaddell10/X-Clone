@@ -53,7 +53,6 @@ export default function PostReaction({ post, comments }) {
 	return (
 		<div className="post-reaction-container">
 			<CommentReaction post={post} comments={comments} />
-			<RepeatIcon />
 			<LikeReaction
 				isLiked={isLiked}
 				likes={likeCount}

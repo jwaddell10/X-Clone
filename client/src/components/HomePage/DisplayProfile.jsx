@@ -30,6 +30,7 @@ export default function DisplayProfile({ profileId }) {
 		await handleFollow(event, profileId);
 		triggerRefresh();
 	};
+
 	return (
 		<StyledDiv>
 			<div className="profile-container">
@@ -97,6 +98,19 @@ export default function DisplayProfile({ profileId }) {
 	);
 }
 
+const breakpoints = {
+	small: "500px",
+	medium: "769px",
+};
+
 const StyledDiv = styled.div`
 	width: 45vw;
+
+	@media (max-width: ${breakpoints.medium}) {
+		width: 75vw;
+	}
+
+	@media (max-width: ${breakpoints.small}) {
+		width: 100vw;
+	}
 `;

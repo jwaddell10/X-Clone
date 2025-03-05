@@ -20,6 +20,8 @@ export default function CommentDetails() {
 		commentId,
 		refreshTrigger
 	);
+
+	console.log(comment, 'comment in details')
 	if (loading) {
 		return <CircularProgress />;
 	}
@@ -40,7 +42,7 @@ export default function CommentDetails() {
 				<StyledDiv>
 					<StyledHeader className="post-header">
 						<Link to={`/profile/${comment.author.Profile.id}`}>
-							<img
+							<StyledImage
 								src={comment.author.Profile.profilePicture}
 								alt="profile picture"
 							/>
@@ -88,4 +90,8 @@ const StyledDiv = styled.section`
 	@media (max-width: ${breakpoints.small}) {
 		width: 100vw;
 	}
+`;
+
+const StyledImage = styled.img`
+	width: 40px;
 `;

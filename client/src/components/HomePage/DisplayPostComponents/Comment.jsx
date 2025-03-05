@@ -59,7 +59,7 @@ export default function Comment({ post, comment }) {
 			>
 				<StyledHeader className="header-container">
 					<Link to={`/profile/${comment.author.Profile.id}`}>
-						<img
+						<StyledImage
 							src={comment.author.Profile.profilePicture}
 							alt="profile picture"
 						/>
@@ -77,7 +77,6 @@ export default function Comment({ post, comment }) {
 				style={{ display: "flex", justifyContent: "space-around" }}
 			>
 				<CommentReaction post={post} comments={comment} />
-				<RepeatIcon />
 				<LikeReaction
 					isLiked={isLiked}
 					likes={likeCount}
@@ -92,4 +91,8 @@ export default function Comment({ post, comment }) {
 
 const StyledHeader = styled.header`
 	display: flex;
+`;
+
+const StyledImage = styled.img`
+	width: 40px;
 `;
