@@ -10,12 +10,16 @@ import { styled } from "styled-components";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useContext } from "react";
 import { RefreshContext } from "../../../context/refreshTriggerContext";
+import formatDate from "../../../helpers/formatDate";
 
 export default function CommentDetails() {
-    const { refreshTrigger } = useContext(RefreshContext)
+	const { refreshTrigger } = useContext(RefreshContext);
 	const { username, commentId } = useParams();
-	const { comment, loading, error } = useFetchComment(username, commentId, refreshTrigger);
-console.log(comment, 'comment in details')
+	const { comment, loading, error } = useFetchComment(
+		username,
+		commentId,
+		refreshTrigger
+	);
 	if (loading) {
 		return <CircularProgress />;
 	}
@@ -42,7 +46,9 @@ console.log(comment, 'comment in details')
 							/>
 						</Link>
 						<div>{username}</div>
-						<div className="created-at">{comment.createdAt}</div>
+						<div className="created-at">
+							{formatDate(comment.createdAt)}
+						</div>
 					</StyledHeader>
 
 					<div className="post-text-container">{comment.text}</div>

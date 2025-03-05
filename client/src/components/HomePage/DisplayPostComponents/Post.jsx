@@ -1,7 +1,7 @@
 import PostReaction from "./PostReaction";
 import { Link } from "react-router";
 import { styled } from "styled-components";
-import formatDateXStyle from "../../../helpers/timeAgo";
+import formatDate from "../../../helpers/formatDate";
 
 export default function Post({ post, showReactions = true }) {
 	return (
@@ -26,7 +26,9 @@ export default function Post({ post, showReactions = true }) {
 								/>
 							</Link>
 							<div className="username">{post.author.name}</div>
-							<div className="created-at">{post.createdAt}</div>
+							<div className="created-at">
+								{formatDate(post.createdAt)}
+							</div>
 						</StyledHeader>
 						<div className="post-text-contaiiner">{post.text}</div>
 					</Link>
@@ -67,7 +69,6 @@ const OuterStyledDiv = styled.div`
 		width: 100vw;
 	}
 `;
-
 
 const InnerStyledDiv = styled.div`
 	@media (max-width: ${breakpoints.medium}) {

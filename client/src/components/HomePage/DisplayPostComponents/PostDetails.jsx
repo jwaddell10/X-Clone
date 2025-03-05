@@ -12,6 +12,7 @@ import useGetLoggedInUserProfileInfo from "../../../helpers/useGetLoggedInUserPr
 import CircularProgress from "@mui/material/CircularProgress";
 import { RefreshContext } from "../../../context/refreshTriggerContext";
 import { useContext } from "react";
+import formatDate from "../../../helpers/formatDate";
 
 export default function PostDetails() {
 	const { username, postId } = useParams();
@@ -22,7 +23,6 @@ export default function PostDetails() {
 		refreshTrigger
 	);
 	const { comments } = useFetchComments(postId, refreshTrigger);
-	console.log(comments, 'comments')
 	const { profileInfo } = useGetLoggedInUserProfileInfo();
 
 	if (loading) {
@@ -35,7 +35,7 @@ export default function PostDetails() {
 
 	return (
 		<div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
-			<SideNavigation profileInfo={profileInfo}/>
+			<SideNavigation profileInfo={profileInfo} />
 			{post && (
 				<StyledDiv>
 					<StyledHeader className="post-header">
@@ -46,7 +46,9 @@ export default function PostDetails() {
 							/>
 						</Link>
 						<div>{username}</div>
-						<div className="created-at">{post.createdAt}</div>
+						<div className="created-at">
+							{formatDate(post.createdAt)}
+						</div>
 					</StyledHeader>
 
 					<div className="post-text-container">{post.text}</div>

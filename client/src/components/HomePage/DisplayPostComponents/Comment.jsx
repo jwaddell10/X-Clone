@@ -6,6 +6,7 @@ import { useState, useEffect, useContext } from "react";
 import { RefreshContext } from "../../../context/refreshTriggerContext";
 import { styled } from "styled-components";
 import { Link } from "react-router";
+import formatDate from "../../../helpers/formatDate";
 
 export default function Comment({ post, comment }) {
 	const [isLiked, setIsLiked] = useState(false);
@@ -65,7 +66,9 @@ export default function Comment({ post, comment }) {
 					</Link>
 
 					<div>{comment.author.name}</div>
-					<div className="created-at">{comment.createdAt}</div>
+					<div className="created-at">
+						{formatDate(comment.createdAt)}
+					</div>
 				</StyledHeader>
 				<div className="text-container">{comment.text}</div>
 			</Link>
