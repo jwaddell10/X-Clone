@@ -1,15 +1,20 @@
 const asyncHandler = require("express-async-handler");
 const db = require("../db/queries");
+const getItemsInAscendingOrderAndClosestToNowFirst = require("../helpers/getItemsInAscendingOrderAndClosestToNowFirst");
 
 exports.getAllPosts = asyncHandler(async (req, res, next) => {
 	const posts = await db.findAllPosts();
-
-	if (posts === null) {
+	const sortedPosts =
+		getItemsInAscendingOrderAndClosestToNowFirst.getItemsInAscendingOrderAndClosestToNowFirst(
+			posts
+		);
+	console.log(sortedPosts, "sorted posts");
+	if (sortedPosts === null) {
 		res.json({ message: "No posts available" });
 	}
 
-	if (posts) {
-		res.json({ posts });
+	if (sortedPosts) {
+		res.json({ sortedPosts });
 	}
 });
 
