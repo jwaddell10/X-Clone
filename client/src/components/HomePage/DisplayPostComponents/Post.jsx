@@ -25,6 +25,7 @@ export default function Post({ post, showReactions = true }) {
 									alt="profile picture"
 								/>
 							</Link>
+							<div className="username">{post.author.name}</div>
 							<div className="created-at">{post.createdAt}</div>
 						</StyledHeader>
 						<div className="post-text-contaiiner">{post.text}</div>

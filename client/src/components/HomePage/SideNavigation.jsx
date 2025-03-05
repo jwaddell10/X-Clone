@@ -12,9 +12,21 @@ import { Link } from "react-router";
 import PropTypes from "prop-types";
 import Popper from "@mui/material/Popper";
 import Button from "@mui/material/Button";
+import ReplyModal from "../../helpers/ReplyModal";
 import Paper from "@mui/material/Paper";
 
 export default function SideNavigation({ profileInfo }) {
+	const [isReplyModalOpen, setIsReplyModalOpen] = useState(false);
+
+	const [replyModalFormData, setReplyModalFormData] = useState("");
+
+	const handleOpenReplyFormModal = () => {
+		setIsReplyModalOpen(true);
+	};
+
+	const handleCloseReplyFormModal = () => {
+		setIsReplyModalOpen(false);
+	};
 	const loggedInUserId = localStorage.getItem("id");
 	const [logoutPopupOpen, setLogoutPopupOpen] = useState(false);
 	const anchorRef = useRef(null);
@@ -27,6 +39,9 @@ export default function SideNavigation({ profileInfo }) {
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
+	const handleFormSubmit = () => {
+		console.log('handle form submit runs')
+	}
 	const handleLogoutPopupToggle = () => {
 		setLogoutPopupOpen((prev) => !prev);
 	};
@@ -43,6 +58,14 @@ export default function SideNavigation({ profileInfo }) {
 
 	return (
 		<section className="sidebar-container">
+			{isReplyModalOpen && (
+							<ReplyModal
+								isOpen={isReplyModalOpen}
+								modalData={replyModalFormData}
+								onSubmit={handleFormSubmit}
+								onClose={handleCloseReplyFormModal}
+							/>
+						)}
 			<span className="icons-container">
 				<li className="nav-item">
 					<Link>
@@ -63,7 +86,7 @@ export default function SideNavigation({ profileInfo }) {
 				</Link>
 
 				{/* Conditionally render Post button or icon based on screen size */}
-				<button className="side-nav-post-button">
+				<button onClick={handleOpenReplyFormModal} className="side-nav-post-button">
 					{isMobile ? (
 						<AddCircleOutlineRoundedIcon fontSize="large" />
 					) : (

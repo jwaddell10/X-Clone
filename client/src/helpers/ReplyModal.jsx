@@ -1,20 +1,17 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useContext } from "react";
 import Modal from "./Modal";
 import Post from "../components/HomePage/DisplayPostComponents/Post";
 import Comment from "../components/HomePage/DisplayPostComponents/Comment";
 import ComposeReply from "../components/HomePage/ComposeReply";
+import ComposePost from "../components/HomePage/ComposePost";
+import useGetLoggedInUserProfileInfo from "./useGetLoggedInUserProfileInfo";
+import { RefreshContext } from "../context/refreshTriggerContext";
 
-export default function ReplyModal({
-	post,
-	comment,
-	onSubmit,
-	modalData,
-	isOpen,
-	onClose,
-}) {
-	// const {postId} = useParams();
-	// console.log(postId, 'postId')
+export default function ReplyModal({ post, comment, isOpen, onClose }) {
+	const { refreshTrigger } = useContext(RefreshContext);
+	const { profileInfo } = useGetLoggedInUserProfileInfo(refreshTrigger);
 	const focusInputRef = useRef(null);
+
 	useEffect(() => {
 		if (isOpen && focusInputRef.current) {
 			setTimeout(() => {
@@ -22,6 +19,7 @@ export default function ReplyModal({
 			}, 0);
 		}
 	}, [isOpen]);
+
 	return (
 		<Modal
 			isOpen={isOpen}
@@ -29,25 +27,29 @@ export default function ReplyModal({
 			onClose={onClose}
 			comment={comment}
 		>
-			{/* if user clicks on a comment with an id render the comment details, otherwise render post details */}
-			{comment.id ? (
+			<ComposePost profileInfo={profileInfo} />
+
+			{/* If a comment exists, show the comment details; otherwise, show the post */}
+			{comment?.id ? (
 				<>
 					<Comment comment={comment} showReactions={false} />
-					<ComposeReply
-						profileInfo={post.author.Profile}
-						postId={post.id}
-						commentId={comment.id}
-					/>
+					{post?.id && (
+						<ComposeReply
+							profileInfo={post?.author?.Profile}
+							postId={post.id}
+							commentId={comment.id}
+						/>
+					)}
 				</>
-			) : (
+			) : post?.id ? (
 				<>
 					<Post post={post} showReactions={false} />
 					<ComposeReply
-						profileInfo={post.author.Profile}
+						profileInfo={post?.author?.Profile}
 						postId={post.id}
 					/>
 				</>
-			)}
+			) : null}
 		</Modal>
 	);
 }

@@ -21,7 +21,6 @@ export default function PostDetails() {
 		postId,
 		refreshTrigger
 	);
-
 	const { comments } = useFetchComments(postId, refreshTrigger);
 	const { profileInfo } = useGetLoggedInUserProfileInfo();
 
@@ -35,7 +34,7 @@ export default function PostDetails() {
 
 	return (
 		<div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
-			<SideNavigation />
+			<SideNavigation profileInfo={profileInfo}/>
 			{post && (
 				<StyledDiv>
 					<StyledHeader className="post-header">

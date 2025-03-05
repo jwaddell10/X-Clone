@@ -13,7 +13,13 @@ exports.verifyToken = (req, res, next) => {
 
 		req.token = bearerToken;
 		const verifiedUser = jwt.verify(req.token, process.env.JWT_SECRET);
-		return verifiedUser;
+
+		if (!verifiedUser) {
+			return res.json({ message: "Unable to access" });
+		}
+		if (verifiedUser) {
+			next();
+		}
 	} else {
 		res.sendStatus(403);
 	}
