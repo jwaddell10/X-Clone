@@ -43,10 +43,21 @@ export default function DisplayedUsers({ users }) {
 		<>
 			{displayedUsers?.map((user, index) => (
 				<ul key={user.id} className="user-sidebar">
-					<StyledImage src={user.Profile.profilePicture} />
-					<li className="user-name" style={{ color: "white" }}>
-						{user.name}
-					</li>
+					<div
+						style={{
+							display: "grid",
+							gridTemplateColumns: "40px 1fr 1fr",
+							alignItems: "center",
+							gap: "5px",
+						}}
+						className="profile-picture-and-username-container"
+					>
+						<StyledImage src={user.Profile.profilePicture} />
+						<li className="user-name" style={{ color: "white" }}>
+							{user.name}
+						</li>
+					</div>
+
 					{followingStatusOfTop10users && (
 						<StyledButton
 							onClick={(event) =>
@@ -65,8 +76,7 @@ export default function DisplayedUsers({ users }) {
 }
 
 const StyledButton = styled.button`
-	height: 5vh;
-	min-width: 8vw;
+	min-width: 6rem;
 	border-radius: 20px;
 	color: black;
 	cursor: pointer;

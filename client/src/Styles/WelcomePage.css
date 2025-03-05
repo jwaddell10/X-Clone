@@ -26,7 +26,7 @@
 
 .homepage-header {
 	margin: 0;
-	font-size: 4rem; /* Default font size for desktop */
+	font-size: 4rem;
 }
 
 .homepage-header:first-of-type {
@@ -40,7 +40,6 @@
 	margin-top: 20px;
 }
 
-/* Media query for screens smaller than 800px */
 @media screen and (max-width: 700px) {
 	.content-container {
 		flex-direction: column;
@@ -66,11 +65,10 @@
 	}
 
 	.homepage-header {
-		font-size: 3rem; /* Font size for tablets and smaller screens */
+		font-size: 3rem;
 	}
 }
 
-/* Media query for screens smaller than 500px */
 @media screen and (max-width: 500px) {
 	.homepage-header {
 		font-size: 2rem;

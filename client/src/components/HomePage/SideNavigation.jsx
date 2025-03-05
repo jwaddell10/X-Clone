@@ -85,7 +85,6 @@ export default function SideNavigation({ profileInfo }) {
 					</li>
 				</Link>
 
-				{/* Conditionally render Post button or icon based on screen size */}
 				<button onClick={handleOpenReplyFormModal} className="side-nav-post-button">
 					{isMobile ? (
 						<AddCircleOutlineRoundedIcon fontSize="large" />
@@ -97,7 +96,7 @@ export default function SideNavigation({ profileInfo }) {
 				{profileInfo && (
 					<div
 						ref={anchorRef}
-						style={{ display: "flex", cursor: "pointer" }}
+						style={{ display: "flex", cursor: "pointer", alignItems: "center", gap: "5px" }}
 						onClick={handleLogoutPopupToggle}
 					>
 						{isMobile ? (

@@ -2,6 +2,7 @@ import useFetchProfilePosts from "../../helpers/useFetchProfilePosts";
 import PostReaction from "./DisplayPostComponents/PostReaction";
 import { Link } from "react-router";
 import CircularProgress from "@mui/material/CircularProgress";
+import formatDate from "../../helpers/formatDate";
 
 export default function UserProfilePosts({ profileId }) {
 	const { posts, loading, error } = useFetchProfilePosts(profileId);
@@ -23,7 +24,7 @@ export default function UserProfilePosts({ profileId }) {
 						className="main-post-container"
 					>
 						<div style={{ display: "flex" }}>
-							<div style={{ display: "flex" }}>
+							<div style={{ display: "flex", gap: "5px" }}>
 								<img
 									className="profile-picture-icon"
 									src={post.author.Profile.profilePicture}
@@ -31,7 +32,7 @@ export default function UserProfilePosts({ profileId }) {
 								/>
 
 								<span>{post.author.name}</span>
-								<span>{post.createdAt}</span>
+								<span>{formatDate(post.createdAt)}</span>
 							</div>
 						</div>
 
