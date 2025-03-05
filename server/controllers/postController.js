@@ -8,7 +8,7 @@ exports.getAllPosts = asyncHandler(async (req, res, next) => {
 		getItemsInAscendingOrderAndClosestToNowFirst.getItemsInAscendingOrderAndClosestToNowFirst(
 			posts
 		);
-	console.log(sortedPosts, "sorted posts");
+
 	if (sortedPosts === null) {
 		res.json({ message: "No posts available" });
 	}
@@ -22,12 +22,16 @@ exports.getComments = asyncHandler(async (req, res, next) => {
 	const comments = await db.findParentCommentsForPost(
 		parseInt(req.params.id)
 	);
-	if (comments === null) {
+	const sortedComments =
+		getItemsInAscendingOrderAndClosestToNowFirst.getItemsInAscendingOrderAndClosestToNowFirst(
+			comments
+		);
+	if (sortedComments === null) {
 		res.json({ message: "No comments available" });
 	}
 
-	if (comments) {
-		res.json({ comments });
+	if (sortedComments) {
+		res.json({ sortedComments });
 	}
 });
 
@@ -62,8 +66,6 @@ exports.replyToPost = asyncHandler(async (req, res, next) => {
 });
 
 exports.replyToComment = asyncHandler(async (req, res, next) => {
-	console.log(req.params, "req params", req.body, "req body");
-
 	const replyToComment = await db.createReplyToComment(
 		parseInt(req.params.postId),
 		parseInt(req.params.commentId),

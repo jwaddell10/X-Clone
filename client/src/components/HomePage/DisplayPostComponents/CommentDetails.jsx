@@ -15,7 +15,7 @@ export default function CommentDetails() {
     const { refreshTrigger } = useContext(RefreshContext)
 	const { username, commentId } = useParams();
 	const { comment, loading, error } = useFetchComment(username, commentId, refreshTrigger);
-
+console.log(comment, 'comment in details')
 	if (loading) {
 		return <CircularProgress />;
 	}
