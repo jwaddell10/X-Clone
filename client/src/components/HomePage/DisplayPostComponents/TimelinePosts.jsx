@@ -3,11 +3,12 @@ import "../../../Styles/TimeLinePosts.css";
 import PropTypes from "prop-types";
 import Post from "./Post";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useContext, useState } from "react";
+import { useContext} from "react";
 import { RefreshContext } from "../../../context/refreshTriggerContext";
 export default function TimelinePosts() {
 	const { refreshTrigger } = useContext(RefreshContext);
 	const { posts, loading, error } = useFetchPosts(refreshTrigger);
+
 	if (loading) {
 		return <CircularProgress />;
 	}

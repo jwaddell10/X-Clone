@@ -13,7 +13,7 @@ export default function useFetchComment(username, commentId, refreshTrigger) {
 					}/comment/${username}/${commentId}`
 				);
 				const data = await response.json();
-				setComment(data.sortedComments);
+				setComment(data.comment);
 			} catch (error) {
 				setError(error);
 			} finally {

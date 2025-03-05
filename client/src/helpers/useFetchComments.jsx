@@ -16,7 +16,7 @@ export default function useFetchComments(postId, refreshTrigger) {
                 }
                 const data = await response.json();
                 console.log(data, 'data from fetchcomments')
-                setComments(data.sortedComments);
+                setComments(data.comments);
             } catch (err) {
                 console.error(err.message);
                 setError(err.message);

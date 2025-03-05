@@ -172,6 +172,9 @@ module.exports = {
 	findAllPosts: async () => {
 		try {
 			const posts = await prisma.post.findMany({
+				orderBy: {
+					createdAt: 'desc'
+				},
 				select: {
 					id: true,
 					createdAt: true,
@@ -199,6 +202,9 @@ module.exports = {
 	findAllUserPosts: async (id) => {
 		try {
 			const userPosts = await prisma.post.findMany({
+				orderBy: {
+					createdAt: 'desc'
+				},
 				where: {
 					authorId: id,
 				},
@@ -226,6 +232,9 @@ module.exports = {
 	findComment: async (id) => {
 		try {
 			const comment = await prisma.comment.findUnique({
+				orderBy: {
+					createdAt: 'desc'
+				},
 				where: {
 					id: id,
 				},
@@ -241,8 +250,10 @@ module.exports = {
 	},
 	findCommentAndChildComments: async (commentId) => {
 		try {
-			//trying to find a comment, and it's children comments
 			const commentAndChildComments = await prisma.comment.findUnique({
+				orderBy: {
+					createdAt: 'desc'
+				},
 				where: {
 					id: commentId,
 				},
@@ -296,6 +307,9 @@ module.exports = {
 	findParentCommentsForPost: async (postId) => {
 		try {
 			const comments = await prisma.comment.findMany({
+				orderBy: {
+					createdAt: 'desc'
+				},
 				where: {
 					postId: postId,
 					parentId: null,

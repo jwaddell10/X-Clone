@@ -4,17 +4,13 @@ const getItemsInAscendingOrderAndClosestToNowFirst = require("../helpers/getItem
 
 exports.getAllPosts = asyncHandler(async (req, res, next) => {
 	const posts = await db.findAllPosts();
-	const sortedPosts =
-		getItemsInAscendingOrderAndClosestToNowFirst.getItemsInAscendingOrderAndClosestToNowFirst(
-			posts
-		);
-
-	if (sortedPosts === null) {
+	
+	if (posts === null) {
 		res.json({ message: "No posts available" });
 	}
 
-	if (sortedPosts) {
-		res.json({ sortedPosts });
+	if (posts) {
+		res.json({ posts });
 	}
 });
 
@@ -22,16 +18,12 @@ exports.getComments = asyncHandler(async (req, res, next) => {
 	const comments = await db.findParentCommentsForPost(
 		parseInt(req.params.id)
 	);
-	const sortedComments =
-		getItemsInAscendingOrderAndClosestToNowFirst.getItemsInAscendingOrderAndClosestToNowFirst(
-			comments
-		);
-	if (sortedComments === null) {
+	if (comments === null) {
 		res.json({ message: "No comments available" });
 	}
 
-	if (sortedComments) {
-		res.json({ sortedComments });
+	if (comments) {
+		res.json({ comments });
 	}
 });
 

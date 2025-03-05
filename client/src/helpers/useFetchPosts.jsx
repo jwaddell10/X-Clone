@@ -15,7 +15,7 @@ export default function useFetchPosts(refreshTrigger) {
 					throw new Error("Failed to fetch posts");
 				}
 				const data = await response.json();
-				setPosts(data.sortedPosts);
+				setPosts(data.posts);
 			} catch (err) {
 				console.error(err.message);
 				setError(err.message);

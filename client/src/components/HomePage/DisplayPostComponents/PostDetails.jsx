@@ -22,6 +22,7 @@ export default function PostDetails() {
 		refreshTrigger
 	);
 	const { comments } = useFetchComments(postId, refreshTrigger);
+	console.log(comments, 'comments')
 	const { profileInfo } = useGetLoggedInUserProfileInfo();
 
 	if (loading) {

@@ -7,16 +7,11 @@ exports.getComment = asyncHandler(async (req, res, next) => {
 		parseInt(req.params.commentId)
 	);
 
-	const sortedComments =
-		getItemsInAscendingOrderAndClosestToNowFirst.getItemsInAscendingOrderAndClosestToNowFirst(
-			comment
-		);
-
-	if (sortedComments === null) {
+	if (comment === null) {
 		res.json({ errorMessage: "No comments" });
 	}
 
-	if (sortedComments) {
-		res.json({ sortedComments });
+	if (comment) {
+		res.json({ comment });
 	}
 });
