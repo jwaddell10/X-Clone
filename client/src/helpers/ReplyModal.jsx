@@ -21,12 +21,7 @@ export default function ReplyModal({ post, comment, isOpen, onClose }) {
 	}, [isOpen]);
 
 	return (
-		<Modal
-			isOpen={isOpen}
-			hasCloseBtn={true}
-			onClose={onClose}
-			comment={comment}
-		>
+		<Modal isOpen={isOpen} hasCloseBtn={true} onClose={onClose}>
 			<ComposePost profileInfo={profileInfo} />
 
 			{/* If a comment exists, show the comment details; otherwise, show the post */}

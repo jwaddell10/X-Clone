@@ -9,12 +9,12 @@ export default async function submitPost(text, url) {
 		method: "POST",
 		body: JSON.stringify({ text: text, loggedInUserId: loggedInUserId }),
 	});
-	
+
 	if (!response.ok) {
 		throw new Error(`HTTP error! status: ${response.status}`);
 	}
 
 	const data = await response.json();
-	console.log(data, 'data from submit post')
+	console.log(data, "data from submit post");
 	return data;
 }

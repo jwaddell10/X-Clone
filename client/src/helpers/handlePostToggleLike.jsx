@@ -4,6 +4,7 @@ export default async function handlePostToggleLike(
 	post,
 	likeId
 ) {
+	const JWTToken = localStorage.getItem("token");
 	if (!isLiked) {
 		//add like
 
@@ -12,6 +13,7 @@ export default async function handlePostToggleLike(
 			{
 				headers: {
 					"Content-type": "application/json",
+					Authorization: `Bearer ${JWTToken}`,
 				},
 				method: "POST",
 				body: JSON.stringify({ loggedInUserId: loggedInUserId }),
@@ -25,6 +27,7 @@ export default async function handlePostToggleLike(
 			{
 				headers: {
 					"Content-type": "application/json",
+					Authorization: `Bearer ${JWTToken}`,
 				},
 				method: "DELETE",
 				body: JSON.stringify({ likeId: likeId }),

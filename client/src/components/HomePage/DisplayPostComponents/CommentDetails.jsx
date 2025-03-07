@@ -74,6 +74,7 @@ const breakpoints = {
 
 const StyledHeader = styled.header`
 	display: flex;
+	gap: 5px;
 `;
 
 const StyledDiv = styled.section`

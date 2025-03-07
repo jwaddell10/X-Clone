@@ -8,7 +8,7 @@
 /* 2. Remove default margin */
 * {
 	margin: 0;
-  font-family: inherit;
+	font-family: inherit;
 }
 
 body {
@@ -16,7 +16,7 @@ body {
 	line-height: 1.5;
 	/* 4. Improve text rendering */
 	-webkit-font-smoothing: antialiased;
-  font-family: "Roboto", sans-serif;
+	font-family: "Roboto", sans-serif;
 }
 
 /* 5. Improve media defaults */
@@ -85,5 +85,5 @@ a {
 }
 
 li {
-    list-style-type: none;
+	list-style-type: none;
 }

@@ -1,11 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import XIcon from "@mui/icons-material/X";
 import HomeSharpIcon from "@mui/icons-material/HomeSharp";
-import SearchSharpIcon from "@mui/icons-material/SearchSharp";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import MailOutlineSharpIcon from "@mui/icons-material/MailOutlineSharp";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import MoreHorizSharpIcon from "@mui/icons-material/MoreHorizSharp";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 import "../../Styles/SideNavigation.css";
 import { Link } from "react-router";

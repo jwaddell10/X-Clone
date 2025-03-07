@@ -6,6 +6,7 @@ exports.createJWT = (user) => {
 };
 
 exports.verifyToken = (req, res, next) => {
+
 	const bearerHeader = req.headers["authorization"];
 	if (typeof bearerHeader !== "undefined") {
 		const bearer = bearerHeader.split(" ");
@@ -13,7 +14,6 @@ exports.verifyToken = (req, res, next) => {
 
 		req.token = bearerToken;
 		const verifiedUser = jwt.verify(req.token, process.env.JWT_SECRET);
-
 		if (!verifiedUser) {
 			return res.json({ message: "Unable to access" });
 		}

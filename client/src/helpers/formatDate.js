@@ -19,7 +19,8 @@ export default function formatDate(dateString) {
 			.replace(/ minutes ago/, "m")
 			.replace(/ hours ago/, "h")
 			.replace(/ hour ago/, "h")
-			.replace(/ days ago/, "d");
+			.replace(/ days ago/, "d")
+			.replace(/ day ago/, "d");
 	}
 
 	return format(date, "MMM d");

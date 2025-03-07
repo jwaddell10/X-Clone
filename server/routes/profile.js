@@ -9,6 +9,6 @@ router.get("/:id", profileController.getProfilePosts);
 router.post("/edit/:id", JWTMethods.verifyToken, profileController.editProfile);
 router.post("/:userId/:id/follow", JWTMethods.verifyToken, profileController.followProfile);
 
-router.delete("/:userId/:id/unfollow", profileController.unFollowProfile);
+router.delete("/:userId/:id/unfollow", JWTMethods.verifyToken, profileController.unFollowProfile);
 
 module.exports = router;
