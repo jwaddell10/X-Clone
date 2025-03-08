@@ -1,6 +1,7 @@
 import ComposePost from "./ComposePost";
 import TimelinePosts from "./DisplayPostComponents/TimelinePosts";
 import { styled } from "styled-components";
+import PropTypes from "prop-types";
 
 export default function HomeTimeline({ profileInfo }) {
 	return (
@@ -8,7 +9,11 @@ export default function HomeTimeline({ profileInfo }) {
 			className="post-container"
 			style={{ display: "flex", flexDirection: "column" }}
 		>
-			<ComposePost profileInfo={profileInfo} placeholderText="What is happening?!" buttonText="Post" />
+			<ComposePost
+				profileInfo={profileInfo}
+				placeholderText="What is happening?!"
+				buttonText="Post"
+			/>
 			<TimelinePosts />
 		</StyledDiv>
 	);
@@ -29,3 +34,7 @@ const StyledDiv = styled.div`
 		width: 100vw;
 	}
 `;
+
+HomeTimeline.propTypes = {
+	profileInfo: PropTypes.object,
+};

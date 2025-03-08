@@ -4,6 +4,7 @@ import submitPost from "../../helpers/submitPost";
 import Button from "../../helpers/Button";
 import "../../Styles/ComposePost.css";
 import CircularProgress from "@mui/material/CircularProgress";
+import PropTypes from "prop-types";
 
 export default function ComposePost({ profileInfo }) {
 	const { triggerRefresh } = useContext(RefreshContext);
@@ -75,3 +76,7 @@ export default function ComposePost({ profileInfo }) {
 		</span>
 	);
 }
+
+ComposePost.propTypes = {
+	profileInfo: PropTypes.object,
+};

@@ -7,6 +7,7 @@ import { RefreshContext } from "../../context/refreshTriggerContext.jsx";
 import { styled } from "styled-components";
 import UserProfilePosts from "./UserProfilePosts.jsx";
 import handleFollow from "../../helpers/handleFollow.jsx";
+import PropTypes from "prop-types";
 
 export default function DisplayProfile({ profileId }) {
 	const { refreshTrigger, triggerRefresh } = useContext(RefreshContext);
@@ -114,3 +115,7 @@ const StyledDiv = styled.div`
 		width: 100vw;
 	}
 `;
+
+DisplayProfile.propTypes = {
+	profileId: PropTypes.number,
+};

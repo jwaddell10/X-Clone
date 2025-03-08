@@ -51,9 +51,14 @@ export default function PostDetails() {
 						</div>
 					</StyledHeader>
 
-					<StyledTextContainr className="post-text-container">{post.text}</StyledTextContainr>
+					<StyledTextContainr className="post-text-container">
+						{post.text}
+					</StyledTextContainr>
 					<PostReaction post={post} comments={comments} />
-					<ComposeReply profilePicture={profileInfo.profilePicture} postId={post.id} />
+					<ComposeReply
+						profilePicture={profileInfo.profilePicture}
+						postId={post.id}
+					/>
 					<Comments post={post} comments={comments} />
 				</StyledDiv>
 			)}

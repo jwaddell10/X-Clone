@@ -23,7 +23,7 @@ export default function Profile() {
 	if (error) {
 		return <div style={{ color: "white" }}>{error}</div>;
 	}
-	
+
 	return (
 		<div
 			className="big-container"

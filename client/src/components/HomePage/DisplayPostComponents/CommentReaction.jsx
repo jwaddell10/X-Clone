@@ -1,12 +1,11 @@
 import CommentCount from "./CommentCount";
 import { useState } from "react";
 import ReplyModal from "../../../helpers/ReplyModal";
+import PropTypes from "prop-types";
 
 export default function CommentReaction({ post, comments }) {
 	//click on it, it opens reply modal, reply modal can submit a reply.
 	const [isReplyModalOpen, setIsReplyModalOpen] = useState(false);
-
-	const [replyModalFormData, setReplyModalFormData] = useState("");
 
 	const handleOpenReplyFormModal = () => {
 		setIsReplyModalOpen(true);
@@ -16,11 +15,6 @@ export default function CommentReaction({ post, comments }) {
 		setIsReplyModalOpen(false);
 	};
 
-	const handleFormSubmit = (data) => {
-		setIsReplyModalOpen(data);
-		handleCloseReplyFormModal();
-	};
-
 	return (
 		<div style={{ display: "flex", alignItems: "center", gap: "0.25vw" }}>
 			{isReplyModalOpen && (
@@ -28,8 +22,6 @@ export default function CommentReaction({ post, comments }) {
 					post={post}
 					comment={comments}
 					isOpen={isReplyModalOpen}
-					modalData={replyModalFormData}
-					onSubmit={handleFormSubmit}
 					onClose={handleCloseReplyFormModal}
 				/>
 			)}
@@ -48,3 +40,8 @@ export default function CommentReaction({ post, comments }) {
 		</div>
 	);
 }
+
+CommentReaction.propTypes = {
+	post: PropTypes.object,
+	comments: PropTypes.object,
+};

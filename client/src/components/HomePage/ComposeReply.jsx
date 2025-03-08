@@ -4,6 +4,7 @@ import Button from "../../helpers/Button";
 import "../../Styles/ComposePost.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import { RefreshContext } from "../../context/refreshTriggerContext";
+import PropTypes from "prop-types";
 
 export default function ComposeReply({ profilePicture, postId, commentId }) {
 	const { triggerRefresh } = useContext(RefreshContext);
@@ -78,3 +79,9 @@ export default function ComposeReply({ profilePicture, postId, commentId }) {
 		</span>
 	);
 }
+
+ComposeReply.propTypes = {
+	profilePicture: PropTypes.string,
+	postId: PropTypes.number,
+	commentId: PropTypes.number,
+};

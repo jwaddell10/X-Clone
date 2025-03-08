@@ -35,9 +35,6 @@ export default function SideNavigation({ profileInfo }) {
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
-	const handleFormSubmit = () => {
-		console.log('handle form submit runs')
-	}
 	const handleLogoutPopupToggle = () => {
 		setLogoutPopupOpen((prev) => !prev);
 	};
@@ -58,7 +55,6 @@ export default function SideNavigation({ profileInfo }) {
 							<ReplyModal
 								isOpen={isReplyModalOpen}
 								modalData={replyModalFormData}
-								onSubmit={handleFormSubmit}
 								onClose={handleCloseReplyFormModal}
 							/>
 						)}

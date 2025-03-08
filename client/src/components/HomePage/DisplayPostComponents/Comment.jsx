@@ -1,5 +1,4 @@
 import LikeReaction from "./LikeReaction";
-import RepeatIcon from "@mui/icons-material/Repeat";
 import handleCommentToggleLike from "../../../helpers/handleCommentToggleLike";
 import CommentReaction from "./CommentReaction";
 import { useState, useEffect, useContext } from "react";
@@ -7,6 +6,7 @@ import { RefreshContext } from "../../../context/refreshTriggerContext";
 import { styled } from "styled-components";
 import { Link } from "react-router";
 import formatDate from "../../../helpers/formatDate";
+import PropTypes from "prop-types";
 
 export default function Comment({ post, comment }) {
 	const [isLiked, setIsLiked] = useState(false);
@@ -41,8 +41,8 @@ export default function Comment({ post, comment }) {
 				comment.id,
 				likeId
 			);
-
 			triggerRefresh();
+			return data;
 		} catch (error) {
 			console.log(error, "error comment");
 		}
@@ -70,7 +70,9 @@ export default function Comment({ post, comment }) {
 						{formatDate(comment.createdAt)}
 					</div>
 				</StyledHeader>
-				<StyledTextContainer className="text-container">{comment.text}</StyledTextContainer>
+				<StyledTextContainer className="text-container">
+					{comment.text}
+				</StyledTextContainer>
 			</Link>
 			<div
 				className="reaction-container"
@@ -102,3 +104,8 @@ const StyledTextContainer = styled.div`
 const StyledImage = styled.img`
 	width: 40px;
 `;
+
+Comment.propTypes = {
+	post: PropTypes.object,
+	comment: PropTypes.object,
+};

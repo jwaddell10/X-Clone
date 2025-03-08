@@ -1,9 +1,9 @@
-import RepeatIcon from "@mui/icons-material/Repeat";
 import CommentReaction from "./CommentReaction";
 import LikeReaction from "./LikeReaction";
 import { useState, useEffect, useContext } from "react";
 import handlePostToggleLike from "../../../helpers/handlePostToggleLike";
 import { RefreshContext } from "../../../context/refreshTriggerContext";
+import PropTypes from "prop-types";
 
 export default function PostReaction({ post, comments }) {
 	const { triggerRefresh } = useContext(RefreshContext);
@@ -43,6 +43,7 @@ export default function PostReaction({ post, comments }) {
 				likeId
 			);
 			triggerRefresh();
+			return data;
 		} catch (error) {
 			console.error("Failed to toggle like:", error);
 			setIsLiked(previousIsLiked);
@@ -61,3 +62,8 @@ export default function PostReaction({ post, comments }) {
 		</div>
 	);
 }
+
+PostReaction.propTypes = {
+	post: PropTypes.object,
+	comments: PropTypes.object,
+};

@@ -1,13 +1,8 @@
 import "../../Styles/Button.css";
 import PropTypes from "prop-types";
-import loginGuest from "../../helpers/loginGuest";
 
 export default function HomeAuthButton({ text, variant, action, setAction }) {
-	const handleClick = async (text) => {
-		// if (text.target.innerText === "Enter as Guest") {
-		// 	await loginGuest();
-		// 	triggerRefresh();
-		// }
+	const handleClick = async () => {
 		setAction(action);
 	};
 	return (

@@ -2,6 +2,7 @@ import PostReaction from "./PostReaction";
 import { Link } from "react-router";
 import { styled } from "styled-components";
 import formatDate from "../../../helpers/formatDate";
+import PropTypes from "prop-types";
 
 export default function Post({ post, showReactions = true }) {
 	return (
@@ -85,3 +86,8 @@ const InnerStyledDiv = styled.div`
 const StyledImage = styled.img`
 	width: 40px;
 `;
+
+Post.propTypes = {
+	post: PropTypes.object,
+	showReactions: PropTypes.boolean,
+};

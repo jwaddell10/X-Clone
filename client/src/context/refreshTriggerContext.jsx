@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-
+import PropTypes from "prop-types";
 // Create the context
 export const RefreshContext = createContext();
 
@@ -17,4 +17,8 @@ export const RefreshProvider = ({ children }) => {
 			{children}
 		</RefreshContext.Provider>
 	);
+};
+
+RefreshProvider.propTypes = {
+	children: PropTypes.object,
 };

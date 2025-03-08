@@ -15,7 +15,6 @@ export default function useFetchComments(postId, refreshTrigger) {
                     throw new Error("Failed to fetch posts");
                 }
                 const data = await response.json();
-                console.log(data, 'data from fetchcomments')
                 setComments(data.comments);
             } catch (err) {
                 console.error(err.message);

@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { RefreshContext } from "../../context/refreshTriggerContext";
 import handleFollow from "../../helpers/handleFollow";
 import { styled } from "styled-components";
+import PropTypes from "prop-types";
 
 export default function DisplayedUsers({ users }) {
 	const [displayedUsers, setDisplayedUsers] = useState(null);
@@ -86,3 +87,7 @@ const StyledButton = styled.button`
 const StyledImage = styled.img`
 	width: 40px;
 `;
+
+DisplayedUsers.propTypes = {
+	users: PropTypes.object,
+};

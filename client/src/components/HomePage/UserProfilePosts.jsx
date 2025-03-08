@@ -3,6 +3,7 @@ import PostReaction from "./DisplayPostComponents/PostReaction";
 import { Link } from "react-router";
 import CircularProgress from "@mui/material/CircularProgress";
 import formatDate from "../../helpers/formatDate";
+import PropTypes from "prop-types";
 
 export default function UserProfilePosts({ profileId }) {
 	const { posts, loading, error } = useFetchProfilePosts(profileId);
@@ -48,3 +49,7 @@ export default function UserProfilePosts({ profileId }) {
 		</div>
 	);
 }
+
+UserProfilePosts.propTypes = {
+	profileId: PropTypes.number,
+};

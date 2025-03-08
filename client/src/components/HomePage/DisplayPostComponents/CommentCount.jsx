@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function CommentCount({ comments }) {
 	//if the comment has children, render the number of child comments
 	if (comments?.children) {
@@ -6,3 +8,7 @@ export default function CommentCount({ comments }) {
 
 	return <>{comments && <div>{comments.length}</div>}</>;
 }
+
+CommentCount.propTypes = {
+	comments: PropTypes.object,
+};
