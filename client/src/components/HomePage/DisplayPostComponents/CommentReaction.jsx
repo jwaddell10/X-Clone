@@ -4,7 +4,6 @@ import ReplyModal from "../../../helpers/ReplyModal";
 import PropTypes from "prop-types";
 
 export default function CommentReaction({ post, comments }) {
-	//click on it, it opens reply modal, reply modal can submit a reply.
 	const [isReplyModalOpen, setIsReplyModalOpen] = useState(false);
 
 	const handleOpenReplyFormModal = () => {
@@ -16,7 +15,14 @@ export default function CommentReaction({ post, comments }) {
 	};
 
 	return (
-		<div style={{ display: "flex", alignItems: "center", gap: "0.25vw" }}>
+		<div
+			style={{
+				display: "flex",
+				alignItems: "center",
+				gap: "0.25vw",
+				cursor: "pointer",
+			}}
+		>
 			{isReplyModalOpen && (
 				<ReplyModal
 					post={post}

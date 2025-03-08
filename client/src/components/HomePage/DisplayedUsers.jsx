@@ -3,6 +3,7 @@ import { RefreshContext } from "../../context/refreshTriggerContext";
 import handleFollow from "../../helpers/handleFollow";
 import { styled } from "styled-components";
 import PropTypes from "prop-types";
+import { Link } from "react-router";
 
 export default function DisplayedUsers({ users }) {
 	const [displayedUsers, setDisplayedUsers] = useState(null);
@@ -23,6 +24,7 @@ export default function DisplayedUsers({ users }) {
 
 	useEffect(() => {
 		if (displayedUsers) {
+			console.log(displayedUsers, "dis users");
 			const followStatus = displayedUsers.map((item) =>
 				item.Profile.followedBy.some(
 					(item) => item.followingId == loggedInUserId
@@ -43,7 +45,12 @@ export default function DisplayedUsers({ users }) {
 	return (
 		<>
 			{displayedUsers?.map((user, index) => (
-				<ul key={user.id} className="user-sidebar">
+				<Link
+					to={`/profile/${user.Profile.id}`}
+					style={{ margin: "10px" }}
+					key={user.id}
+					className="user-sidebar"
+				>
 					<div
 						style={{
 							display: "grid",
@@ -70,7 +77,7 @@ export default function DisplayedUsers({ users }) {
 								: "Follow"}
 						</StyledButton>
 					)}
-				</ul>
+				</Link>
 			))}
 		</>
 	);

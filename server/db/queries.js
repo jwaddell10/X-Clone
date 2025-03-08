@@ -25,6 +25,7 @@ module.exports = {
 				include: {
 					Profile: {
 						select: {
+							id: true,
 							profilePicture: true,
 							followedBy: true,
 						},
