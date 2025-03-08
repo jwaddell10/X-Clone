@@ -24,7 +24,6 @@ export default function DisplayedUsers({ users }) {
 
 	useEffect(() => {
 		if (displayedUsers) {
-			console.log(displayedUsers, "dis users");
 			const followStatus = displayedUsers.map((item) =>
 				item.Profile.followedBy.some(
 					(item) => item.followingId == loggedInUserId
@@ -45,13 +44,8 @@ export default function DisplayedUsers({ users }) {
 	return (
 		<>
 			{displayedUsers?.map((user, index) => (
-				<Link
-					to={`/profile/${user.Profile.id}`}
-					style={{ margin: "10px" }}
-					key={user.id}
-					className="user-sidebar"
-				>
-					<div
+				<ul key={user.id} className="user-sidebar">
+					<Link to={`/profile/${user.Profile.id}`}
 						style={{
 							display: "grid",
 							gridTemplateColumns: "40px 1fr 1fr",
@@ -64,7 +58,7 @@ export default function DisplayedUsers({ users }) {
 						<li className="user-name" style={{ color: "white" }}>
 							{user.name}
 						</li>
-					</div>
+					</Link>
 
 					{followingStatusOfTop10users && (
 						<StyledButton
@@ -77,7 +71,7 @@ export default function DisplayedUsers({ users }) {
 								: "Follow"}
 						</StyledButton>
 					)}
-				</Link>
+				</ul>
 			))}
 		</>
 	);
