@@ -1,5 +1,4 @@
 export default async function submitEditProfile({ formData }, profileId) {
-	// console.log(formData, 'formdata')
 	const id = localStorage.getItem("id");
 	const JWTToken = localStorage.getItem("token");
 

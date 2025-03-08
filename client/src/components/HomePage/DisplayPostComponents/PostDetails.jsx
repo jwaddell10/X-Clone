@@ -36,7 +36,7 @@ export default function PostDetails() {
 	return (
 		<div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
 			<SideNavigation profileInfo={profileInfo} />
-			{post && (
+			{post && profileInfo && (
 				<StyledDiv>
 					<StyledHeader className="post-header">
 						<Link to={`/profile/${post.author.Profile.id}`}>

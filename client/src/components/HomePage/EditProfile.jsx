@@ -35,6 +35,13 @@ export default function EditProfile({ profileInfo, onClose }) {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		setIsLoading(true);
+		if (profileInfo.user.name === "demouser") {
+			setEditProfileError(
+				"Unable to edit demouser, create a new account to utilize this feature"
+			);
+			return;
+		}
+
 		try {
 			const data = await submitEditProfile({ formData }, profileInfo.id);
 			if (data) {
@@ -94,7 +101,7 @@ export default function EditProfile({ profileInfo, onClose }) {
 				<Button type="submit" text="Save" variant="saveButton" />
 			</div>
 			{editProfileError && (
-				<div style={{ color: "white" }}>{editProfileError.message}</div>
+				<div style={{ color: "white" }}>{editProfileError}</div>
 			)}
 			{isLoading && <CircularProgress color="white" />}
 		</form>
