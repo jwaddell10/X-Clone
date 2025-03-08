@@ -13,23 +13,52 @@
 	border-radius: 1em;
 	cursor: pointer;
 	padding: 0.8em 1.2em 0.8em 1em;
-	transition: all ease-in-out 0.2s;
 	font-size: 16px;
+	font-weight: bold;
 	color: white;
 }
 
-.image-container:hover {
-	border: 1rem solid #262626;
+.image-container {
+	width: 4rem;
 }
 
 .image-container-selected {
-	border: 1rem solid #262626;
+	width: 4rem;
 	outline: 1px solid #00ff00;
 }
 
 .profile-picture-container {
 	display: grid;
+	justify-items: center;
 	gap: 1rem;
 	grid-template-columns: repeat(4, 1fr);
 	width: 40vw;
+}
+
+.edit-name-container {
+	display: flex;
+	gap: 5px;
+	padding: 10px;
+}
+
+@media screen and (max-width: 768px) {
+	.profile-picture-container {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.edit-profile-form {
+		width: 100vw;
+		height: 100vh;
+	}
+
+	.profile-picture-container {
+		width: 100vw;
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.image-container {
+		width: auto;
+	}
 }

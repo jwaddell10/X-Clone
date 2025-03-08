@@ -58,3 +58,12 @@
 	opacity: 0.5;
 	cursor: not-allowed;
 }
+
+.saveButton {
+	font-weight: bold;
+	height: 2rem;
+	width: 4rem;
+	border-radius: 20px;
+	color: black;
+	cursor: pointer;
+}

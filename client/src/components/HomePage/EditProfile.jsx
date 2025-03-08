@@ -78,6 +78,7 @@ export default function EditProfile({ profileInfo, onClose }) {
 			<div className="edit-name-container">
 				<label htmlFor="name">Change Name</label>
 				<input
+				style={{backgroundColor: "black", border: "1px solid white", borderRadius: "10px", color: "white"}}
 					type="text"
 					value={formData.username}
 					onChange={handleChange}
