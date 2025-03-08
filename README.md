@@ -9,7 +9,7 @@
 
 <p>Full-Stack Social Media Clone created with the goal of pixel perfect design. I also wanted to practice testing, and plan on incorporation integration tests, and end-to-end testing to ensure good test coverage. I also wanted to optimize for high number of users</p>
 
-### 🏠 [Homepage]![alt text](image.png)
+### 🏠 [Homepage]![alt text](./client/src/assets/HomePageScreenshot.png)
 
 ## Install
 
