@@ -8,6 +8,7 @@ import useGetLoggedInUserProfileInfo from "./useGetLoggedInUserProfileInfo";
 import { RefreshContext } from "../context/refreshTriggerContext";
 
 export default function ReplyModal({ post, comment, isOpen, onClose }) {
+	console.log(post, comment, "psot coment");
 	const { refreshTrigger } = useContext(RefreshContext);
 	const { profileInfo } = useGetLoggedInUserProfileInfo(refreshTrigger);
 	const focusInputRef = useRef(null);
@@ -22,7 +23,9 @@ export default function ReplyModal({ post, comment, isOpen, onClose }) {
 
 	return (
 		<Modal isOpen={isOpen} hasCloseBtn={true} onClose={onClose}>
-			<ComposePost profileInfo={profileInfo} />
+			{post === undefined && comment === undefined && (
+				<ComposePost profileInfo={profileInfo} />
+			)}
 
 			{/* If a comment exists, show the comment details; otherwise, show the post */}
 			{comment?.id ? (

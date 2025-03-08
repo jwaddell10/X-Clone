@@ -24,7 +24,6 @@ export default function CommentDetails() {
 
 	const { profileInfo } = useGetLoggedInUserProfileInfo();
 
-	console.log(comment, "comment in details");
 	if (loading) {
 		return <CircularProgress />;
 	}
