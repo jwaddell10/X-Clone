@@ -11,6 +11,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useContext } from "react";
 import { RefreshContext } from "../../../context/refreshTriggerContext";
 import formatDate from "../../../helpers/formatDate";
+import useGetLoggedInUserProfileInfo from "../../../helpers/useGetLoggedInUserProfileInfo";
 
 export default function CommentDetails() {
 	const { refreshTrigger } = useContext(RefreshContext);
@@ -21,7 +22,9 @@ export default function CommentDetails() {
 		refreshTrigger
 	);
 
-	console.log(comment, 'comment in details')
+	const { profileInfo } = useGetLoggedInUserProfileInfo();
+
+	console.log(comment, "comment in details");
 	if (loading) {
 		return <CircularProgress />;
 	}
@@ -53,10 +56,12 @@ export default function CommentDetails() {
 						</div>
 					</StyledHeader>
 
-					<div className="post-text-container">{comment.text}</div>
+					<StyledTextContainer className="post-text-container">
+						{comment.text}
+					</StyledTextContainer>
 					<PostReaction post={comment} comments={comment.children} />
 					<ComposeReply
-						profilePicture={comment.author.Profile.profilePicture}
+						profilePicture={profileInfo.profilePicture}
 						commentId={comment.id}
 					/>
 					<Comments post={comment} comments={comment.children} />
@@ -75,6 +80,11 @@ const breakpoints = {
 const StyledHeader = styled.header`
 	display: flex;
 	gap: 5px;
+	padding: 10px;
+`;
+
+const StyledTextContainer = styled.header`
+	padding: 10px;
 `;
 
 const StyledDiv = styled.section`
@@ -82,7 +92,6 @@ const StyledDiv = styled.section`
 	color: white;
 	width: 45vw;
 	margin-right: 5vw;
-	padding: 10px;
 
 	@media (max-width: ${breakpoints.medium}) {
 		width: 75vw;

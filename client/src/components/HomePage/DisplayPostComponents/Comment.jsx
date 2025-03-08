@@ -70,7 +70,7 @@ export default function Comment({ post, comment }) {
 						{formatDate(comment.createdAt)}
 					</div>
 				</StyledHeader>
-				<div className="text-container">{comment.text}</div>
+				<StyledTextContainer className="text-container">{comment.text}</StyledTextContainer>
 			</Link>
 			<div
 				className="reaction-container"
@@ -92,6 +92,11 @@ export default function Comment({ post, comment }) {
 const StyledHeader = styled.header`
 	display: flex;
 	gap: 5px;
+	padding: 10px;
+`;
+
+const StyledTextContainer = styled.div`
+	padding: 10px;
 `;
 
 const StyledImage = styled.img`

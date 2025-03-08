@@ -59,7 +59,6 @@ exports.replyToPost = asyncHandler(async (req, res, next) => {
 
 exports.replyToComment = asyncHandler(async (req, res, next) => {
 	const replyToComment = await db.createReplyToComment(
-		parseInt(req.params.postId),
 		parseInt(req.params.commentId),
 		parseInt(req.body.loggedInUserId),
 		req.body.text

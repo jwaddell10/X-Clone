@@ -51,9 +51,9 @@ export default function PostDetails() {
 						</div>
 					</StyledHeader>
 
-					<div className="post-text-container">{post.text}</div>
+					<StyledTextContainr className="post-text-container">{post.text}</StyledTextContainr>
 					<PostReaction post={post} comments={comments} />
-					<ComposeReply profileInfo={profileInfo} postId={post.id} />
+					<ComposeReply profilePicture={profileInfo.profilePicture} postId={post.id} />
 					<Comments post={post} comments={comments} />
 				</StyledDiv>
 			)}
@@ -70,14 +70,15 @@ const breakpoints = {
 const StyledHeader = styled.header`
 	display: flex;
 	gap: 5px;
+	padding: 10px;
 `;
 
 const StyledDiv = styled.section`
 	border: 1px solid gray;
 	color: white;
 	width: 45vw;
+	height: 100vh;
 	margin-right: 5vw;
-	padding: 10px;
 
 	@media (max-width: ${breakpoints.medium}) {
 		width: 75vw;
@@ -86,6 +87,10 @@ const StyledDiv = styled.section`
 	@media (max-width: ${breakpoints.small}) {
 		width: 100vw;
 	}
+`;
+
+const StyledTextContainr = styled.div`
+	padding: 10px;
 `;
 
 const StyledImage = styled.img`
