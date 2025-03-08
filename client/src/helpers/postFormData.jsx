@@ -7,7 +7,6 @@ export default async function postFormData(formData, url) {
 			headers: { "Content-type": "application/json" },
 		}
 	);
-
 	const data = await response.json();
 	if (data.token && data.id) {
 		localStorage.setItem("token", data.token);

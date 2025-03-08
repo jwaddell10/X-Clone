@@ -4,8 +4,20 @@ import "../../Styles/LoginSignup.css";
 import useSubmit from "../../helpers/useSubmit";
 import CircularProgress from "@mui/material/CircularProgress";
 import PropTypes from "prop-types";
+import loginGuest from "../../helpers/loginGuest";
 
-export default function Login({ setAction }) {
+export default function Login({ action, setAction }) {
+	// if (action === "LoginGuest") {
+	// 	const handleGuestLogin = async () => {
+	// 		try {
+	// 			await loginGuest();
+	// 			setAction("");
+	// 		} catch (error) {
+	// 			console.log(error, "error");
+	// 		}
+	// 	};
+	// 	handleGuestLogin();
+	// }
 	const {
 		register,
 		handleSubmit,

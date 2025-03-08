@@ -87,3 +87,10 @@ a {
 li {
 	list-style-type: none;
 }
+
+dialog {
+	padding: 0;
+	border: none;
+	background: white;
+  }
+  

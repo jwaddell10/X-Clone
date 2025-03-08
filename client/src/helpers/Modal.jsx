@@ -79,6 +79,7 @@ const StyledCloseButton = styled.button`
 	color: white;
 	font-size: 1.5rem;
 	cursor: pointer;
+	margin: 10px;
 	transition: transform 0.2s ease;
 
 	&:hover {
@@ -87,9 +88,5 @@ const StyledCloseButton = styled.button`
 
 	&:active {
 		transform: scale(0.9);
-	}
-
-	&:focus {
-		outline: 2px solid rgba(255, 255, 255, 0.5);
 	}
 `;

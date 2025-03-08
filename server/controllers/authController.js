@@ -1,6 +1,7 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 const db = require("../db/queries");
+const bcryptjs = require("bcryptjs");
 const passportJWTStrategy = require("../passport/passportJWT.js");
 
 exports.signUp = asyncHandler(async (req, res, next) => {
@@ -19,7 +20,7 @@ exports.signUp = asyncHandler(async (req, res, next) => {
 			res.status(200).json({
 				message: "User created successfully",
 				token: token,
-				id: createdUser.id
+				id: createdUser.id,
 			});
 		} else
 			res.json({
@@ -29,12 +30,54 @@ exports.signUp = asyncHandler(async (req, res, next) => {
 });
 
 exports.logIn = asyncHandler(async (req, res, next) => {
-	const user = await db.findUser(req.body.username);
+	console.log(req.body, "req body login");
+
+	//handle guest login
+	if (req.body.guestUsername) {
+		const user = await db.findUser(req.body.guestUsername);
+
+		if (user === null) {
+			return res.json({
+				errorMessage: "Unable to login, try again later",
+			});
+		}
+
+		if (user !== null) {
+			const token = passportJWTStrategy.createJWT(user);
+			if (token) {
+				return res.status(200).json({
+					message: "User logged in successfully",
+					token: token,
+					id: user.id,
+				});
+			} else
+				return res.json({
+					message: "an error has occurred",
+				});
+		} else
+			return res.json({
+				message:
+					"User not found with that username/password. Please try again",
+			});
+	}
+
+	//handle non-guest login
+	const user = await db.findUser(req.body.username, req.body.password);
+
+	if (user === null) {
+		return res.json({ message: "Incorrect username." });
+	}
+
+	const isMatch = await bcryptjs.compare(req.body.password, user.password);
+
+	if (isMatch === false) {
+		return res.json({ message: "Incorrect password." });
+	}
 
 	if (user !== null) {
 		const token = passportJWTStrategy.createJWT(user);
 		if (token) {
-			res.status(200).json({
+			return res.status(200).json({
 				message: "User logged in successfully",
 				token: token,
 				id: user.id,

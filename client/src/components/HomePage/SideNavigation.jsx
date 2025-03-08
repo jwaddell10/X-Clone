@@ -64,7 +64,7 @@ export default function SideNavigation({ profileInfo }) {
 						)}
 			<span className="icons-container">
 				<li className="nav-item">
-					<Link>
+					<Link to="/">
 						<XIcon className="icons" fontSize="large" />
 					</Link>
 				</li>

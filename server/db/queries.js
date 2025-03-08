@@ -4,7 +4,7 @@ const bcryptjs = require("bcryptjs");
 const { getDefaultImageUrl, getAllImages } = require("../services/cloudinary");
 
 module.exports = {
-	findUser: async (username) => {
+	findUser: async (username, password) => {
 		try {
 			const user = await prisma.user.findUnique({
 				where: {
