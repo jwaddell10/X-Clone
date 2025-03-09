@@ -21,7 +21,6 @@ export default function CommentDetails() {
 		commentId,
 		refreshTrigger
 	);
-
 	const { profileInfo } = useGetLoggedInUserProfileInfo();
 
 	if (loading) {
