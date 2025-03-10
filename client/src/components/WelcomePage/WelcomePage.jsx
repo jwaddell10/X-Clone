@@ -5,6 +5,7 @@ import Signup from "./Signup";
 import "../../Styles/WelcomePage.css";
 import PropTypes from "prop-types";
 import loginGuest from "../../helpers/loginGuest";
+import XLogo from "../../assets/X_logo.jpg"
 
 export default function WelcomePage({ action, setAction }) {
 	const [error, setError] = useState("");
@@ -27,7 +28,7 @@ export default function WelcomePage({ action, setAction }) {
 			<title>OdinBook Project</title>
 			<img
 				className="x-logo-welcome-page"
-				src="../src/assets/X_logo.jpg"
+				src={XLogo}
 				alt="X logo"
 			/>
 			<div className="homepage-container">
