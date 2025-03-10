@@ -21,6 +21,7 @@ const corsOptions = {
 	allowedHeaders: ['Content-Type', 'Authorization'],
 	optionsSuccessStatus: 200,
 };
+app.set('view engine', 'pug')// app.options("*", cors());
 app.use(cors(corsOptions));
 
 app.use(logger("dev"));
