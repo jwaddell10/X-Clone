@@ -21,7 +21,7 @@ export default function EditProfile({ profileInfo, onClose }) {
 	const profileImages = Object.values(
 		import.meta.glob(
 			"/src/assets/profileImages/*.{png,jpg,jpeg,svg,webp,avif}",
-			{ eager: true, as: "url" }
+			{ eager: true, query: "?url", import: 'default' }
 		)
 	);
 
