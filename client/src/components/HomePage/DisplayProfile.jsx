@@ -57,7 +57,7 @@ export default function DisplayProfile({ profileId }) {
 									Edit Profile
 								</button>
 							) : (
-								<button
+								<StyledButton
 									onClick={(event) => {
 										toggleFollow(event, profileInfo.id);
 									}}
@@ -67,7 +67,7 @@ export default function DisplayProfile({ profileId }) {
 									) == loggedInUserId
 										? "Unfollow"
 										: "Follow"}
-								</button>
+								</StyledButton>
 							)}
 
 							{showEditForm && (
@@ -104,6 +104,14 @@ const breakpoints = {
 	small: "500px",
 	medium: "769px",
 };
+
+const StyledButton = styled.button`
+	min-width: 6rem;
+	border-radius: 20px;
+	color: black;
+	cursor: pointer;
+	font-weight: bold;
+`;
 
 const StyledDiv = styled.div`
 	width: 45vw;
