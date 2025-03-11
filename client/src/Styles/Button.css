@@ -49,6 +49,7 @@
 	border-radius: 20px;
 	color: black;
 	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
 }
 
 .postButton:disabled {

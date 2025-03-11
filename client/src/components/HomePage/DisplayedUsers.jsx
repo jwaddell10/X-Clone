@@ -1,5 +1,4 @@
-import { useEffect, useState, useContext } from "react";
-import { RefreshContext } from "../../context/refreshTriggerContext";
+import { useEffect, useState } from "react";
 import handleFollow from "../../helpers/handleFollow";
 import { styled } from "styled-components";
 import PropTypes from "prop-types";
@@ -11,7 +10,6 @@ export default function DisplayedUsers({ users }) {
 
 	const [followingStatusOfTop10users, setFollowingStatusOfTop10users] =
 		useState(null);
-	const { triggerRefresh } = useContext(RefreshContext);
 
 	useEffect(() => {
 		if (users) {
@@ -38,7 +36,6 @@ export default function DisplayedUsers({ users }) {
 		updatedItems[index] = !followingStatusOfTop10users[index];
 		setFollowingStatusOfTop10users(updatedItems);
 		await handleFollow(event, userId);
-		triggerRefresh();
 	};
 
 	return (
