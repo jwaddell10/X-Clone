@@ -10,7 +10,14 @@
 
 <h1>About the Project</h1>
 
-<p>Full-Stack Social Media Clone featuring pixel perfect, mobile responsive rendition of X (formerly known as Twitter). Users can post, comment, like other posts/comments, follow/unfollow other users and edit their profile, along with log in and registering functionality. Playwright was utilized for end-to-end testing as well as React Testing Library to test all essential features.</p>
+<p>Full-Stack Social Media Clone featuring pixel perfect, mobile responsive rendition of X (formerly known as Twitter). 
+  
+Features:
+1. Users can post, comment
+2. Users can like other posts, and like other comments
+3. Users can post deeply nested comments--this required recursion to implement. Simulating the actual X platform
+4. Users can follow and unfollow other users, and edit their profile
+5. Playwright was utilized for end-to-end testing as well as React Testing Library to test all essential features.</p>
 
 ### 🏠 [Homepage]![alt text](./client/src/assets/HomePageScreenshot.png)
 
