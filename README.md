@@ -27,7 +27,9 @@
 ## Install
 
 ```sh
+git clone git@github.com:jwaddell10/X-Clone.git
 npm install
+npm run dev
 ```
 
 ## Author
