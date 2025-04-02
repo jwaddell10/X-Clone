@@ -4,6 +4,7 @@ import Router from "./Routes";
 import { useAuth } from "./helpers/authContext";
 import tokenActive from "./helpers/tokenActive";
 import { RefreshProvider } from "./context/refreshTriggerContext";
+import { PostModalProvider } from "./context/PostModalContext";
 
 function App() {
 	const { user, setUser } = useAuth();
@@ -12,9 +13,11 @@ function App() {
 		setUser(tokenActive(JWTToken));
 	}, [setUser, user]);
 	return (
-		<RefreshProvider>
-			<Router />
-		</RefreshProvider>
+		<PostModalProvider>
+			<RefreshProvider>
+				<Router />
+			</RefreshProvider>
+		</PostModalProvider>
 	);
 }
 

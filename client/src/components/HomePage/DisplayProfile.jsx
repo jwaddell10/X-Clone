@@ -28,7 +28,6 @@ export default function DisplayProfile({ profileId }) {
 	}
 
 	const toggleFollow = async (event, profileId) => {
-		console.log('toggle follow runs?')
 		await handleFollow(event, profileId);
 		triggerRefresh();
 	};

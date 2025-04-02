@@ -5,9 +5,12 @@ import Button from "../../helpers/Button";
 import "../../Styles/ComposePost.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import PropTypes from "prop-types";
+import { PostModalContext } from "../../context/PostModalContext";
 
 export default function ComposePost({ profileInfo }) {
 	const { triggerRefresh } = useContext(RefreshContext);
+
+	const { setIsReplyModalOpen } = useContext(PostModalContext);
 	const [text, setText] = useState("");
 	const [error, setError] = useState(null);
 	const [isDisabled, setIsDisabled] = useState(true);
@@ -22,7 +25,10 @@ export default function ComposePost({ profileInfo }) {
 		try {
 			setIsLoading(true);
 			setIsDisabled(true);
-			await submitPost(text, "post");
+			const data = await submitPost(text, "post");
+			if (data.createdPost) {
+				setIsReplyModalOpen(false);
+			}
 		} catch (error) {
 			setError(error);
 		} finally {

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import XIcon from "@mui/icons-material/X";
 import HomeSharpIcon from "@mui/icons-material/HomeSharp";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
@@ -10,10 +10,10 @@ import Popper from "@mui/material/Popper";
 import Button from "@mui/material/Button";
 import ReplyModal from "../../helpers/ReplyModal";
 import Paper from "@mui/material/Paper";
+import { PostModalContext } from "../../context/PostModalContext";
 
 export default function SideNavigation({ profileInfo }) {
-	const [isReplyModalOpen, setIsReplyModalOpen] = useState(false);
-
+	const { isReplyModalOpen, setIsReplyModalOpen } = useContext(PostModalContext)
 	const [replyModalFormData, setReplyModalFormData] = useState("");
 
 	const handleOpenReplyFormModal = () => {
